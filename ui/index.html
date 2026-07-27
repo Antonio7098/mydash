@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <meta
+      name="description"
+      content="Browse, preview and export My Dashboards artefacts."
+    >
+    <title>My Dashboards</title>
+    <script src="/navigator/theme-init.js?v=20260727-61"></script>
+    <link rel="stylesheet" href="/navigator/styles.css?v=20260727-61">
+  </head>
+  <body>
+    <a class="skip-link" href="#page-content">Skip to content</a>
+
+    <header class="navigator-chrome">
+      <nav
+        class="navigator-nav"
+        id="navigator-nav"
+        aria-label="Primary navigation"
+        data-open="false"
+      >
+        <button
+          class="navigator-nav__toggle"
+          id="nav-toggle"
+          type="button"
+          aria-controls="nav-panel"
+          aria-expanded="false"
+        >
+          <span class="navigator-mark" aria-hidden="true">
+            <span class="navigator-mark__bar"></span>
+            <span class="navigator-mark__letters">MD</span>
+          </span>
+          <span class="navigator-nav__toggle-label">My Dashboards</span>
+          <span class="navigator-nav__chevron" aria-hidden="true">›</span>
+        </button>
+
+        <div class="navigator-nav__panel" id="nav-panel">
+          <a
+            href="/dashboards"
+            data-navigator-link
+            data-route="dashboards"
+          >
+            Dashboards
+          </a>
+          <a
+            href="/presentations"
+            data-navigator-link
+            data-route="presentations"
+          >
+            Presentations
+          </a>
+          <a
+            href="/concepts"
+            data-navigator-link
+            data-route="concepts"
+          >
+            Concepts
+          </a>
+          <a
+            href="/components"
+            data-navigator-link
+            data-route="components"
+          >
+            Library
+          </a>
+
+          <div class="navigator-nav__separator" role="separator"></div>
+
+          <label class="user-switcher">
+            <span>User</span>
+            <select id="user-selector" aria-label="Scope artefacts to user">
+              <option>Loading</option>
+            </select>
+          </label>
+
+          <div class="navigator-nav__separator" role="separator"></div>
+
+          <a href="/api" target="_blank" rel="noreferrer">API</a>
+        </div>
+      </nav>
+
+      <a
+        class="context-back-control"
+        id="context-back"
+        aria-label="Go back"
+        title="Go back"
+        data-navigator-link
+      >
+        <span aria-hidden="true">←</span>
+      </a>
+
+      <a
+        class="viewer-download-control"
+        id="viewer-download"
+        aria-label="Download artefact"
+        title="Download artefact"
+        download
+      >
+        <span aria-hidden="true">↓</span>
+      </a>
+
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch to dark theme"
+        title="Switch to dark theme"
+      >
+        <span class="theme-toggle__sun" aria-hidden="true">☼</span>
+        <span class="theme-toggle__moon" aria-hidden="true">◐</span>
+      </button>
+
+      <div class="navigator-switchers">
+        <nav
+          class="category-tabs"
+          id="category-tabs"
+          aria-label="Artefact categories"
+          data-selected="0"
+        >
+          <span class="category-tabs__indicator" aria-hidden="true"></span>
+          <a href="/dashboards" data-navigator-link data-category-tab data-route="dashboards">
+            Dashboards
+          </a>
+          <a href="/presentations" data-navigator-link data-category-tab data-route="presentations">
+            Presentations
+          </a>
+          <a href="/concepts" data-navigator-link data-category-tab data-route="concepts">
+            Concepts
+          </a>
+          <a href="/components" data-navigator-link data-category-tab data-route="components">
+            Library
+          </a>
+        </nav>
+      </div>
+
+      <div
+        class="connection-status"
+        id="connection-status"
+        data-state="loading"
+        role="status"
+        aria-live="polite"
+      >
+        <span class="connection-status__dot" aria-hidden="true"></span>
+        <span id="connection-status-label">Connecting</span>
+      </div>
+    </header>
+
+    <main class="navigator-main" id="page-content" tabindex="-1">
+      <section class="navigator-loading" aria-live="polite">
+        <p class="navigator-eyebrow">My Dashboards</p>
+        <h1>Opening your workspace</h1>
+        <p>Reading artefacts and shared resources from the repository.</p>
+      </section>
+    </main>
+
+    <footer class="navigator-footer">
+      <span>Repository-backed</span>
+      <span aria-hidden="true">·</span>
+      <span id="footer-revision">Revision loading</span>
+    </footer>
+
+    <script type="module" src="/navigator/main.js?v=20260727-61"></script>
+  </body>
+</html>

@@ -132,8 +132,7 @@ export function getWorkspaceCapabilities(options = {}) {
           "/dashboards",
           "/presentations",
           "/concepts",
-          "/components",
-          "/settings"
+          "/components"
         ],
         liveRevisionEvents: true,
       },

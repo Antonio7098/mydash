@@ -36,7 +36,7 @@ const DEFAULT_NAVIGATOR_ROOT = resolve(
   dirname(
     fileURLToPath(import.meta.url),
   ),
-  "../app",
+  "../ui",
 );
 
 export async function createApplication(

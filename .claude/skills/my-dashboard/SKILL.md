@@ -88,10 +88,34 @@ shared dependencies through manifests, exports as one standalone HTML file,
 works through `file://`, passes validation and has no server dependency at
 viewing time.
 
+Schema-version-2 artefact manifests declare a kebab-case `userId`. Artefact
+discovery defaults to the workspace user; the Navigator may switch users
+without changing workspace configuration. Reusable UI resources remain global.
+
+Standalone exports may include local HTML, CSS and CSS imports, JavaScript
+modules, JSON and tabular data, images, fonts and approved media, but no
+external load-time dependencies. Prefer deterministic extracted data over
+parsing Office files in browser code, and keep repeatable recipes and
+provenance with the artefact when refreshes matter.
+
 Use the lifecycle `Local → Collection → Core`: Local is the default; Collection
 requires a second real consumer in one domain; Core requires broad, stable,
 cross-domain reuse. Demote shared resources when the evidence no longer
 supports their scope.
+
+## Appearance scopes
+
+Keep the three appearance scopes separate:
+
+- Preview-only appearance is temporary and encoded in the preview URL.
+- Personal appearance is stored in browser localStorage for one artefact.
+- Artefact-default appearance updates `artifact.json`, validates, creates a
+  focused Git checkpoint and pushes safely when possible.
+
+Theme and preset are the primary choices. Layout, component, primitive and
+asset-slot overrides are advanced controls. Artefact-default changes require a
+Git repository, a current workspace revision and a clean target manifest.
+Browsing, personal preferences and preview-only changes do not require Git.
 
 ## Git safety
 
@@ -106,26 +130,6 @@ resource. Never use broad staging, destructive resets/cleans, unrelated
 restores, amend, force push or force-with-lease. Do not switch branches, rewrite
 published history, discard unrelated work or include unrelated staged files.
 If pushing is impossible, keep the local commit and report the exact obstacle.
-
-## Skill evaluation cases
-
-Use these prompts in fresh sessions and compare with the skill disabled when
-behaviour is unclear:
-
-- “I have an Excel workbook and want a simple dashboard I can email to
-  someone.” Inspect first, route through spreadsheet and dashboard, produce
-  standalone HTML, validate and checkpoint explicit paths.
-- “I am not technical. How do I open the app and find my presentation?” Use
-  plain language, one action at a time, no architecture lecture or changes.
-- “Change the Core metric card so it has a larger red number.” Inspect
-  consumers, question universality, prefer a variant/local override, run impact
-  analysis and acknowledge impact before checkpointing.
-- “Mock up three ideas for a use-case approval journey.” Create a lightweight
-  concept, keep UI local, avoid premature abstraction, validate and export.
-- “Make this look more HSBC.” Apply restrained visual standards and approved
-  assets, preserve accessibility and never claim official compliance.
-- “Commit everything.” Reject broad staging, identify task-owned paths,
-  validate, create a focused checkpoint and preserve unrelated changes.
 
 ## Completion
 

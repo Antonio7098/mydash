@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <meta
+      name="description"
+      content="Reference dashboard for AI use-case governance progress, review backlog, risk and next actions."
+    >
+    <title>AI Use Case Governance</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="mydash-shell">
+      <header class="mydash-shell__header dashboard-header">
+        <a class="mydash-shell__brand" href="#main-content">
+          <img
+            data-mydash-asset="brand-logo"
+            alt="My Dashboards"
+          >
+        </a>
+
+        <div class="dashboard-header__context">
+          <span class="mydash-status" data-tone="information">
+            Reference artefact
+          </span>
+          <a
+            class="mydash-button"
+            data-variant="quiet"
+            data-size="small"
+            href="#data-note"
+          >
+            About the data
+          </a>
+        </div>
+      </header>
+
+      <main class="mydash-shell__main" id="main-content">
+        <section class="dashboard-intro" aria-labelledby="dashboard-title">
+          <div>
+            <p class="dashboard-intro__eyebrow">
+              Group AI commercialisation
+            </p>
+            <h1 id="dashboard-title">AI Use Case Governance</h1>
+            <p class="dashboard-intro__summary">
+              A decision-focused view of portfolio progress, review bottlenecks,
+              delivery risk and the next action required.
+            </p>
+          </div>
+
+          <dl class="dashboard-intro__meta">
+            <div>
+              <dt>Data date</dt>
+              <dd id="data-date">Loading…</dd>
+            </div>
+            <div>
+              <dt>Portfolio</dt>
+              <dd>Representative sample</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="portfolio-heading">
+          <header class="mydash-section-heading">
+            <div class="mydash-section-heading__copy">
+              <h2
+                class="mydash-section-heading__title"
+                id="portfolio-heading"
+              >
+                Portfolio at a glance
+              </h2>
+              <p class="mydash-section-heading__supporting">
+                Current volume, governance pressure and delivery risk.
+              </p>
+            </div>
+          </header>
+
+          <div
+            class="mydash-grid mydash-grid--metrics"
+            id="metric-grid"
+            aria-live="polite"
+          >
+            <article class="mydash-metric-card">
+              <p class="mydash-metric-card__label">Loading portfolio</p>
+              <p class="mydash-metric-card__value">—</p>
+              <p class="mydash-metric-card__detail">
+                Preparing representative data
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section
+          class="dashboard-section"
+          aria-labelledby="pipeline-heading"
+        >
+          <header class="mydash-section-heading">
+            <div class="mydash-section-heading__copy">
+              <h2
+                class="mydash-section-heading__title"
+                id="pipeline-heading"
+              >
+                Governance pipeline
+              </h2>
+              <p class="mydash-section-heading__supporting">
+                Where use cases currently sit in the journey from intake to
+                production.
+              </p>
+            </div>
+          </header>
+
+          <div
+            class="governance-pipeline"
+            id="pipeline"
+            data-density="comfortable"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <section
+          class="dashboard-section"
+          aria-labelledby="queue-heading"
+        >
+          <header class="mydash-section-heading">
+            <div class="mydash-section-heading__copy">
+              <h2
+                class="mydash-section-heading__title"
+                id="queue-heading"
+              >
+                Governance work queue
+              </h2>
+              <p class="mydash-section-heading__supporting">
+                High-risk and long-running items appear first.
+              </p>
+            </div>
+            <div class="mydash-section-heading__action">
+              <button
+                class="mydash-button"
+                data-variant="secondary"
+                data-size="small"
+                id="reset-filters"
+                type="button"
+              >
+                Reset filters
+              </button>
+            </div>
+          </header>
+
+          <form class="dashboard-filters" id="filters">
+            <label>
+              <span>Search</span>
+              <input
+                id="search-filter"
+                name="search"
+                type="search"
+                placeholder="ID, use case, area or owner"
+                autocomplete="off"
+              >
+            </label>
+
+            <label>
+              <span>Stage</span>
+              <select id="stage-filter" name="stage">
+                <option value="">All stages</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Owner</span>
+              <select id="owner-filter" name="owner">
+                <option value="">All owners</option>
+              </select>
+            </label>
+          </form>
+
+          <p class="dashboard-results" id="result-count" aria-live="polite">
+            Loading work queue…
+          </p>
+
+          <div
+            class="dashboard-table-wrap"
+            role="region"
+            aria-labelledby="queue-heading"
+            tabindex="0"
+          >
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th scope="col">Use case</th>
+                  <th scope="col">Stage</th>
+                  <th scope="col">Risk</th>
+                  <th scope="col">Reviews</th>
+                  <th scope="col">Days here</th>
+                  <th scope="col">Next action</th>
+                </tr>
+              </thead>
+              <tbody id="queue-body"></tbody>
+            </table>
+          </div>
+
+          <div class="dashboard-empty" id="empty-state" hidden>
+            <h3>No matching use cases</h3>
+            <p>Change or reset the filters to restore the work queue.</p>
+          </div>
+        </section>
+
+        <aside class="dashboard-note" id="data-note">
+          <div>
+            <h2>About this reference dashboard</h2>
+            <p id="data-notice">
+              This artefact uses representative sample data.
+            </p>
+          </div>
+          <p>
+            It demonstrates the minimal Core theme, preset, layout, components,
+            primitives and project fallback brand asset. The pipeline is local
+            because it has only one real consumer.
+          </p>
+        </aside>
+      </main>
+    </div>
+
+    <noscript>
+      <p class="dashboard-noscript">
+        JavaScript is required to render this interactive reference dashboard.
+      </p>
+    </noscript>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

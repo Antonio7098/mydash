@@ -10,7 +10,7 @@ import {
   presetMappingRows,
   propRows,
   themeTokenRows,
-} from "../../app/library-model.js";
+} from "../../ui/library-model.js";
 
 const entries = [
   { id: "button", kind: "primitive", name: "Button", description: "Accessible action", reference: "core/button", level: "core", slot: "button", variants: { variant: ["primary", "quiet"] }, supportedThemes: ["hsbc-light"] },
@@ -22,6 +22,8 @@ test("library filters search semantic metadata", () => {
   assert.deepEqual(filterLibraryEntries(entries, { query: "accessible" }).map((entry) => entry.id), ["button"]);
   assert.deepEqual(filterLibraryEntries(entries, { level: "local" }).map((entry) => entry.id), ["governance-pipeline"]);
   assert.deepEqual(filterLibraryEntries(entries, { slot: "metric-summary" }).map((entry) => entry.id), ["metric-card"]);
+  assert.deepEqual(filterLibraryEntries(entries, { kind: ["component", "primitive"] }).map((entry) => entry.id), ["metric-card", "button", "governance-pipeline"]);
+  assert.deepEqual(filterLibraryEntries(entries, { slot: ["button", "governance-pipeline"] }).map((entry) => entry.id), ["button", "governance-pipeline"]);
 });
 
 test("library sorting prefers Core before Local", () => {

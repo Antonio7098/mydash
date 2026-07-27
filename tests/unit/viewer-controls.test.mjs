@@ -8,7 +8,7 @@ import {
   selectedAppearance,
   shortHash,
   viewerShortcutAction,
-} from "../../app/viewer-model.js";
+} from "../../ui/viewer-model.js";
 
 test("viewer shortcuts ignore modified and editable key events", () => {
   assert.equal(

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "kind": "dashboard",
+  "id": "portfolio-overview",
+  "title": "Portfolio Overview",
+  "userId": "antonio",
+  "description": "Development sample for testing the dashboard gallery layout.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "data": [
+    "data/use-cases.json"
+  ],
+  "tags": [
+    "reference",
+    "governance",
+    "ai-use-cases",
+    "operations"
+  ],
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "portfolio-overview.html"
+  }
+}

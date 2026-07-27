@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { buildReadinessReport, unavailableGit } from "../../src/workspace/readiness.mjs";
-import { readinessProgress, readinessTitle } from "../../app/readiness-model.js";
+import { readinessProgress, readinessTitle } from "../../ui/readiness-model.js";
 
 function input(overrides = {}) {
   return {

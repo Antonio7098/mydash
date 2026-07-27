@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "concept",
+  "id": "operations-cockpit",
+  "title": "Operations Cockpit",
+  "userId": "antonio",
+  "description": "A compact command view for flow, signals and intervention.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "operations-cockpit.html"
+  }
+}

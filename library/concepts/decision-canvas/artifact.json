@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "concept",
+  "id": "decision-canvas",
+  "title": "Decision Canvas",
+  "userId": "antonio",
+  "description": "A lightweight structure for turning evidence into action.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "decision-canvas.html"
+  }
+}

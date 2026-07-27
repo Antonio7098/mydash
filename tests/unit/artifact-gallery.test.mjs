@@ -8,11 +8,11 @@ import {
   galleryVariantForArtifact,
   kindLabel,
   sortArtifacts,
-} from "../../app/gallery-model.js";
+} from "../../ui/gallery-model.js";
 import {
   isNavigatorPath,
   routeForPath,
-} from "../../app/router.js";
+} from "../../ui/router.js";
 
 const artifact = {
   id: "ai-use-case-governance",

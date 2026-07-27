@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "primitive",
+  "id": "text-input",
+  "name": "Text Input",
+  "description": "Accessible single-line text entry with clear label, focus and validation states.",
+  "level": "core",
+  "slot": "text-input",
+  "contractVersion": 1,
+  "entry": "primitive.css",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Visible label describing the expected value."
+    },
+    "state": {
+      "type": "default|invalid|disabled",
+      "required": false,
+      "description": "Interaction and validation state."
+    }
+  },
+  "variants": {
+    "state": [
+      "default",
+      "invalid",
+      "disabled"
+    ]
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

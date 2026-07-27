@@ -64,7 +64,7 @@ for (const required of [
   "package.json",
   "config/workspace.json",
   "server/start.mjs",
-  "app/index.html",
+  "ui/index.html",
   "library/dashboards/ai-use-case-governance/artifact.json",
 ]) {
   if (!fileSet.has(resolve(root, required))) {

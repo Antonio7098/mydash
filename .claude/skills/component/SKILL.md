@@ -35,6 +35,36 @@ Local → Collection → Core
 - Promote to Core only after broad, stable, cross-domain reuse.
 - Demote shared resources when their scope is no longer justified.
 
+The visual library browser at `/components` is an inspection surface. It shows
+canonical references, lifecycle ownership, source paths, props, variants,
+supported themes, dependencies and consumers. It does not automatically
+promote or edit shared resources; make lifecycle changes explicitly in the
+filesystem and validate them.
+
+## Required manifests and placement
+
+Every created resource must include the manifest required for its kind. A
+resource directory without its manifest is incomplete and is not discoverable
+as that resource.
+
+| Resource | Shared placement | Local artefact placement | Required manifest |
+| --- | --- | --- | --- |
+| Primitive | `library/ui/primitives/core/<id>/` or `library/ui/primitives/collections/<collection>/<id>/` | `<artefact>/ui/primitives/<id>/` | `ui.json` |
+| Component | `library/ui/components/core/<id>/` or `library/ui/components/collections/<collection>/<id>/` | `<artefact>/ui/components/<id>/` | `ui.json` |
+| Layout | `library/ui/layouts/core/<id>/` or `library/ui/layouts/collections/<collection>/<id>/` | `<artefact>/ui/layouts/<id>/` | `ui.json` |
+| Theme | `library/themes/core/<id>/` or `library/themes/collections/<collection>/<id>/` | `<artefact>/theme/<id>/` | `theme.json` |
+| Preset | `library/presets/core/<id>/` or `library/presets/collections/<collection>/<id>/` | Not supported locally | `preset.json` |
+| Asset | `library/assets/core/<id>/` or `library/assets/collections/<collection>/<id>/` | `<artefact>/assets/<id>/` | `asset.json` |
+
+Here, `<artefact>` is the containing
+`library/dashboards/<id>/`, `library/presentations/<id>/` or
+`library/concepts/<id>/` directory. The artefact itself requires
+`artifact.json`; `asset.json` is required only for an asset resource owned by
+that artefact. For example, Core metric card creation is incomplete without
+`library/ui/components/core/metric-card/ui.json`, while a dashboard-local logo
+is incomplete without
+`library/dashboards/<dashboard-id>/assets/<asset-id>/asset.json`.
+
 ## Shared changes
 
 Before changing Core or Collection:

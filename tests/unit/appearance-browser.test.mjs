@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   viewerShortcutAction,
-} from "../../app/viewer-model.js";
+} from "../../ui/viewer-model.js";
 import {
   appearanceEqual,
   clearPersonalAppearance,
@@ -11,7 +11,7 @@ import {
   readPersonalAppearance,
   withAppearanceQuery,
   writePersonalAppearance,
-} from "../../app/appearance-model.js";
+} from "../../ui/appearance-model.js";
 
 function storage() {
   const values = new Map();

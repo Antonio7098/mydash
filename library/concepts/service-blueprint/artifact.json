@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "concept",
+  "id": "service-blueprint",
+  "title": "Service Blueprint",
+  "userId": "antonio",
+  "description": "A connected view of customer journeys and service operations.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "service-blueprint.html"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "concept",
+  "id": "team-radar",
+  "title": "Team Radar",
+  "userId": "antonio",
+  "description": "An exploratory view of team health, capability and focus.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "team-radar.html"
+  }
+}

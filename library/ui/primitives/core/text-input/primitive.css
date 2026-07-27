@@ -1,0 +1,31 @@
+.mydash-text-input {
+  display: grid;
+  gap: var(--space-2);
+  color: var(--colour-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.mydash-text-input input {
+  min-height: 2.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--colour-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--colour-text);
+  background: var(--colour-surface);
+  font: inherit;
+}
+
+.mydash-text-input input:focus-visible {
+  border-color: var(--colour-focus);
+  outline: 3px solid color-mix(in srgb, var(--colour-focus) 25%, transparent);
+  outline-offset: 1px;
+}
+
+.mydash-text-input[data-state="invalid"] input {
+  border-color: var(--colour-critical);
+}
+
+.mydash-text-input[data-state="disabled"] {
+  opacity: 0.55;
+}

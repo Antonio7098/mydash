@@ -6,7 +6,7 @@ import {
   normaliseNavigatorPath,
   routeForId,
   routeForPath,
-} from "../../app/router.js";
+} from "../../ui/router.js";
 
 test("navigator routes cover the intended foundation sections", () => {
   assert.deepEqual(
@@ -19,7 +19,6 @@ test("navigator routes cover the intended foundation sections", () => {
       "/presentations",
       "/concepts",
       "/components",
-      "/settings",
     ],
   );
 });

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "presentation",
+  "id": "customer-insights",
+  "title": "Customer Insights",
+  "userId": "antonio",
+  "description": "Signals and themes emerging from customer research.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "customer-insights.html"
+  }
+}

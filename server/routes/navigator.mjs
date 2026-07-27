@@ -11,7 +11,6 @@ export const NAVIGATOR_PATHS = Object.freeze([
   "/presentations",
   "/concepts",
   "/components",
-  "/settings",
 ]);
 
 const VIEWER_PATTERN =
@@ -102,7 +101,7 @@ function setNavigatorHeaders(
 ) {
   response.setHeader(
     "Cache-Control",
-    "private, no-cache, must-revalidate",
+    "no-store, max-age=0",
   );
   response.setHeader(
     "Content-Security-Policy",

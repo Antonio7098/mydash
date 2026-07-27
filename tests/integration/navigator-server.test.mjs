@@ -64,7 +64,7 @@ test("navigator root serves the application shell instead of redirecting", async
     );
     assert.match(
       html,
-      /src="\/navigator\/main\.js"/,
+      /src="\/navigator\/main\.js(?:\?[^"]+)?"/,
     );
     assert.doesNotMatch(
       html,
@@ -80,7 +80,6 @@ test("supported category routes return the same navigator document", async () =>
       "/presentations",
       "/concepts",
       "/components",
-      "/settings",
     ]) {
       const response = await fetch(
         `${baseUrl}${path}`,
@@ -95,7 +94,7 @@ test("supported category routes return the same navigator document", async () =>
       );
       assert.match(
         html,
-        /id="category-selector"/,
+        /id="category-tabs"/,
       );
     }
   });
@@ -123,7 +122,7 @@ test("browser modules are served with revalidation and no external dependencies"
       response.headers.get(
         "cache-control",
       ),
-      /no-cache/,
+      /no-(?:cache|store)/,
     );
     assert.match(
       source,
