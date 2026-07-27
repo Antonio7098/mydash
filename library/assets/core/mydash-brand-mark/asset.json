@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "asset",
+  "id": "mydash-brand-mark",
+  "name": "My Dashboards Brand Mark",
+  "level": "core",
+  "file": "mydash-brand-mark.svg",
+  "mediaType": "image/svg+xml",
+  "category": "logo",
+  "usage": "Approved project fallback for internal My Dashboards interfaces on light backgrounds. It is not an HSBC logo and must not be described as one. Replace the brand-logo mapping when an approved internal HSBC asset is available.",
+  "approved": true,
+  "attribution": "Created specifically for the My Dashboards project."
+}

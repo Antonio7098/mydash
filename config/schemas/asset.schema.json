@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/asset.schema.json",
+  "title": "Asset manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "name",
+    "level",
+    "file",
+    "mediaType",
+    "usage"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "const": "asset"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "level": {
+      "$ref": "common.schema.json#/$defs/lifecycle"
+    },
+    "collection": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "ownerArtifact": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "file": {
+      "$ref": "common.schema.json#/$defs/relativePath"
+    },
+    "mediaType": {
+      "type": "string",
+      "minLength": 3
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "logo",
+        "icon",
+        "image",
+        "illustration",
+        "background",
+        "font",
+        "data",
+        "other"
+      ]
+    },
+    "usage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approved": {
+      "type": "boolean"
+    },
+    "attribution": {
+      "type": "string"
+    }
+  }
+}

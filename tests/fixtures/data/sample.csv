@@ -1,0 +1,5 @@
+id,status,owner,amount,created
+UC-001,Approved,Alice,1200,2026-01-10
+UC-002,Review,Bob,750,2026-02-01
+UC-002,Review,Bob,750,2026-02-01
+UC-003,,Carla,100,2026-03-12

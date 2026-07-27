@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "kind": "theme",
+  "id": "hsbc-light",
+  "name": "HSBC Light",
+  "level": "core",
+  "tokens": {
+    "colour-primary": "#db0011",
+    "colour-background": "#ffffff"
+  },
+  "assets": {
+    "brand-logo": "hsbc-red"
+  }
+}

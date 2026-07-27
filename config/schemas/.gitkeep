@@ -1,0 +1,5 @@
+# Intentionally retained
+
+JSON schemas for workspace and library manifests will live here.
+
+Implementation is added by a later bootstrap step.

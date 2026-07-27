@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "kind": "preset",
+  "id": "default",
+  "name": "Default",
+  "description": "Minimal Core mappings for clear, accessible dashboards and concepts.",
+  "level": "core",
+  "mappings": {
+    "layout": "dashboard-shell",
+    "components": {
+      "metric-summary": "metric-card",
+      "section-heading": "section-heading"
+    },
+    "primitives": {
+      "button": "button",
+      "status": "status-badge"
+    },
+    "assets": {
+      "brand-logo": "mydash-brand-mark"
+    }
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

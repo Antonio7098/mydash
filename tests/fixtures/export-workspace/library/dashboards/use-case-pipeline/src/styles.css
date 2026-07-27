@@ -1,0 +1,20 @@
+@import "./typography.css";
+
+:root {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--colour-background);
+}
+
+.masthead {
+  min-height: 5rem;
+  padding: 1rem;
+  background-image: url("../assets/pattern.svg");
+}
+
+.masthead img {
+  width: 7rem;
+}

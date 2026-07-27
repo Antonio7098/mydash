@@ -1,0 +1,77 @@
+[
+  {
+    "file": "valid/workspace.json",
+    "contract": "workspace",
+    "valid": true
+  },
+  {
+    "file": "valid/artifact-dashboard.json",
+    "contract": "artifact",
+    "valid": true
+  },
+  {
+    "file": "valid/artifact-presentation.json",
+    "contract": "artifact",
+    "valid": true
+  },
+  {
+    "file": "valid/ui-component-core.json",
+    "contract": "uiItem",
+    "valid": true
+  },
+  {
+    "file": "valid/ui-layout-collection.json",
+    "contract": "uiItem",
+    "valid": true
+  },
+  {
+    "file": "valid/theme.json",
+    "contract": "theme",
+    "valid": true
+  },
+  {
+    "file": "valid/preset.json",
+    "contract": "preset",
+    "valid": true
+  },
+  {
+    "file": "valid/asset.json",
+    "contract": "asset",
+    "valid": true
+  },
+  {
+    "file": "valid/user-preferences.json",
+    "contract": "userPreferences",
+    "valid": true
+  },
+  {
+    "file": "valid/data-recipe.json",
+    "contract": "dataRecipe",
+    "valid": true
+  },
+  {
+    "file": "valid/provenance.json",
+    "contract": "provenance",
+    "valid": true
+  },
+  {
+    "file": "invalid/artifact-missing-title.json",
+    "contract": "artifact",
+    "valid": false
+  },
+  {
+    "file": "invalid/ui-local-without-owner.json",
+    "contract": "uiItem",
+    "valid": false
+  },
+  {
+    "file": "invalid/preset-unsafe-reference.json",
+    "contract": "preset",
+    "valid": false
+  },
+  {
+    "file": "invalid/provenance-bad-hash.json",
+    "contract": "provenance",
+    "valid": false
+  }
+]

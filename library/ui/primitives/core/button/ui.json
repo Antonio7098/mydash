@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "primitive",
+  "id": "button",
+  "name": "Button",
+  "description": "Accessible action styling for native button and link elements.",
+  "level": "core",
+  "slot": "button",
+  "contractVersion": 1,
+  "entry": "primitive.css",
+  "props": {
+    "variant": {
+      "type": "primary|secondary|quiet",
+      "required": false,
+      "description": "Visual emphasis of the action."
+    },
+    "size": {
+      "type": "small|medium",
+      "required": false,
+      "description": "Control height and padding."
+    }
+  },
+  "variants": {
+    "variant": [
+      "primary",
+      "secondary",
+      "quiet"
+    ],
+    "size": [
+      "small",
+      "medium"
+    ]
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

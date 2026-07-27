@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "metric-card",
+  "name": "Local Metric Card",
+  "level": "local",
+  "ownerArtifact": "use-case-pipeline",
+  "slot": "metric-summary",
+  "contractVersion": 1,
+  "entry": "component.js",
+  "dependencies": {
+    "primitives": {
+      "button": "button"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

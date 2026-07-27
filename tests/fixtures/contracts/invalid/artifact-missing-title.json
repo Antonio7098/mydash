@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "kind": "dashboard",
+  "id": "broken-dashboard",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": null,
+    "preset": null,
+    "overrides": {}
+  }
+}

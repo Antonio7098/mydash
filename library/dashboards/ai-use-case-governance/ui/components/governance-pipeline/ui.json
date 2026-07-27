@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "governance-pipeline",
+  "name": "Governance Pipeline",
+  "description": "Artefact-local stage summary for the AI use-case governance journey.",
+  "level": "local",
+  "ownerArtifact": "ai-use-case-governance",
+  "slot": "governance-pipeline",
+  "contractVersion": 1,
+  "entry": "component.css",
+  "props": {
+    "stages": {
+      "type": "array",
+      "required": true,
+      "description": "Ordered governance stages and their current counts."
+    },
+    "total": {
+      "type": "number",
+      "required": true,
+      "description": "Total use-case count used to scale stage bars."
+    }
+  },
+  "variants": {
+    "density": [
+      "comfortable",
+      "compact"
+    ]
+  },
+  "dependencies": {
+    "primitives": {
+      "status": "status-badge"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

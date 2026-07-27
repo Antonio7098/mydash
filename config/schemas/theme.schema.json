@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/theme.schema.json",
+  "title": "Theme manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "name",
+    "level",
+    "tokens"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "const": "theme"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "level": {
+      "$ref": "common.schema.json#/$defs/lifecycle"
+    },
+    "collection": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "ownerArtifact": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "tokens": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean"
+        ]
+      }
+    },
+    "assets": {
+      "$ref": "common.schema.json#/$defs/stringMap"
+    }
+  }
+}

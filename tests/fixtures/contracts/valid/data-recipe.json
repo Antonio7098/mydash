@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "use-case-extract",
+  "source": {
+    "type": "excel",
+    "file": "sources/use-cases.xlsx",
+    "sheet": "Use Cases",
+    "table": "UseCaseTable"
+  },
+  "output": {
+    "file": "library/dashboards/use-case-pipeline/data/use-cases.json",
+    "format": "json",
+    "overwrite": false
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "metric-card",
+  "name": "Metric Card",
+  "description": "Displays one metric with optional context and status.",
+  "level": "core",
+  "slot": "metric-summary",
+  "contractVersion": 1,
+  "entry": "component.js",
+  "preview": "preview.html",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Human-readable metric label."
+    },
+    "value": {
+      "type": "string | number",
+      "required": true
+    },
+    "status": {
+      "type": "positive | neutral | warning | negative",
+      "required": false
+    }
+  },
+  "variants": {
+    "density": [
+      "compact",
+      "comfortable"
+    ],
+    "emphasis": [
+      "standard",
+      "high"
+    ]
+  },
+  "dependencies": {
+    "primitives": {
+      "badge": "badge"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light",
+    "hsbc-dark"
+  ]
+}

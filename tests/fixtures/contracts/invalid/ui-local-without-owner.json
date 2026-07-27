@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "local-risk-card",
+  "name": "Local Risk Card",
+  "level": "local",
+  "slot": "risk-summary",
+  "contractVersion": 1,
+  "entry": "component.js",
+  "supportedThemes": []
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "kind": "presentation",
+  "id": "agent-hub-proposal",
+  "title": "Agent Hub Proposal",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "editorial",
+    "overrides": {
+      "layout": "presentation-frame",
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  }
+}

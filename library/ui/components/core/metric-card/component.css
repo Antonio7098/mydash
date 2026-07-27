@@ -1,0 +1,57 @@
+.mydash-metric-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-height: 9.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-lg);
+  background: var(--colour-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.mydash-metric-card[data-density="compact"] {
+  min-height: 7.5rem;
+  padding: var(--space-4);
+}
+
+.mydash-metric-card__topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.mydash-metric-card__label {
+  margin: 0;
+  color: var(--colour-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.mydash-metric-card__value {
+  margin: 0;
+  color: var(--colour-text);
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.035em;
+  line-height: var(--line-height-tight);
+}
+
+.mydash-metric-card__detail {
+  margin: 0;
+  color: var(--colour-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.mydash-metric-card[data-tone="positive"] {
+  border-top: 3px solid var(--colour-positive);
+}
+
+.mydash-metric-card[data-tone="warning"] {
+  border-top: 3px solid var(--colour-warning);
+}
+
+.mydash-metric-card[data-tone="critical"] {
+  border-top: 3px solid var(--colour-critical);
+}

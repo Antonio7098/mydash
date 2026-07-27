@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/common.schema.json",
+  "title": "My Dashboards common definitions",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?![a-zA-Z][a-zA-Z0-9+.-]*://).+$"
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "local",
+        "collection",
+        "core"
+      ]
+    },
+    "reference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9]+(?:[/-][a-z0-9]+)*$"
+    },
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

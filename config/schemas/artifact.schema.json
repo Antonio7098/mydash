@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/artifact.schema.json",
+  "title": "Dashboard, presentation or concept manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "title",
+    "entry",
+    "appearance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "dashboard",
+        "presentation",
+        "concept"
+      ]
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry": {
+      "$ref": "common.schema.json#/$defs/relativePath"
+    },
+    "data": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/relativePath"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "theme",
+        "preset",
+        "overrides"
+      ],
+      "properties": {
+        "theme": {
+          "$ref": "common.schema.json#/$defs/reference"
+        },
+        "preset": {
+          "$ref": "common.schema.json#/$defs/reference"
+        },
+        "overrides": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "layout": {
+              "$ref": "common.schema.json#/$defs/reference"
+            },
+            "components": {
+              "$ref": "common.schema.json#/$defs/stringMap"
+            },
+            "primitives": {
+              "$ref": "common.schema.json#/$defs/stringMap"
+            },
+            "assets": {
+              "$ref": "common.schema.json#/$defs/stringMap"
+            }
+          }
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "pattern": "^[^/\\\\]+\\.html$"
+        }
+      }
+    }
+  }
+}

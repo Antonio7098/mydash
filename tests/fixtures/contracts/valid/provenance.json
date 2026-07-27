@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "source": "sources/use-cases.xlsx",
+  "sourceHash": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "generatedAt": "2026-07-26T15:30:00.000Z",
+  "command": "mydash excel extract-table sources/use-cases.xlsx --table UseCaseTable",
+  "toolVersion": "0.1.0"
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "primitive",
+  "id": "button",
+  "name": "Button",
+  "level": "core",
+  "slot": "button",
+  "contractVersion": 1,
+  "entry": "primitive.js",
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

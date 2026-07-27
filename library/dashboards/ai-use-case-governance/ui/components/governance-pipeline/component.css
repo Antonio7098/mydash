@@ -1,0 +1,98 @@
+.governance-pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(9.5rem, 1fr));
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding: var(--space-5);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-lg);
+  background: var(--colour-surface-subtle);
+}
+
+.governance-pipeline__stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: var(--space-3);
+  min-width: 9.5rem;
+  padding: var(--space-4);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-md);
+  background: var(--colour-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.governance-pipeline__stage:not(:last-child)::after {
+  position: absolute;
+  top: 2rem;
+  right: calc(var(--space-3) * -1 - 1px);
+  width: var(--space-3);
+  height: 1px;
+  background: var(--colour-border-strong);
+  content: "";
+}
+
+.governance-pipeline__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.governance-pipeline__index {
+  color: var(--colour-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+}
+
+.governance-pipeline__count {
+  margin: 0;
+  color: var(--colour-text);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.governance-pipeline__label {
+  margin: 0;
+  color: var(--colour-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.governance-pipeline__description {
+  margin: var(--space-1) 0 0;
+  color: var(--colour-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.governance-pipeline__bar {
+  align-self: end;
+  height: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--colour-border);
+}
+
+.governance-pipeline__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--colour-primary);
+}
+
+.governance-pipeline[data-density="compact"] {
+  padding: var(--space-4);
+}
+
+.governance-pipeline[data-density="compact"]
+  .governance-pipeline__stage {
+  padding: var(--space-3);
+}
+
+@media (max-width: 64rem) {
+  .governance-pipeline {
+    grid-template-columns: repeat(5, minmax(11rem, 1fr));
+  }
+}

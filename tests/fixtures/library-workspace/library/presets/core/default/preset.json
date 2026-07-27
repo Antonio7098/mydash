@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "kind": "preset",
+  "id": "default",
+  "name": "Default",
+  "level": "core",
+  "mappings": {
+    "layout": "dashboard-grid",
+    "components": {
+      "metric-summary": "metric-card"
+    },
+    "primitives": {
+      "button": "button"
+    },
+    "assets": {
+      "brand-logo": "hsbc-red"
+    }
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

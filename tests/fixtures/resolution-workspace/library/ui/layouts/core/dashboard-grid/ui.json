@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "layout",
+  "id": "dashboard-grid",
+  "name": "Dashboard Grid",
+  "level": "core",
+  "slot": "page-layout",
+  "contractVersion": 1,
+  "entry": "layout.js",
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

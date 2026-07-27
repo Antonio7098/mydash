@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "kind": "layout",
+  "id": "dashboard-shell",
+  "name": "Dashboard Shell",
+  "description": "Responsive page shell with a compact header, bounded content region and composable grid utilities.",
+  "level": "core",
+  "slot": "page-layout",
+  "contractVersion": 1,
+  "entry": "layout.css",
+  "props": {
+    "density": {
+      "type": "comfortable|compact",
+      "required": false,
+      "description": "Controls the default spacing rhythm."
+    }
+  },
+  "variants": {
+    "density": [
+      "comfortable",
+      "compact"
+    ]
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

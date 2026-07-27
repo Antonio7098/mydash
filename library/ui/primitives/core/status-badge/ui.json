@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "kind": "primitive",
+  "id": "status-badge",
+  "name": "Status Badge",
+  "description": "Compact textual status treatment. Status meaning must never rely on colour alone.",
+  "level": "core",
+  "slot": "status",
+  "contractVersion": 1,
+  "entry": "primitive.css",
+  "props": {
+    "tone": {
+      "type": "neutral|information|positive|warning|critical",
+      "required": false,
+      "description": "Semantic visual tone paired with visible status text."
+    }
+  },
+  "variants": {
+    "tone": [
+      "neutral",
+      "information",
+      "positive",
+      "warning",
+      "critical"
+    ]
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

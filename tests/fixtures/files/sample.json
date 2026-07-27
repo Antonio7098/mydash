@@ -1,0 +1,9 @@
+{
+  "name": "Example",
+  "items": [
+    {
+      "id": 1,
+      "status": "active"
+    }
+  ]
+}

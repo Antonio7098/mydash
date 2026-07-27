@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "preset",
+  "id": "unsafe",
+  "name": "Unsafe",
+  "level": "core",
+  "mappings": {
+    "layout": "../../outside",
+    "components": {},
+    "primitives": {}
+  },
+  "supportedThemes": []
+}

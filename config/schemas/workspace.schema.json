@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/workspace.schema.json",
+  "title": "Workspace configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "libraryRoots",
+    "defaults",
+    "preview",
+    "export"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "libraryRoots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dashboards",
+        "presentations",
+        "concepts",
+        "primitives",
+        "components",
+        "layouts",
+        "themes",
+        "presets",
+        "assets"
+      ],
+      "properties": {
+        "dashboards": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "presentations": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "concepts": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "primitives": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "components": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "layouts": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "themes": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "presets": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        },
+        "assets": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        }
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "theme",
+        "preset"
+      ],
+      "properties": {
+        "theme": {
+          "$ref": "common.schema.json#/$defs/reference"
+        },
+        "preset": {
+          "$ref": "common.schema.json#/$defs/reference"
+        }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host",
+        "port"
+      ],
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outputDirectory"
+      ],
+      "properties": {
+        "outputDirectory": {
+          "$ref": "common.schema.json#/$defs/relativePath"
+        }
+      }
+    }
+  }
+}

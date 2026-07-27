@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "source": "sources/use-cases.xlsx",
+  "sourceHash": "not-a-sha256",
+  "generatedAt": "yesterday",
+  "command": "extract",
+  "toolVersion": "0.1.0"
+}

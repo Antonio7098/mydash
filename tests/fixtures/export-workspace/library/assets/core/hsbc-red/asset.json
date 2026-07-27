@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "kind": "asset",
+  "id": "hsbc-red",
+  "name": "HSBC Red Logo",
+  "level": "core",
+  "file": "hsbc-red.svg",
+  "mediaType": "image/svg+xml",
+  "category": "logo",
+  "usage": "Use on light backgrounds.",
+  "approved": true
+}

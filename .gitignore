@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Generated outputs
+dist/
+exports/
+coverage/
+
+# Agent and application working files
+.my-dashboards/
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating-system files
+.DS_Store
+Thumbs.db

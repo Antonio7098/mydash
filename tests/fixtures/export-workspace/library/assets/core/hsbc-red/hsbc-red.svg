@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="24" viewBox="0 0 120 24">
+  <rect width="120" height="24" fill="white"/>
+  <path d="M2 12L14 2l12 10-12 10z" fill="#db0011"/>
+  <text x="34" y="17" font-family="Arial" font-size="14" fill="#111">HSBC</text>
+</svg>

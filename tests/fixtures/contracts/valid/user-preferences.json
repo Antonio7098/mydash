@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "userId": "antonio",
+  "favourites": [
+    "use-case-pipeline"
+  ],
+  "recent": [
+    "agent-hub-proposal",
+    "use-case-pipeline"
+  ],
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default"
+  }
+}

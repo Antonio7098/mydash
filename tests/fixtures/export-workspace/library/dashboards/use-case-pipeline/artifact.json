@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "dashboard",
+  "id": "use-case-pipeline",
+  "title": "Use Case Pipeline",
+  "entry": "src/index.html",
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {
+        "metric-summary": "metric-card"
+      },
+      "primitives": {},
+      "assets": {}
+    }
+  }
+}

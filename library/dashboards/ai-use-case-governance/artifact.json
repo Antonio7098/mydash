@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dashboard",
+  "id": "ai-use-case-governance",
+  "title": "AI Use Case Governance",
+  "description": "Reference dashboard for understanding AI use-case progress, review backlog, risk and next actions.",
+  "owner": "My Dashboards",
+  "entry": "src/index.html",
+  "data": [
+    "data/use-cases.json"
+  ],
+  "tags": [
+    "reference",
+    "governance",
+    "ai-use-cases",
+    "operations"
+  ],
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {
+        "governance-pipeline": "governance-pipeline"
+      },
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "ai-use-case-governance.html"
+  }
+}

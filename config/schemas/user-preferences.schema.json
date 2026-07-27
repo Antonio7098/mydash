@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/user-preferences.schema.json",
+  "title": "Local user preferences",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "userId",
+    "favourites",
+    "recent",
+    "appearance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "userId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "favourites": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/reference"
+      }
+    },
+    "recent": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/reference"
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "theme",
+        "preset"
+      ],
+      "properties": {
+        "theme": {
+          "$ref": "common.schema.json#/$defs/reference"
+        },
+        "preset": {
+          "$ref": "common.schema.json#/$defs/reference"
+        }
+      }
+    }
+  }
+}

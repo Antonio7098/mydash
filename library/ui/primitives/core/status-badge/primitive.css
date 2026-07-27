@@ -1,0 +1,48 @@
+.mydash-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 1.625rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--colour-border);
+  border-radius: 999px;
+  color: var(--colour-text-muted);
+  background: var(--colour-surface-subtle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mydash-status::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.mydash-status[data-tone="information"] {
+  color: var(--colour-information);
+  border-color: color-mix(in srgb, var(--colour-information) 25%, white);
+  background: var(--colour-information-soft);
+}
+
+.mydash-status[data-tone="positive"] {
+  color: var(--colour-positive);
+  border-color: color-mix(in srgb, var(--colour-positive) 25%, white);
+  background: var(--colour-positive-soft);
+}
+
+.mydash-status[data-tone="warning"] {
+  color: var(--colour-warning);
+  border-color: color-mix(in srgb, var(--colour-warning) 25%, white);
+  background: var(--colour-warning-soft);
+}
+
+.mydash-status[data-tone="critical"] {
+  color: var(--colour-critical);
+  border-color: color-mix(in srgb, var(--colour-critical) 25%, white);
+  background: var(--colour-critical-soft);
+}

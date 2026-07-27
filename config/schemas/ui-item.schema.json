@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-dashboards.local/schemas/ui-item.schema.json",
+  "title": "Primitive, component or layout manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "name",
+    "level",
+    "slot",
+    "contractVersion",
+    "entry",
+    "supportedThemes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "primitive",
+        "component",
+        "layout"
+      ]
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "level": {
+      "$ref": "common.schema.json#/$defs/lifecycle"
+    },
+    "collection": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "ownerArtifact": {
+      "$ref": "common.schema.json#/$defs/reference"
+    },
+    "slot": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "contractVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "entry": {
+      "$ref": "common.schema.json#/$defs/relativePath"
+    },
+    "preview": {
+      "$ref": "common.schema.json#/$defs/relativePath"
+    },
+    "props": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "required"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primitives": {
+          "$ref": "common.schema.json#/$defs/stringMap"
+        },
+        "components": {
+          "$ref": "common.schema.json#/$defs/stringMap"
+        },
+        "assets": {
+          "$ref": "common.schema.json#/$defs/stringMap"
+        }
+      }
+    },
+    "supportedThemes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/reference"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "local"
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "required": [
+          "ownerArtifact"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "collection"
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "required": [
+          "collection"
+        ]
+      }
+    }
+  ]
+}

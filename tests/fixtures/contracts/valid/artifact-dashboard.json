@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "kind": "dashboard",
+  "id": "use-case-pipeline",
+  "title": "Use Case Pipeline",
+  "description": "An operational view of use cases and governance progress.",
+  "owner": "antonio",
+  "entry": "src/index.html",
+  "data": [
+    "data/use-cases.json"
+  ],
+  "tags": [
+    "governance",
+    "operations"
+  ],
+  "appearance": {
+    "theme": "hsbc-light",
+    "preset": "default",
+    "overrides": {
+      "layout": null,
+      "components": {},
+      "primitives": {},
+      "assets": {}
+    }
+  },
+  "export": {
+    "fileName": "use-case-pipeline.html"
+  }
+}

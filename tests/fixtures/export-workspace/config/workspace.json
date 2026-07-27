@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "library-fixture",
+  "name": "Library Fixture",
+  "libraryRoots": {
+    "dashboards": "library/dashboards",
+    "presentations": "library/presentations",
+    "concepts": "library/concepts",
+    "primitives": "library/ui/primitives",
+    "components": "library/ui/components",
+    "layouts": "library/ui/layouts",
+    "themes": "library/themes",
+    "presets": "library/presets",
+    "assets": "library/assets"
+  },
+  "defaults": {
+    "theme": "hsbc-light",
+    "preset": "default"
+  },
+  "preview": {
+    "host": "127.0.0.1",
+    "port": 4173
+  },
+  "export": {
+    "outputDirectory": "exports"
+  }
+}

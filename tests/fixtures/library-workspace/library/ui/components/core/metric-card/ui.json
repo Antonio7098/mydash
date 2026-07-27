@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "metric-card",
+  "name": "Metric Card",
+  "level": "core",
+  "slot": "metric-summary",
+  "contractVersion": 1,
+  "entry": "component.js",
+  "dependencies": {
+    "primitives": {
+      "button": "button"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

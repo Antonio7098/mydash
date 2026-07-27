@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "use-case-data",
+  "source": {
+    "type": "json",
+    "file": "library/dashboards/use-case-pipeline/data/use-cases.json"
+  },
+  "output": {
+    "file": "exports/use-cases-refreshed.json",
+    "format": "json",
+    "overwrite": false
+  }
+}

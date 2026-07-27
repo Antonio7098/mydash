@@ -1,0 +1,45 @@
+.mydash-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-block: 0 var(--space-5);
+}
+
+.mydash-section-heading[data-alignment="start"] {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mydash-section-heading__copy {
+  min-width: 0;
+}
+
+.mydash-section-heading__title {
+  margin: 0;
+  color: var(--colour-text);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025em;
+  line-height: var(--line-height-tight);
+}
+
+.mydash-section-heading__supporting {
+  max-width: 70ch;
+  margin: var(--space-2) 0 0;
+  color: var(--colour-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.mydash-section-heading__action {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 40rem) {
+  .mydash-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}

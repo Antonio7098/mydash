@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "metric-card",
+  "name": "Metric Card",
+  "description": "A labelled summary value with optional supporting detail and status.",
+  "level": "core",
+  "slot": "metric-summary",
+  "contractVersion": 1,
+  "entry": "component.css",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Plain-language metric label."
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "description": "Formatted value including visible unit where needed."
+    },
+    "detail": {
+      "type": "string",
+      "required": false,
+      "description": "Supporting comparison, period or source context."
+    },
+    "tone": {
+      "type": "neutral|positive|warning|critical",
+      "required": false,
+      "description": "Optional semantic emphasis."
+    }
+  },
+  "variants": {
+    "tone": [
+      "neutral",
+      "positive",
+      "warning",
+      "critical"
+    ],
+    "density": [
+      "comfortable",
+      "compact"
+    ]
+  },
+  "dependencies": {
+    "primitives": {
+      "status": "status-badge"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

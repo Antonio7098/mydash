@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "layout",
+  "id": "executive-overview",
+  "name": "Executive Overview",
+  "level": "collection",
+  "collection": "executive-reporting",
+  "slot": "page-layout",
+  "contractVersion": 1,
+  "entry": "layout.js",
+  "supportedThemes": [
+    "hsbc-light",
+    "hsbc-dark"
+  ]
+}

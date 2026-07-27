@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "kind": "component",
+  "id": "section-heading",
+  "name": "Section Heading",
+  "description": "A section title, optional supporting text and optional action region.",
+  "level": "core",
+  "slot": "section-heading",
+  "contractVersion": 1,
+  "entry": "component.css",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Short section heading."
+    },
+    "action": {
+      "type": "button|link",
+      "required": false,
+      "description": "Optional action aligned with the heading."
+    },
+    "supporting-text": {
+      "type": "string",
+      "required": false,
+      "description": "Concise context or source note."
+    }
+  },
+  "variants": {
+    "alignment": [
+      "start",
+      "split"
+    ]
+  },
+  "dependencies": {
+    "primitives": {
+      "button": "button"
+    },
+    "components": {},
+    "assets": {}
+  },
+  "supportedThemes": [
+    "hsbc-light"
+  ]
+}

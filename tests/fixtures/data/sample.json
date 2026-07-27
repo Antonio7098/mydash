@@ -1,0 +1,14 @@
+[
+  {
+    "id": "UC-001",
+    "status": "Approved",
+    "owner": "Alice",
+    "amount": 1200
+  },
+  {
+    "id": "UC-002",
+    "status": "Review",
+    "owner": "Bob",
+    "amount": 750
+  }
+]
