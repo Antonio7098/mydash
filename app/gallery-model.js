@@ -52,31 +52,31 @@ export function galleryVariantForArtifact(
 export function artifactViewerPath(
   artifact,
 ) {
-  return `/view/${encodeURIComponent(
+  return withArtifactUser(`/view/${encodeURIComponent(
     artifact.kind,
   )}/${encodeURIComponent(
     artifact.id,
-  )}`;
+  )}`, artifact);
 }
 
 export function artifactPreviewPath(
   artifact,
 ) {
-  return `/api/artifacts/${encodeURIComponent(
+  return withArtifactUser(`/api/artifacts/${encodeURIComponent(
     artifact.kind,
   )}/${encodeURIComponent(
     artifact.id,
-  )}/preview`;
+  )}/preview`, artifact);
 }
 
 export function artifactDownloadPath(
   artifact,
 ) {
-  return `/api/artifacts/${encodeURIComponent(
+  return withArtifactUser(`/api/artifacts/${encodeURIComponent(
     artifact.kind,
   )}/${encodeURIComponent(
     artifact.id,
-  )}/download`;
+  )}/download`, artifact);
 }
 
 export function categoryPathForKind(
@@ -110,4 +110,11 @@ function titleCase(value) {
     .replace(/\b\w/g, (letter) =>
       letter.toUpperCase(),
     );
+}
+
+function withArtifactUser(path, artifact) {
+  if (!artifact.userId) return path;
+  return `${path}${
+    path.includes("?") ? "&" : "?"
+  }userId=${encodeURIComponent(artifact.userId)}`;
 }

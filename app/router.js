@@ -136,8 +136,14 @@ export function navigate(
   path,
   options = {},
 ) {
+  const requested = new URL(
+    path,
+    window.location.origin,
+  );
   const next =
-    normaliseNavigatorPath(path);
+    normaliseNavigatorPath(
+      requested.pathname,
+    );
 
   if (!isNavigatorPath(next)) {
     throw new TypeError(
@@ -153,7 +159,10 @@ export function navigate(
   window.history[method](
     {},
     "",
-    next,
+    `${next}${
+      requested.search ||
+      window.location.search
+    }`,
   );
   window.dispatchEvent(
     new PopStateEvent("popstate"),

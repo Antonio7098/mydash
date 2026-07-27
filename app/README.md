@@ -3,6 +3,11 @@
 The navigator is a lightweight browser interface over the repository and HTTP
 services. It does not maintain a separate database or artefact index.
 
+The top-bar user selector scopes artifact galleries, viewers, previews,
+downloads and appearance changes. It defaults to the workspace `userId` and
+persists the selected user in the URL and browser storage. The visual component
+library remains global.
+
 ## Start
 
 ```bash

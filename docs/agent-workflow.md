@@ -1,6 +1,7 @@
 # Agent workflow
 
-Project skills live under `.claude/skills/`.
+Active project skills live under `.claude/skills/`; their shared references
+live under `docs/agent-workflows/`.
 
 Recommended flow:
 

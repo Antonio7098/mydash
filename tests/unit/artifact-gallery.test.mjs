@@ -35,6 +35,26 @@ test("gallery URLs use the existing API and viewer contracts", () => {
   );
 });
 
+test("artifact URLs carry their user scope", () => {
+  const scoped = {
+    ...artifact,
+    userId: "antonio",
+  };
+
+  assert.equal(
+    artifactViewerPath(scoped),
+    "/view/dashboard/ai-use-case-governance?userId=antonio",
+  );
+  assert.equal(
+    artifactPreviewPath(scoped),
+    "/api/artifacts/dashboard/ai-use-case-governance/preview?userId=antonio",
+  );
+  assert.equal(
+    artifactDownloadPath(scoped),
+    "/api/artifacts/dashboard/ai-use-case-governance/download?userId=antonio",
+  );
+});
+
 test("viewer routes are recognised and parsed", () => {
   const route = routeForPath(
     "/view/dashboard/ai-use-case-governance",

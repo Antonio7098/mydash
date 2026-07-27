@@ -42,6 +42,7 @@ export const artifactCommand = {
     "--overwrite                   Replace an existing export explicitly.",
     "--minify                      Minify bundled JavaScript and CSS.",
     "--max-bytes <number>          Maximum final HTML size.",
+    "--all-users                   Override config user scoping.",
     "--workspace <path>            Use a specific workspace.",
     "--json                        Return structured JSON.",
   ],
@@ -95,6 +96,7 @@ export const artifactCommand = {
 
 async function runInspect(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind"],
   });
   requirePositionals(
@@ -107,6 +109,7 @@ async function runInspect(args, workspaceRoot) {
     workspaceRoot,
     parsed.positionals[0],
     parsed.options.kind,
+    parsed.options.allUsers,
   );
 
   return {
@@ -117,6 +120,7 @@ async function runInspect(args, workspaceRoot) {
         id: artifact.id,
         kind: artifact.kind,
         title: artifact.title,
+        userId: artifact.userId,
         entry: artifact.manifest.entry,
         displayPath: artifact.displayPath,
       },
@@ -126,6 +130,7 @@ async function runInspect(args, workspaceRoot) {
     text: [
       `${artifact.kind}:${artifact.id}`,
       `Title: ${artifact.title}`,
+      `User: ${artifact.userId}`,
       `Entry: ${artifact.manifest.entry}`,
       `Appearance valid: ${resolution.summary.valid ? "yes" : "no"}`,
       `Resolved dependencies: ${resolution.summary.dependencyCount}`,
@@ -135,6 +140,7 @@ async function runInspect(args, workspaceRoot) {
 
 async function runDependencies(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind"],
   });
   requirePositionals(
@@ -147,6 +153,7 @@ async function runDependencies(args, workspaceRoot) {
     workspaceRoot,
     parsed.positionals[0],
     parsed.options.kind,
+    parsed.options.allUsers,
   );
 
   return {
@@ -173,7 +180,7 @@ async function runDependencies(args, workspaceRoot) {
 
 async function runValidate(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
-    booleans: ["minify"],
+    booleans: ["minify", "all-users"],
     values: ["kind", "max-bytes"],
   });
   requirePositionals(
@@ -193,6 +200,7 @@ async function runValidate(args, workspaceRoot) {
       workspaceRoot,
       parsed.positionals[0],
       parsed.options.kind,
+      parsed.options.allUsers,
     );
 
   assertResolutionValid(resolution);
@@ -224,7 +232,7 @@ async function runValidate(args, workspaceRoot) {
 
 async function runExport(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
-    booleans: ["overwrite", "minify"],
+    booleans: ["overwrite", "minify", "all-users"],
     values: ["kind", "output", "max-bytes"],
   });
   requirePositionals(
@@ -244,6 +252,7 @@ async function runExport(args, workspaceRoot) {
       workspaceRoot,
       parsed.positionals[0],
       parsed.options.kind,
+      parsed.options.allUsers,
     );
 
   assertResolutionValid(resolution);
@@ -286,9 +295,15 @@ async function loadResolvedArtifact(
   workspaceRoot,
   artifactId,
   kind,
+  allUsers = false,
 ) {
   const scan = await scanWorkspaceLibrary(workspaceRoot);
-  const artifact = findArtifact(scan, artifactId, kind);
+  const artifact = findArtifact(
+    scan,
+    artifactId,
+    kind,
+    allUsers ? null : scan.config.userId,
+  );
   const resolution = resolveArtifactAppearance(scan, artifact);
 
   return {

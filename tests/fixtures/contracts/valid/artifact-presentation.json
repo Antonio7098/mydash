@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "presentation",
   "id": "agent-hub-proposal",
   "title": "Agent Hub Proposal",
+  "userId": "antonio",
   "entry": "src/index.html",
   "appearance": {
     "theme": "hsbc-light",

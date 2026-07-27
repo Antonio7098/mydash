@@ -82,17 +82,26 @@
         </div>
       </nav>
 
-      <label class="category-switcher">
-        <span class="visually-hidden">Current section</span>
-        <select id="category-selector" aria-label="Current section">
-          <option value="/">Home</option>
-          <option value="/dashboards">Dashboards</option>
-          <option value="/presentations">Presentations</option>
-          <option value="/concepts">Concepts</option>
-          <option value="/components">Library</option>
-          <option value="/settings">Settings</option>
-        </select>
-      </label>
+      <div class="navigator-switchers">
+        <label class="category-switcher">
+          <span class="visually-hidden">Current section</span>
+          <select id="category-selector" aria-label="Current section">
+            <option value="/">Home</option>
+            <option value="/dashboards">Dashboards</option>
+            <option value="/presentations">Presentations</option>
+            <option value="/concepts">Concepts</option>
+            <option value="/components">Library</option>
+            <option value="/settings">Settings</option>
+          </select>
+        </label>
+
+        <label class="user-switcher">
+          <span>User</span>
+          <select id="user-selector" aria-label="Scope artefacts to user">
+            <option>Loading</option>
+          </select>
+        </label>
+      </div>
 
       <div
         class="connection-status"

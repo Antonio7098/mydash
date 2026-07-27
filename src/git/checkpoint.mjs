@@ -96,6 +96,7 @@ export async function checkpointWorkspace(
       DEFAULT_MAX_EXPORT_BYTES,
     failOnWarning:
       options.failOnWarning ?? false,
+    allUsers: options.allUsers ?? false,
     now: options.now,
   });
 

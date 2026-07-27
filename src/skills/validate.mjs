@@ -26,18 +26,19 @@ export const EXPECTED_COMMANDS = [
 ];
 
 const SUPPORTING_FILES = [
-  "skills/README.md",
-  "skills/OPERATING_MODEL.md",
-  "skills/CLI_REFERENCE.md",
-  "skills/ARTIFACT_AUTHORING.md",
-  "skills/VISUAL_STANDARDS.md",
-  "skills/EVALUATION_CASES.md",
+  "docs/agent-workflows/README.md",
+  "docs/agent-workflows/OPERATING_MODEL.md",
+  "docs/agent-workflows/CLI_REFERENCE.md",
+  "docs/agent-workflows/ARTIFACT_AUTHORING.md",
+  "docs/agent-workflows/VISUAL_STANDARDS.md",
+  "docs/agent-workflows/EVALUATION_CASES.md",
 ];
 
 const CONTENT_RULES = {
   "my-dashboard": [
     "Do not maintain an artefact index",
     "mydash git checkpoint",
+    "data.userId",
   ],
   help: [
     "nontechnical",

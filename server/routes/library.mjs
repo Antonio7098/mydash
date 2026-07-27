@@ -64,20 +64,14 @@ export function createLibraryRouter(context) {
         );
       }
 
-      if (result.matches.length > 1) {
-        throw new HttpError(
-          409,
-          "AMBIGUOUS_LIBRARY_ENTRY",
-          `Multiple library entries match ${kind}:${id}.`,
-          {
-            details: {
-              matches: result.matches.map(publicLibraryEntry),
-            },
-          },
-        );
-      }
-
-      const entry = result.matches[0];
+      // Detail routes intentionally mirror resolution precedence: an
+      // artefact-local resource shadows a Core resource with the same id.
+      // This keeps canonical browser routes usable while list responses still
+      // expose each qualified reference.
+      const entry =
+        result.matches.find((candidate) => candidate.level === "local") ??
+        result.matches.find((candidate) => candidate.level === "core") ??
+        result.matches[0];
       const consumers = context.services.library.consumersFor(entry, result.graph);
       const dependencies = context.services.library.dependenciesFor(entry, result.graph);
       const etag = createRevisionEtag(

@@ -14,9 +14,14 @@ export async function loadNavigatorSnapshot(
   options = {},
 ) {
   const signal = options.signal;
+  const artifactsPath = withUserId(
+    "/api/artifacts",
+    options.userId,
+  );
 
   const [
     health,
+    users,
     artefacts,
     library,
     state,
@@ -24,7 +29,8 @@ export async function loadNavigatorSnapshot(
     readiness,
   ] = await Promise.all([
     getJson("/api/health", { signal }),
-    getJson("/api/artifacts", { signal }),
+    getJson("/api/users", { signal }),
+    getJson(artifactsPath, { signal }),
     getJson("/api/library", { signal }),
     getJson("/api/state", {
       signal,
@@ -42,6 +48,10 @@ export async function loadNavigatorSnapshot(
 
   return {
     health,
+    users,
+    selectedUserId:
+      artefacts.userId ??
+      users.currentUserId,
     artefacts:
       artefacts.artifacts ?? [],
     library:
@@ -72,15 +82,16 @@ export async function loadArtifactViewerData(
     `/api/artifacts/${encodeURIComponent(
       kind,
     )}/${encodeURIComponent(id)}`;
+  const scopedBase = withUserId(base, options.userId);
   const [
     detail,
     exportStatus,
   ] = await Promise.all([
-    getJson(base, {
+    getJson(scopedBase, {
       signal: options.signal,
     }),
     getJson(
-      `${base}/export-status`,
+      withUserId(`${base}/export-status`, options.userId),
       {
         signal: options.signal,
       },
@@ -102,18 +113,23 @@ export async function loadAppearanceOptions(
   options = {},
 ) {
   return getJson(
-    `/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
+    withUserId(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
       id,
-    )}/appearance-options`,
+    )}/appearance-options`, options.userId),
     { signal: options.signal },
   );
 }
 
-export async function saveArtifactAppearance(kind, id, payload) {
+export async function saveArtifactAppearance(
+  kind,
+  id,
+  payload,
+  options = {},
+) {
   return sendJson(
-    `/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
+    withUserId(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
       id,
-    )}/appearance`,
+    )}/appearance`, options.userId),
     {
       method: "PUT",
       body: payload,
@@ -253,4 +269,11 @@ export async function getJson(
 
 export function clearApiCache() {
   responseCache.clear();
+}
+
+function withUserId(path, userId) {
+  if (!userId) return path;
+  return `${path}${
+    path.includes("?") ? "&" : "?"
+  }userId=${encodeURIComponent(userId)}`;
 }

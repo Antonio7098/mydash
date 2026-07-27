@@ -33,6 +33,12 @@ const tests = [
     "integration",
     "server.test.mjs",
   ),
+  resolve(
+    projectRoot,
+    "tests",
+    "integration",
+    "user-scope-server.test.mjs",
+  ),
 ];
 
 const result = spawnSync(

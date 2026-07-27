@@ -8,9 +8,9 @@ Treat `$ARGUMENTS` as the dashboard outcome.
 
 Read:
 
-- `skills/OPERATING_MODEL.md`
-- `skills/ARTIFACT_AUTHORING.md`
-- `skills/VISUAL_STANDARDS.md`
+- `docs/agent-workflows/OPERATING_MODEL.md`
+- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
+- `docs/agent-workflows/VISUAL_STANDARDS.md`
 
 Load `/spreadsheet` or `/powerpoint` when the source requires it. Load
 `/component` before creating or changing reusable UI.

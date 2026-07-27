@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "dashboard",
   "id": "use-case-pipeline",
   "title": "Use Case Pipeline",
+  "userId": "antonio",
   "description": "An operational view of use cases and governance progress.",
   "owner": "antonio",
   "entry": "src/index.html",

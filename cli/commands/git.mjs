@@ -36,6 +36,7 @@ export const gitCommand = {
     "--message <text>               Required checkpoint commit message.",
     "--acknowledge-impact           Confirm reviewed shared-resource consumers.",
     "--fail-on-warning              Treat validation warnings as failures.",
+    "--all-users                   Validate artifacts for every user.",
     "--dry-run                      Validate and analyse without committing.",
     "--no-push                      Commit locally without pushing.",
     "--workspace <path>             Use a specific workspace repository.",
@@ -78,7 +79,7 @@ export const gitCommand = {
         return runStatus(rest, workspaceRoot);
       }
 
-      return runCheckpoint(
+      return await runCheckpoint(
         rest,
         workspaceRoot,
         context,
@@ -138,6 +139,7 @@ async function runCheckpoint(
       "fail-on-warning",
       "dry-run",
       "no-push",
+      "all-users",
     ],
     values: ["message"],
   });
@@ -164,6 +166,7 @@ async function runCheckpoint(
     failOnWarning:
       parsed.options.failOnWarning ?? false,
     dryRun: parsed.options.dryRun ?? false,
+    allUsers: parsed.options.allUsers ?? false,
     push: !(parsed.options.noPush ?? false),
     now: context.now,
   });

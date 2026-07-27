@@ -14,6 +14,7 @@ On Windows, `start-mydash.cmd` installs missing dependencies and starts the app.
 ## What it does
 
 - discovers artefacts and UI resources from the filesystem;
+- scopes artefacts by configured user while keeping reusable UI global;
 - inspects CSV, JSON, Excel and PowerPoint source files;
 - resolves themes, presets and Local/Collection/Core UI dependencies;
 - provides a live navigator, visual library browser and dedicated viewer;

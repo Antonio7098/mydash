@@ -1,11 +1,12 @@
 import { CliError, EXIT_USAGE } from "../../cli/errors.mjs";
 
-export function findArtifact(scan, id, kind = null) {
+export function findArtifact(scan, id, kind = null, userId = null) {
   const matches = scan.entries.filter(
     (entry) =>
       entry.category === "artifact" &&
       entry.id === id &&
-      (!kind || entry.kind === kind),
+      (!kind || entry.kind === kind) &&
+      (!userId || entry.userId === userId),
   );
 
   if (matches.length === 0) {

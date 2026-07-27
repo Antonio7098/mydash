@@ -17,6 +17,9 @@ import {
   discoverRecipeFiles,
   validateRecipeFile,
 } from "./recipe-validation.mjs";
+import {
+  scopedLibraryView,
+} from "../users/scope.mjs";
 
 export async function validateWorkspace(options) {
   const generatedAt = (
@@ -28,11 +31,13 @@ export async function validateWorkspace(options) {
   const recipeReports = [];
   let config = null;
   let scan = null;
+  let userId = null;
 
   try {
     config = await loadWorkspaceConfig(
       options.workspaceRoot,
     );
+    userId = options.allUsers ? null : config.userId;
     stages.workspace.status = "passed";
   } catch (error) {
     const issue = errorIssue(
@@ -51,7 +56,11 @@ export async function validateWorkspace(options) {
     scan = await scanWorkspaceLibrary(
       options.workspaceRoot,
     );
-    const libraryIssues = scan.issues.map((issue) => ({
+    const libraryView = scopedLibraryView(scan, {
+      allUsers: options.allUsers,
+      userId,
+    });
+    const libraryIssues = libraryView.issues.map((issue) => ({
       stage: "library",
       ...issue,
     }));
@@ -61,7 +70,7 @@ export async function validateWorkspace(options) {
     )
       ? "failed"
       : "passed";
-    stages.library.entryCount = scan.summary.entryCount;
+    stages.library.entryCount = libraryView.summary.entryCount;
     finishStage(stages.library, libraryIssues);
   } catch (error) {
     const issue = errorIssue(
@@ -77,7 +86,9 @@ export async function validateWorkspace(options) {
   }
 
   let artifacts = scan.entries.filter(
-    (entry) => entry.category === "artifact",
+    (entry) =>
+      entry.category === "artifact" &&
+      (!userId || entry.userId === userId),
   );
 
   if (options.artifactId) {
@@ -86,6 +97,7 @@ export async function validateWorkspace(options) {
         scan,
         options.artifactId,
         options.artifactKind,
+        userId,
       ),
     ];
   }
@@ -95,6 +107,7 @@ export async function validateWorkspace(options) {
       id: artifact.id,
       kind: artifact.kind,
       title: artifact.title,
+      userId: artifact.userId,
       displayPath: artifact.displayPath,
       appearance: null,
       export: {
@@ -252,9 +265,7 @@ export async function validateWorkspace(options) {
   } else {
     const recipePaths = await discoverRecipeFiles(
       options.workspaceRoot,
-      scan.entries.filter(
-        (entry) => entry.category === "artifact",
-      ),
+      artifacts,
     );
 
     for (const recipePath of recipePaths) {
@@ -315,11 +326,14 @@ export async function validateWorkspace(options) {
       workspace: {
         id: config?.id ?? null,
         name: config?.name ?? "Unknown workspace",
+        userId: config?.userId ?? null,
         root: options.workspaceRoot,
       },
       options: {
         artifactId: options.artifactId ?? null,
         artifactKind: options.artifactKind ?? null,
+        userId,
+        allUsers: options.allUsers ?? false,
         validateExports:
           options.validateExports !== false,
         validateRecipes:

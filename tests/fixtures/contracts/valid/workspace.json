@@ -1,7 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "my-dashboards",
   "name": "My Dashboards",
+  "userId": "antonio",
   "libraryRoots": {
     "dashboards": "library/dashboards",
     "presentations": "library/presentations",

@@ -9,12 +9,13 @@
     "kind",
     "id",
     "title",
+    "userId",
     "entry",
     "appearance"
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "kind": {
       "type": "string",
@@ -30,6 +31,9 @@
     "title": {
       "type": "string",
       "minLength": 1
+    },
+    "userId": {
+      "$ref": "common.schema.json#/$defs/id"
     },
     "description": {
       "type": "string"

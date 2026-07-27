@@ -589,6 +589,7 @@ export function activateArtifactViewer(
     {
       signal:
         controller.signal,
+      userId: artifact.userId,
     },
   )
     .then((data) => {
@@ -768,6 +769,11 @@ function renderViewerDetails(
           kindLabel(
             artifact.kind,
           ),
+        ],
+        [
+          "User",
+          artifact.userId ??
+            "Unavailable",
         ],
         [
           "Owner",

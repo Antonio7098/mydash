@@ -1,7 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "library-fixture",
   "name": "Library Fixture",
+  "userId": "test-user",
   "libraryRoots": {
     "dashboards": "library/dashboards",
     "presentations": "library/presentations",

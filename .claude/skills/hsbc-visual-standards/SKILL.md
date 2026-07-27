@@ -6,7 +6,7 @@ argument-hint: "[artefact or visual request]"
 
 Apply the request in `$ARGUMENTS`.
 
-Read `skills/VISUAL_STANDARDS.md` before changing visuals.
+Read `docs/agent-workflows/VISUAL_STANDARDS.md` before changing visuals.
 
 ## Rules
 

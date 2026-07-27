@@ -508,9 +508,10 @@ Assets may be local, collection-level or Core. Shared assets will have manifests
       "Collection-specific shared assets will live here.",
     ),
 
-    "skills/README.md": `# Agent skills
+    "docs/agent-workflows/README.md": `# Agent workflows
 
-The skills define judgement and operating procedures. Deterministic operations should be delegated to the \`mydash\` CLI.
+These references support skills in \`.claude/skills/\`. Deterministic operations
+should be delegated to the \`mydash\` CLI.
 
 Planned skills:
 

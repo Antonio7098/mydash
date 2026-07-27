@@ -29,14 +29,19 @@ A typical artefact:
 
 Create only the directories the artefact needs.
 
+Every artefact manifest uses schema version 2 and declares the `userId` from
+`config/workspace.json`. The field controls CLI and Navigator scoping; it is
+not authentication. The optional `owner` field remains descriptive metadata.
+
 ## Before creating
 
 1. Run `mydash library list`.
-2. Inspect relevant themes, presets, layouts and components.
-3. Inspect comparable artefacts for conventions, not for blind copying.
-4. Inspect and profile source data.
-5. Define the audience, decision or story.
-6. Choose the smallest useful first version.
+2. Confirm the configured user with `mydash doctor --json`.
+3. Inspect relevant themes, presets, layouts and components.
+4. Inspect comparable artefacts for conventions, not for blind copying.
+5. Inspect and profile source data.
+6. Define the audience, decision or story.
+7. Choose the smallest useful first version.
 
 ## UI selection
 

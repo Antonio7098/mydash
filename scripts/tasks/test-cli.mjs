@@ -7,11 +7,15 @@ import process from "node:process";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "../..");
-const testFile = resolve(projectRoot, "tests", "unit", "cli.test.mjs");
+const tests = [
+  resolve(projectRoot, "tests", "unit", "cli.test.mjs"),
+  resolve(projectRoot, "tests", "unit", "user-scope.test.mjs"),
+  resolve(projectRoot, "tests", "integration", "user-scope-cli.test.mjs"),
+];
 
 const result = spawnSync(
   process.execPath,
-  ["--test", testFile],
+  ["--test", ...tests],
   {
     cwd: projectRoot,
     stdio: "inherit",

@@ -12,6 +12,9 @@ import {
   buildConsumerGraph,
   consumersForEntry,
 } from "../../src/library/consumers.mjs";
+import {
+  scopedLibraryView,
+} from "../../src/users/scope.mjs";
 
 const SUBCOMMANDS = new Set([
   "scan",
@@ -34,6 +37,7 @@ export const libraryCommand = {
     "--kind <kind>                 Filter or disambiguate by kind.",
     "--level <level>               Filter by local, collection or core.",
     "--collection <id>             Filter by collection.",
+    "--all-users                   Include artifacts from every user.",
     "--workspace <path>            Scan a specific workspace.",
     "--json                        Return structured JSON.",
   ],
@@ -88,29 +92,38 @@ export const libraryCommand = {
 };
 
 async function runScan(args, workspaceRoot) {
-  const parsed = parseCommandArguments(args);
+  const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
+  });
   rejectPositionals(parsed.positionals, "mydash library scan");
   const scan = await scanWorkspaceLibrary(workspaceRoot);
+  const view = scopedLibraryView(scan, {
+    allUsers: parsed.options.allUsers,
+  });
 
   return {
-    ok: scan.summary.errorCount === 0,
+    ok: view.summary.errorCount === 0,
     command: "library scan",
-    data: serialiseScan(scan),
-    warnings: issuesAsWarnings(scan.issues),
+    data: serialiseScan(scan, view),
+    warnings: issuesAsWarnings(view.issues),
     exitCode:
-      scan.summary.errorCount === 0 ? 0 : EXIT_VALIDATION,
-    text: renderSummary(scan),
+      view.summary.errorCount === 0 ? 0 : EXIT_VALIDATION,
+    text: renderSummary(view),
   };
 }
 
 async function runList(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind", "level", "collection"],
   });
   rejectPositionals(parsed.positionals, "mydash library list");
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
-  const entries = findLibraryEntries(scan.entries, {
+  const view = scopedLibraryView(scan, {
+    allUsers: parsed.options.allUsers,
+  });
+  const entries = findLibraryEntries(view.entries, {
     kind: parsed.options.kind,
     level: parsed.options.level,
     collection: parsed.options.collection,
@@ -122,9 +135,9 @@ async function runList(args, workspaceRoot) {
     data: {
       filters: parsed.options,
       entries: entries.map(publicEntry),
-      issueSummary: scan.summary,
+      issueSummary: view.summary,
     },
-    warnings: issuesAsWarnings(scan.issues),
+    warnings: issuesAsWarnings(view.issues),
     text:
       entries.length > 0
         ? entries
@@ -139,6 +152,7 @@ async function runList(args, workspaceRoot) {
 
 async function runInspect(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind"],
   });
   requirePositionals(
@@ -148,13 +162,21 @@ async function runInspect(args, workspaceRoot) {
   );
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
+  const view = scopedLibraryView(scan, {
+    allUsers: parsed.options.allUsers,
+  });
   const entry = requireUniqueEntry(
-    scan.entries,
+    view.entries,
     parsed.positionals[0],
     parsed.options.kind,
   );
   const graph = buildConsumerGraph(scan);
-  const consumers = consumersForEntry(entry, graph);
+  const consumers = consumersForEntry(entry, graph).filter(
+    (consumer) =>
+      parsed.options.allUsers ||
+      consumer.source.category !== "artifact" ||
+      consumer.source.userId === scan.config.userId,
+  );
 
   return {
     ok: true,
@@ -162,19 +184,20 @@ async function runInspect(args, workspaceRoot) {
     data: {
       entry: publicEntry(entry, true),
       consumers,
-      relatedIssues: scan.issues.filter(
+      relatedIssues: view.issues.filter(
         (issue) =>
           issue.manifestPath === entry.manifestPath ||
           issue.targetManifestPath === entry.manifestPath,
       ),
     },
-    warnings: issuesAsWarnings(scan.issues),
+    warnings: issuesAsWarnings(view.issues),
     text: renderInspection(entry, consumers),
   };
 }
 
 async function runDiagnostics(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["severity", "code"],
   });
   rejectPositionals(
@@ -183,7 +206,10 @@ async function runDiagnostics(args, workspaceRoot) {
   );
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
-  const issues = scan.issues.filter((issue) => {
+  const view = scopedLibraryView(scan, {
+    allUsers: parsed.options.allUsers,
+  });
+  const issues = view.issues.filter((issue) => {
     if (
       parsed.options.severity &&
       issue.severity !== parsed.options.severity
@@ -202,14 +228,14 @@ async function runDiagnostics(args, workspaceRoot) {
   });
 
   return {
-    ok: scan.summary.errorCount === 0,
+    ok: view.summary.errorCount === 0,
     command: "library diagnostics",
     data: {
-      summary: scan.summary,
+      summary: view.summary,
       issues,
     },
     exitCode:
-      scan.summary.errorCount === 0 ? 0 : EXIT_VALIDATION,
+      view.summary.errorCount === 0 ? 0 : EXIT_VALIDATION,
     text:
       issues.length > 0
         ? issues
@@ -224,6 +250,7 @@ async function runDiagnostics(args, workspaceRoot) {
 
 async function runConsumers(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind"],
   });
   requirePositionals(
@@ -233,13 +260,21 @@ async function runConsumers(args, workspaceRoot) {
   );
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
+  const view = scopedLibraryView(scan, {
+    allUsers: parsed.options.allUsers,
+  });
   const entry = requireUniqueEntry(
-    scan.entries,
+    view.entries,
     parsed.positionals[0],
     parsed.options.kind,
   );
   const graph = buildConsumerGraph(scan);
-  const consumers = consumersForEntry(entry, graph);
+  const consumers = consumersForEntry(entry, graph).filter(
+    (consumer) =>
+      parsed.options.allUsers ||
+      consumer.source.category !== "artifact" ||
+      consumer.source.userId === scan.config.userId,
+  );
 
   return {
     ok: true,
@@ -248,7 +283,7 @@ async function runConsumers(args, workspaceRoot) {
       target: publicEntry(entry),
       consumers,
     },
-    warnings: issuesAsWarnings(scan.issues),
+    warnings: issuesAsWarnings(view.issues),
     text:
       consumers.length > 0
         ? consumers
@@ -296,12 +331,15 @@ function requireUniqueEntry(entries, id, kind) {
   return matches[0];
 }
 
-function serialiseScan(scan) {
+function serialiseScan(scan, view) {
   return {
     workspaceRoot: scan.workspaceRoot,
-    summary: scan.summary,
-    entries: scan.entries.map(publicEntry),
-    issues: scan.issues,
+    userId: scan.config.userId,
+    allUsers:
+      view.entries === scan.entries,
+    summary: view.summary,
+    entries: view.entries.map(publicEntry),
+    issues: view.issues,
   };
 }
 
@@ -313,6 +351,7 @@ function publicEntry(entry, includeManifest = false) {
     title: entry.title,
     level: entry.level,
     collection: entry.collection,
+    userId: entry.userId,
     displayPath: entry.displayPath,
     manifestPath: entry.manifestPath,
     ...(includeManifest ? { manifest: entry.manifest } : {}),

@@ -1,4 +1,4 @@
-# Agent skills
+# Agent workflows
 
 Project skills are active under:
 
@@ -6,8 +6,8 @@ Project skills are active under:
 .claude/skills/<command>/SKILL.md
 ```
 
-The `skills/` directory contains the shared operating references those skills
-use. Deterministic work belongs in the `mydash` CLI; skills supply judgement,
+This directory contains shared operating references used by the active skills.
+Deterministic work belongs in the `mydash` CLI; skills supply judgement,
 workflow and decision rules.
 
 ## Catalogue

@@ -24,6 +24,7 @@ export const appearanceCommand = {
     "resolve <artifact-id>          Resolve one artefact's effective appearance.",
     "validate                       Resolve and validate every artefact.",
     "--kind <kind>                  Disambiguate dashboard, presentation or concept.",
+    "--all-users                   Override config user scoping.",
     "--workspace <path>             Resolve a specific workspace.",
     "--json                         Return structured JSON.",
   ],
@@ -70,6 +71,7 @@ export const appearanceCommand = {
 
 async function runResolve(args, workspaceRoot) {
   const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
     values: ["kind"],
   });
   requirePositionals(
@@ -83,6 +85,7 @@ async function runResolve(args, workspaceRoot) {
     scan,
     parsed.positionals[0],
     parsed.options.kind,
+    parsed.options.allUsers ? null : scan.config.userId,
   );
   const data = resolveArtifactAppearance(scan, artifact);
 
@@ -102,7 +105,9 @@ async function runResolve(args, workspaceRoot) {
 }
 
 async function runValidate(args, workspaceRoot) {
-  const parsed = parseCommandArguments(args);
+  const parsed = parseCommandArguments(args, {
+    booleans: ["all-users"],
+  });
   if (parsed.positionals.length > 0) {
     throw new CliError(
       "INVALID_USAGE",
@@ -112,7 +117,11 @@ async function runValidate(args, workspaceRoot) {
   }
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
-  const data = resolveAllArtifactAppearances(scan);
+  const data = resolveAllArtifactAppearances(scan, {
+    userId: parsed.options.allUsers
+      ? null
+      : scan.config.userId,
+  });
   const valid = data.summary.invalidArtifactCount === 0;
 
   return {

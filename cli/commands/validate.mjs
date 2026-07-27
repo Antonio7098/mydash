@@ -27,6 +27,7 @@ export const validateCommand = {
     "--minify                      Minify exports during validation.",
     "--max-bytes <number>          Maximum standalone HTML size.",
     "--fail-on-warning             Treat warnings as validation failures.",
+    "--all-users                   Override config user scoping.",
     "--report <path>               Write the complete JSON report.",
     "--workspace <path>            Validate a specific workspace.",
     "--json                        Return structured JSON.",
@@ -39,6 +40,7 @@ export const validateCommand = {
         "skip-recipes",
         "minify",
         "fail-on-warning",
+        "all-users",
       ],
       values: [
         "artifact",
@@ -84,6 +86,7 @@ export const validateCommand = {
       minify: parsed.options.minify ?? false,
       maxBytes,
       failOnWarning: parsed.options.failOnWarning ?? false,
+      allUsers: parsed.options.allUsers ?? false,
       now: context.now,
     });
 

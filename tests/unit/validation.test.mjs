@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import {
   cp,
+  mkdtemp,
   readFile,
   rm,
   writeFile,
 } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import {
@@ -47,11 +49,9 @@ test("consolidated validation checks library, recipes and exports", async () => 
 });
 
 test("invalid recipe sources are attributed to the recipes stage", async () => {
-  const root = resolve(
-    fixtureRoot,
-    ".tmp-validation-test",
+  const root = await mkdtemp(
+    join(tmpdir(), "mydash-validation-test-"),
   );
-  await rm(root, { recursive: true, force: true });
   await cp(fixtureRoot, root, {
     recursive: true,
     filter(path) {

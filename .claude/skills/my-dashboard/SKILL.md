@@ -6,15 +6,22 @@ argument-hint: "[request]"
 
 Treat `$ARGUMENTS` as the requested outcome.
 
-Read `skills/OPERATING_MODEL.md` and `skills/CLI_REFERENCE.md` before changing
+Read `docs/agent-workflows/OPERATING_MODEL.md` and
+`docs/agent-workflows/CLI_REFERENCE.md` before changing
 the repository.
 
 ## Orient
 
 1. Run `npm run mydash -- git status --json`.
-2. Run `npm run mydash -- doctor --json` when environment capability matters.
-3. Discover current content through `mydash library`; do not rely on memory.
-4. Inspect only the files and resources relevant to the request.
+2. Run `npm run mydash -- doctor --json` and confirm `data.userId`. Artefact
+   work and CLI discovery are scoped to this configured user unless the task
+   explicitly requires the `--all-users` override.
+3. When an upstream exists and the worktree is clean, run `git pull --rebase`
+   before inspecting or changing content. If the worktree is dirty, history is
+   diverged, or a pull fails, do not force it; report the state and continue
+   safely with the checked-out files.
+4. Discover current content through `mydash library`; do not rely on memory.
+5. Inspect only the files and resources relevant to the request.
 
 ## Route
 

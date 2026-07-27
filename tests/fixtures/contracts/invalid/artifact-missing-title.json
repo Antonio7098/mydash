@@ -1,7 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "dashboard",
   "id": "broken-dashboard",
+  "userId": "antonio",
   "entry": "src/index.html",
   "appearance": {
     "theme": null,

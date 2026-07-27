@@ -10,6 +10,7 @@ import {
   integerQuery,
   requireIdentifier,
   sendJson,
+  stringQuery,
 } from "../http.mjs";
 import {
   normaliseAppearanceInput,
@@ -22,12 +23,37 @@ export function createArtifactsRouter(context) {
   const router = Router();
 
   router.get(
-    "/artifacts",
-    asyncRoute(async (request, response) => {
-      const result = await context.services.artifacts.list();
+    "/users",
+    asyncRoute(async (_request, response) => {
+      const result = await context.services.artifacts.users();
       const etag = createRevisionEtag(
         result.revision.id,
-        "artifact-list-v2",
+        "user-list-v1",
+      );
+
+      sendJson(
+        response,
+        {
+          currentUserId: result.currentUserId,
+          userIds: result.userIds,
+        },
+        {
+          etag,
+          revisionId: result.revision.id,
+        },
+      );
+    }),
+  );
+
+  router.get(
+    "/artifacts",
+    asyncRoute(async (request, response) => {
+      const userId = requestUserId(request, context);
+      const result = await context.services.artifacts.list(userId);
+      const etag = createRevisionEtag(
+        result.revision.id,
+        "artifact-list-v3",
+        userId,
       );
 
       sendJson(
@@ -35,6 +61,7 @@ export function createArtifactsRouter(context) {
         {
           artifacts: result.artifacts.map(publicArtifact),
           count: result.artifacts.length,
+          userId,
           librarySummary: result.scan.summary,
         },
         {
@@ -50,13 +77,19 @@ export function createArtifactsRouter(context) {
     asyncRoute(async (request, response) => {
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
+      const userId = requestUserId(request, context);
       const result =
-        await context.services.artifacts.appearanceOptions(kind, id);
+        await context.services.artifacts.appearanceOptions(
+          kind,
+          id,
+          userId,
+        );
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-appearance-options-v1",
         kind,
         id,
+        userId,
       );
 
       sendJson(
@@ -83,11 +116,13 @@ export function createArtifactsRouter(context) {
       requireSameOriginMutation(request);
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
+      const userId = requestUserId(request, context);
       const body = validateAppearanceBody(request.body);
       const result = await context.services.artifacts.saveAppearance(
         kind,
         id,
         body,
+        userId,
       );
 
       sendJson(
@@ -113,12 +148,19 @@ export function createArtifactsRouter(context) {
     asyncRoute(async (request, response) => {
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
-      const result = await context.services.artifacts.get(kind, id);
+      const userId = requestUserId(request, context);
+      const result = await context.services.artifacts.get(
+        kind,
+        id,
+        null,
+        userId,
+      );
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-detail-v3",
         kind,
         id,
+        userId,
       );
 
       sendJson(
@@ -146,11 +188,12 @@ export function createArtifactsRouter(context) {
   router.get(
     "/artifacts/:kind/:id/export-status",
     asyncRoute(async (request, response) => {
-      const requestData = parseBuildRequest(request);
+      const requestData = parseBuildRequest(request, context);
       const detail = await context.services.artifacts.get(
         requestData.kind,
         requestData.id,
         requestData.options.appearance,
+        requestData.options.userId,
       );
 
       if (!detail.resolution.summary.valid) {
@@ -160,6 +203,7 @@ export function createArtifactsRouter(context) {
           requestData.kind,
           requestData.id,
           requestData.options.appearance,
+          requestData.options.userId,
           "invalid",
         );
 
@@ -202,6 +246,7 @@ export function createArtifactsRouter(context) {
         requestData.kind,
         requestData.id,
         requestData.options.appearance,
+        requestData.options.userId,
         result.built.sha256,
       );
 
@@ -233,7 +278,7 @@ export function createArtifactsRouter(context) {
   router.get(
     "/artifacts/:kind/:id/preview",
     asyncRoute(async (request, response) => {
-      const data = parseBuildRequest(request);
+      const data = parseBuildRequest(request, context);
       const result = await context.services.artifacts.preview(
         data.kind,
         data.id,
@@ -247,7 +292,7 @@ export function createArtifactsRouter(context) {
   router.get(
     "/artifacts/:kind/:id/download",
     asyncRoute(async (request, response) => {
-      const data = parseBuildRequest(request);
+      const data = parseBuildRequest(request, context);
       const result = await context.services.artifacts.preview(
         data.kind,
         data.id,
@@ -261,7 +306,7 @@ export function createArtifactsRouter(context) {
   return router;
 }
 
-function parseBuildRequest(request) {
+function parseBuildRequest(request, context) {
   const kind = requireIdentifier(request.params.kind, "kind");
   const id = requireIdentifier(request.params.id, "id");
   const minify = booleanQuery(request.query.minify, "minify", false);
@@ -290,8 +335,22 @@ function parseBuildRequest(request) {
       minify,
       maxBytes,
       appearance,
+      userId: requestUserId(request, context),
     },
   };
+}
+
+function requestUserId(request, context) {
+  const value = stringQuery(
+    request.query.userId,
+    "userId",
+    {
+      defaultValue:
+        context.config.userId,
+    },
+  );
+
+  return requireIdentifier(value, "userId");
 }
 
 function validateAppearanceBody(value) {
@@ -413,6 +472,7 @@ function publicArtifact(entry) {
     id: entry.id,
     kind: entry.kind,
     title: entry.title,
+    userId: entry.userId,
     description: entry.manifest.description ?? null,
     tags: entry.manifest.tags ?? [],
     exportFileName: exportFileName(entry),

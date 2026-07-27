@@ -34,6 +34,7 @@ GET  /api/library
 GET  /api/library/:kind/:id
 
 GET  /api/artifacts
+GET  /api/users
 GET  /api/artifacts/:kind/:id
 GET  /api/artifacts/:kind/:id/preview
 
@@ -41,6 +42,10 @@ POST /api/validation
 
 GET  /api/git/status
 ```
+
+Artifact routes accept `?userId=<id>` and default to the configured workspace
+user. `/api/users` derives available IDs from artifact manifests; it is a
+scoping aid, not an authentication endpoint. Library resources remain global.
 
 The server is deliberately read-only at this stage. Preview and validation
 builds happen in memory. It does not expose file writes, recipe refreshes,

@@ -64,7 +64,9 @@ async function buildJavaScript({
       write: false,
       platform: "browser",
       format: moduleScript ? "esm" : "iife",
-      target: ["es2020"],
+      // Module bundles may legitimately use top-level await. ES2022 is the
+      // first ECMAScript target supported by esbuild that preserves it.
+      target: ["es2022"],
       minify: options.minify ?? false,
       sourcemap: false,
       legalComments: "none",

@@ -40,6 +40,10 @@ import {
 import {
   stableStringify,
 } from "../etag.mjs";
+import {
+  artifactsForUser,
+  availableUserIds,
+} from "../../src/users/scope.mjs";
 
 export function createArtifactService(options) {
   const {
@@ -50,20 +54,44 @@ export function createArtifactService(options) {
     now,
   } = options;
 
-  async function list() {
+  async function list(userId = null) {
     const snapshot = await library.snapshot();
+    const selectedUserId =
+      userId ?? snapshot.scan.config.userId;
 
     return {
       ...snapshot,
-      artifacts: snapshot.scan.entries.filter(
-        (entry) => entry.category === "artifact",
+      userId: selectedUserId,
+      artifacts: artifactsForUser(
+        snapshot.scan.entries,
+        selectedUserId,
       ),
     };
   }
 
-  async function get(kind, id, appearance = null) {
+  async function users() {
     const snapshot = await library.snapshot();
-    const sourceArtifact = findArtifact(snapshot.scan, id, kind);
+
+    return {
+      ...snapshot,
+      currentUserId: snapshot.scan.config.userId,
+      userIds: availableUserIds(
+        snapshot.scan.entries,
+        snapshot.scan.config.userId,
+      ),
+    };
+  }
+
+  async function get(kind, id, appearance = null, userId = null) {
+    const snapshot = await library.snapshot();
+    const selectedUserId =
+      userId ?? snapshot.scan.config.userId;
+    const sourceArtifact = findArtifact(
+      snapshot.scan,
+      id,
+      kind,
+      selectedUserId,
+    );
     const artifact = appearance
       ? applyAppearanceInput(sourceArtifact, appearance)
       : sourceArtifact;
@@ -71,6 +99,7 @@ export function createArtifactService(options) {
 
     return {
       ...snapshot,
+      userId: selectedUserId,
       sourceArtifact,
       artifact,
       appearance: normaliseAppearanceInput(artifact.manifest.appearance),
@@ -78,8 +107,8 @@ export function createArtifactService(options) {
     };
   }
 
-  async function appearanceOptions(kind, id) {
-    const snapshot = await get(kind, id);
+  async function appearanceOptions(kind, id, userId = null) {
+    const snapshot = await get(kind, id, null, userId);
 
     return {
       ...snapshot,
@@ -97,13 +126,19 @@ export function createArtifactService(options) {
     const cacheKey = stableStringify({
       kind,
       id,
+      userId: previewOptions.userId ?? null,
       appearance,
       minify: previewOptions.minify ?? false,
       maxBytes: previewOptions.maxBytes,
     });
 
     for (let attempt = 0; attempt < 2; attempt += 1) {
-      const snapshot = await get(kind, id, appearance);
+      const snapshot = await get(
+        kind,
+        id,
+        appearance,
+        previewOptions.userId,
+      );
       const built = await previewCache.get(
         cacheKey,
         snapshot.revision.id,
@@ -141,8 +176,8 @@ export function createArtifactService(options) {
     throw error;
   }
 
-  async function saveAppearance(kind, id, request) {
-    const before = await get(kind, id);
+  async function saveAppearance(kind, id, request, userId = null) {
+    const before = await get(kind, id, null, userId);
 
     if (
       !request.expectedRevision ||
@@ -266,6 +301,7 @@ export function createArtifactService(options) {
         push: true,
         acknowledgeImpact: false,
         failOnWarning: false,
+        allUsers: true,
         now,
       });
     } catch (error) {
@@ -287,7 +323,7 @@ export function createArtifactService(options) {
     }
 
     previewCache.clear("appearance-default-saved");
-    const after = await get(kind, id);
+    const after = await get(kind, id, null, userId);
 
     return {
       artifact: after.sourceArtifact,
@@ -306,6 +342,7 @@ export function createArtifactService(options) {
   }
 
   return {
+    users,
     list,
     get,
     appearanceOptions,

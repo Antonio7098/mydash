@@ -255,7 +255,14 @@ function listWorksheetTables(worksheet) {
         model?.name ??
         model?.displayName ??
         null;
-      const ref = value?.ref ?? model?.ref ?? null;
+      // ExcelJS represents the range of loaded tables as `tableRef`, whereas
+      // its programmatic table API commonly uses `ref`.
+      const ref =
+        value?.ref ??
+        value?.tableRef ??
+        model?.ref ??
+        model?.tableRef ??
+        null;
 
       return name && ref
         ? {

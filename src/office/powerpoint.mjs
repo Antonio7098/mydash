@@ -79,7 +79,9 @@ export async function readPresentation(path, options = {}) {
 
   for (let index = 0; index < slideIds.length; index += 1) {
     const slideId = slideIds[index];
-    const relationshipId = attributeByLocalName(slideId, "id");
+    // A slide has both its numeric `id` and its namespaced relationship
+    // attribute (`r:id`). The latter identifies the slide part.
+    const relationshipId = slideId?.["@r:id"] ?? attributeByLocalName(slideId, "id");
     const relationship = relationshipById.get(relationshipId);
 
     if (!relationship?.resolvedTarget) continue;

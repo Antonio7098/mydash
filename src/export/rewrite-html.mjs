@@ -67,6 +67,7 @@ const RESOURCE_ATTRIBUTES = new Map([
 
 export async function buildStandaloneArtifactDocument(options) {
   const document = parseHtmlDocument(options.source);
+  const htmlElement = findElement(document, "html");
   const head = findElement(document, "head");
   const body = findElement(document, "body");
 
@@ -77,6 +78,8 @@ export async function buildStandaloneArtifactDocument(options) {
     error.code = "ARTIFACT_HTML_STRUCTURE_INVALID";
     throw error;
   }
+
+  setAttribute(htmlElement, "data-mydash-standalone", "true");
 
   const counters = {
     stylesheets: 0,

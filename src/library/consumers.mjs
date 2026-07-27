@@ -69,6 +69,7 @@ function publicTarget(entry) {
     level: entry.level,
     collection: entry.collection,
     ownerArtifact: entry.ownerArtifact,
+    userId: entry.userId,
     displayPath: entry.displayPath,
     manifestPath: entry.manifestPath,
   };

@@ -8,9 +8,9 @@ Treat `$ARGUMENTS` as the presentation outcome.
 
 Read:
 
-- `skills/OPERATING_MODEL.md`
-- `skills/ARTIFACT_AUTHORING.md`
-- `skills/VISUAL_STANDARDS.md`
+- `docs/agent-workflows/OPERATING_MODEL.md`
+- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
+- `docs/agent-workflows/VISUAL_STANDARDS.md`
 
 Load `/powerpoint` when working from a source deck. Load `/component` before
 creating or changing reusable slide UI.

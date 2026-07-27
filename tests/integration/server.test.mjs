@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   cp,
+  mkdir,
   mkdtemp,
   readFile,
   rm,
@@ -78,7 +79,7 @@ test("health and capabilities expose live server state", async () => {
       assert.equal(
         capabilities.body.data.runtime
           .readOnlyHttp,
-        true,
+        false,
       );
       assert.equal(
         capabilities.body.data.features.some(
@@ -203,6 +204,7 @@ test("filesystem edits advance the revision and invalidate previews", async () =
     recursive: true,
     force: true,
   });
+  await mkdir(tempRoot, { recursive: true });
   const workspace = await mkdtemp(
     join(tempRoot, "workspace-"),
   );

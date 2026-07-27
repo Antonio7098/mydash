@@ -185,9 +185,11 @@ export function resolveArtifactAppearance(scan, artifact) {
   };
 }
 
-export function resolveAllArtifactAppearances(scan) {
+export function resolveAllArtifactAppearances(scan, options = {}) {
   const artifacts = scan.entries.filter(
-    (entry) => entry.category === "artifact",
+    (entry) =>
+      entry.category === "artifact" &&
+      (!options.userId || entry.userId === options.userId),
   );
   const results = artifacts.map((artifact) =>
     resolveArtifactAppearance(scan, artifact),
@@ -597,6 +599,7 @@ function publicEntry(entry) {
     level: entry.level,
     collection: entry.collection,
     ownerArtifact: entry.ownerArtifact,
+    userId: entry.userId,
     contractVersion:
       entry.manifest.contractVersion ?? null,
     slot: entry.manifest.slot ?? null,

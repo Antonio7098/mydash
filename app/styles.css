@@ -217,7 +217,8 @@ a {
 
 .navigator-nav__toggle:focus-visible,
 .navigator-nav__panel a:focus-visible,
-.category-switcher select:focus-visible {
+.category-switcher select:focus-visible,
+.user-switcher select:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--nav-focus) 28%, transparent);
   outline-offset: 2px;
 }
@@ -269,12 +270,16 @@ a {
   background: var(--nav-border);
 }
 
-.category-switcher {
+.navigator-switchers {
   grid-column: 2;
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
   justify-self: center;
 }
 
-.category-switcher select {
+.category-switcher select,
+.user-switcher select {
   min-height: 2.65rem;
   min-width: 10rem;
   padding: 0.5rem 2.3rem 0.5rem 0.9rem;
@@ -293,6 +298,28 @@ a {
   appearance: none;
   cursor: pointer;
   backdrop-filter: blur(15px);
+}
+
+.user-switcher {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 2.65rem;
+  padding-left: 0.8rem;
+  border: 1px solid var(--nav-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--nav-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.user-switcher select {
+  min-width: 7rem;
+  border: 0;
+  border-left: 1px solid var(--nav-border);
+  border-radius: 0 999px 999px 0;
+  box-shadow: none;
 }
 
 .connection-status {
@@ -803,9 +830,22 @@ a {
     min-height: 7.5rem;
   }
 
-  .category-switcher {
+  .navigator-switchers {
     grid-column: 2;
+    gap: 0.4rem;
     justify-self: end;
+  }
+
+  .category-switcher select {
+    min-width: 8.5rem;
+  }
+
+  .user-switcher {
+    padding-left: 0.55rem;
+  }
+
+  .user-switcher select {
+    min-width: 5.5rem;
   }
 
   .connection-status {

@@ -8,9 +8,9 @@ Treat `$ARGUMENTS` as the PowerPoint outcome.
 
 Read:
 
-- `skills/OPERATING_MODEL.md`
-- `skills/CLI_REFERENCE.md`
-- `skills/ARTIFACT_AUTHORING.md`
+- `docs/agent-workflows/OPERATING_MODEL.md`
+- `docs/agent-workflows/CLI_REFERENCE.md`
+- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
 
 ## Workflow
 

@@ -72,16 +72,17 @@ function result(errors) {
   };
 }
 
-function validateBase(value, add) {
-  if (value.schemaVersion !== 1) {
-    add("$.schemaVersion", "must equal 1");
+function validateBase(value, add, expectedVersion = 1) {
+  if (value.schemaVersion !== expectedVersion) {
+    add("$.schemaVersion", `must equal ${expectedVersion}`);
   }
 }
 
 function validateWorkspace(value, add) {
-  validateBase(value, add);
+  validateBase(value, add, 2);
   requireId(value.id, "$.id", add);
   requireString(value.name, "$.name", add);
+  requireId(value.userId, "$.userId", add);
 
   const requiredRoots = [
     "dashboards",
@@ -135,7 +136,7 @@ function validateWorkspace(value, add) {
 }
 
 function validateArtifact(value, add) {
-  validateBase(value, add);
+  validateBase(value, add, 2);
 
   if (!ARTIFACT_KINDS.has(value.kind)) {
     add("$.kind", "must be dashboard, presentation or concept");
@@ -143,6 +144,7 @@ function validateArtifact(value, add) {
 
   requireId(value.id, "$.id", add);
   requireString(value.title, "$.title", add);
+  requireId(value.userId, "$.userId", add);
   requireRelativePath(value.entry, "$.entry", add);
 
   if (value.data !== undefined) {

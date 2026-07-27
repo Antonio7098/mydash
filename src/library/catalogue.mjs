@@ -21,6 +21,7 @@ export function publicLibraryEntry(entry) {
     level: entry.level,
     collection: entry.collection,
     ownerArtifact: entry.ownerArtifact,
+    userId: entry.userId,
     slot: manifest.slot ?? null,
     contractVersion: manifest.contractVersion ?? null,
     entryFile: manifest.entry ?? manifest.file ?? null,
