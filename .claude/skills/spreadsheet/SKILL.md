@@ -49,5 +49,7 @@ Before claiming the task is complete:
 1. Run the relevant focused checks.
 2. Run `npm run mydash -- validate` or scoped validation.
 3. Review shared impact when applicable.
-4. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
-5. Report validation, commit, push and remaining obstacles honestly.
+4. Update `BUG_LOG.md` only if the work fixes a system bug or changes system
+   behaviour; do not log routine data extraction or artefact content work.
+5. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
+6. Report validation, commit, push and remaining obstacles honestly.

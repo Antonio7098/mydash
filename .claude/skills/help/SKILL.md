@@ -129,3 +129,8 @@ What happened
 Why it matters
 The next safe action
 ```
+
+When investigation confirms a reproducible MyDash system bug, add or update its
+entry in `BUG_LOG.md`. When the bug is fixed, record its cause, resolution and
+validation. Do not log ordinary dashboard, presentation, concept or reusable
+resource content changes.

@@ -131,6 +131,23 @@ restores, amend, force push or force-with-lease. Do not switch branches, rewrite
 published history, discard unrelated work or include unrelated staged files.
 If pushing is impossible, keep the local commit and report the exact obstacle.
 
+## Bug and system change log
+
+Maintain `BUG_LOG.md` as part of system work:
+
+- record every reproducible system bug that is discovered;
+- update that entry with cause, resolution and validation when it is fixed;
+- record changes to Navigator, CLI, server, discovery, validation, resolution,
+  export, workspace, Git or other system behaviour;
+- add the newest entry first and update an existing open entry instead of
+  duplicating it.
+
+Do not log routine creation or editing of dashboards, presentations, concepts,
+primitives, components, layouts, themes, presets or assets. Log artefact or
+resource work only when it also changes the system that discovers, validates,
+renders, exports or manages it. A task that qualifies is not complete until its
+`BUG_LOG.md` entry is current.
+
 ## Completion
 
 Before claiming the task is complete:
@@ -138,8 +155,9 @@ Before claiming the task is complete:
 1. Run the relevant focused checks.
 2. Run `npm run mydash -- validate` or scoped validation.
 3. Review shared impact when applicable.
-4. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
-5. Report validation, commit, push and remaining obstacles honestly.
+4. Update `BUG_LOG.md` when the task fixes a bug or changes system behaviour.
+5. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
+6. Report validation, commit, push and remaining obstacles honestly.
 
 Use this completion report:
 
