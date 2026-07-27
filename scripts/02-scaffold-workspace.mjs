@@ -508,10 +508,10 @@ Assets may be local, collection-level or Core. Shared assets will have manifests
       "Collection-specific shared assets will live here.",
     ),
 
-    "docs/agent-workflows/README.md": `# Agent workflows
+    "docs/agent-workflow.md": `# Agent workflow
 
-These references support skills in \`.claude/skills/\`. Deterministic operations
-should be delegated to the \`mydash\` CLI.
+Complete agent instructions live in \`.claude/skills/\`. Deterministic
+operations should be delegated to the \`mydash\` CLI.
 
 Planned skills:
 
@@ -525,7 +525,9 @@ Planned skills:
 - \`/component\`
 - \`/hsbc-visual-standards\`
 
-\`/my-dashboard\` indexes and explains these skills. It does not maintain an index of artefacts.
+\`/my-dashboard\` indexes and explains these skills. It does not maintain an
+index of artefacts. Exact CLI and HTTP contracts are installed as
+\`docs/cli-reference.md\` and \`docs/api-reference.md\`.
 `,
 
     "users/README.md": `# Local user preferences

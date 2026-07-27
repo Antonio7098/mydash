@@ -6,7 +6,7 @@ argument-hint: "[question]"
 
 Answer `$ARGUMENTS` for a nontechnical user.
 
-Read `docs/agent-workflows/CLI_REFERENCE.md` only as needed.
+Consult `docs/cli-reference.md` only when exact command syntax is needed.
 
 ## Approach
 

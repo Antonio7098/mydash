@@ -6,11 +6,9 @@ argument-hint: "[dashboard request]"
 
 Treat `$ARGUMENTS` as the dashboard outcome.
 
-Read:
-
-- `docs/agent-workflows/OPERATING_MODEL.md`
-- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
-- `docs/agent-workflows/VISUAL_STANDARDS.md`
+Inspect Git state, the configured `userId`, relevant sources and the filesystem
+library before editing. Preserve unrelated work. Consult
+`docs/cli-reference.md` only for exact command syntax.
 
 Load `/spreadsheet` or `/powerpoint` when the source requires it. Load
 `/component` before creating or changing reusable UI.
@@ -40,6 +38,14 @@ Do not start by choosing chart types.
 7. Embed only the data and assets required by the dashboard.
 8. Include units, dates, source context, empty states and error states.
 9. Avoid decorative gauges, unexplained scores and redundant cards.
+
+Create dashboards under `library/dashboards/<id>/`. The schema-version-2
+`artifact.json` declares the workspace `userId`; optional `owner` is descriptive
+metadata. Create only needed `src/`, `data/`, `assets/`, `recipes/`, `ui/` and
+`theme/` directories. Local resources declare `level: local`, the containing
+`ownerArtifact`, a matching directory ID and stable semantic slots. Final
+exports may use local HTML, CSS/imports, JavaScript modules, JSON/tabular data,
+images, fonts and approved media, but no external load-time dependencies.
 
 ## Verify
 

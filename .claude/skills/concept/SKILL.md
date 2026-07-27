@@ -6,11 +6,9 @@ argument-hint: "[concept request]"
 
 Treat `$ARGUMENTS` as the concept to explore.
 
-Read:
-
-- `docs/agent-workflows/OPERATING_MODEL.md`
-- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
-- `docs/agent-workflows/VISUAL_STANDARDS.md`
+Inspect Git state, the configured `userId`, relevant sources and the filesystem
+library before editing. Preserve unrelated work. Consult
+`docs/cli-reference.md` only for exact command syntax.
 
 ## Principles
 
@@ -33,6 +31,12 @@ Read:
 
 A concept may be intentionally rough, but it must still be safe, accessible
 enough to evaluate, structurally valid and standalone.
+
+Use a schema-version-2 manifest and create only the `src/`, `data/`, `assets/`,
+`recipes/`, `ui/` and `theme/` directories that are needed. Local resources
+declare `level: local`, the containing `ownerArtifact`, a matching directory ID
+and stable semantic slots. The final export must have no external load-time
+dependencies.
 
 ## Completion
 

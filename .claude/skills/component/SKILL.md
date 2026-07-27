@@ -6,11 +6,9 @@ argument-hint: "[UI requirement or resource]"
 
 Treat `$ARGUMENTS` as the UI requirement.
 
-Read:
-
-- `docs/agent-workflows/OPERATING_MODEL.md`
-- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
-- `docs/agent-workflows/VISUAL_STANDARDS.md`
+Inspect Git state, relevant artefacts and the filesystem library before editing.
+Preserve unrelated work. Consult `docs/cli-reference.md` only for exact command
+syntax.
 
 ## Decision tree
 
@@ -57,6 +55,11 @@ Do not:
 - silently break semantic slots;
 - edit approved assets destructively;
 - promote a resource in the same moment it is first created.
+
+Local primitives, components, layouts, themes and assets declare `level:
+local`, name their containing `ownerArtifact`, live beneath that artefact in a
+directory matching their ID and preserve semantic slot contracts. Do not create
+a shared resource merely because two files look alike.
 
 ## Checkpoint
 

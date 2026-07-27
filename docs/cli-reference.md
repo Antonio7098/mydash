@@ -1,5 +1,9 @@
 # `mydash` CLI reference
 
+This is the authoritative command reference for the checked-in `mydash` CLI.
+Agent skills contain workflow and judgement; this document records the exact
+deterministic interface.
+
 Use the repository script form so the checked-in CLI is always used:
 
 ```bash

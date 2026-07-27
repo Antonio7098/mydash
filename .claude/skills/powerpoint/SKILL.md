@@ -6,11 +6,9 @@ argument-hint: "[source and desired outcome]"
 
 Treat `$ARGUMENTS` as the PowerPoint outcome.
 
-Read:
-
-- `docs/agent-workflows/OPERATING_MODEL.md`
-- `docs/agent-workflows/CLI_REFERENCE.md`
-- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
+Consult `docs/cli-reference.md` when exact PowerPoint command syntax is needed.
+Keep extracted outputs inside the workspace, preserve unrelated changes,
+validate before checkpointing and checkpoint only explicit task-owned paths.
 
 ## Workflow
 

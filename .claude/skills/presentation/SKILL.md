@@ -6,11 +6,9 @@ argument-hint: "[presentation request]"
 
 Treat `$ARGUMENTS` as the presentation outcome.
 
-Read:
-
-- `docs/agent-workflows/OPERATING_MODEL.md`
-- `docs/agent-workflows/ARTIFACT_AUTHORING.md`
-- `docs/agent-workflows/VISUAL_STANDARDS.md`
+Inspect Git state, the configured `userId`, relevant sources and the filesystem
+library before editing. Preserve unrelated work. Consult
+`docs/cli-reference.md` only for exact command syntax.
 
 Load `/powerpoint` when working from a source deck. Load `/component` before
 creating or changing reusable slide UI.
@@ -42,6 +40,14 @@ Use one primary idea per slide. Prefer short declarative titles.
 
 Do not mechanically reproduce every source slide. Rebuild the story for the
 requested purpose.
+
+Create presentations under `library/presentations/<id>/`. The
+schema-version-2 `artifact.json` declares the workspace `userId`; optional
+`owner` is descriptive metadata. Create only needed `src/`, `data/`, `assets/`,
+`recipes/`, `ui/` and `theme/` directories. Local resources declare
+`level: local`, the containing `ownerArtifact`, a matching directory ID and
+stable semantic slots. The final export must have no external load-time
+dependencies.
 
 ## Verify
 

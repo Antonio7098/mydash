@@ -3,7 +3,8 @@
 /**
  * My Dashboards — Bootstrap 15: Install project agent skills
  *
- * Adds project skills under .claude/skills and shared references under docs/agent-workflows/.
+ * Adds self-contained project skills under .claude/skills plus authoritative
+ * CLI and HTTP API references under docs/.
  *
  * Logical skills:
  *   /my-dashboard
@@ -361,6 +362,48 @@ Options:
 `.trim());
 }
 
+// Keep this installer aligned with the checked-in skill catalogue. The large
+// FILES object above retains bootstrap migration history; active skill and
+// reference content comes from the repository containing this installer.
+const installerSourceRoot = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "..",
+);
+const activeSkillAndReferencePaths = [
+  ".claude/skills/my-dashboard/SKILL.md",
+  ".claude/skills/help/SKILL.md",
+  ".claude/skills/mydash-help/SKILL.md",
+  ".claude/skills/spreadsheet/SKILL.md",
+  ".claude/skills/powerpoint/SKILL.md",
+  ".claude/skills/dashboard/SKILL.md",
+  ".claude/skills/presentation/SKILL.md",
+  ".claude/skills/concept/SKILL.md",
+  ".claude/skills/component/SKILL.md",
+  ".claude/skills/hsbc-visual-standards/SKILL.md",
+  "docs/cli-reference.md",
+  "docs/api-reference.md",
+];
+
+for (const relativePath of Object.keys(FILES)) {
+  if (relativePath.startsWith("docs/agent-workflows/")) {
+    delete FILES[relativePath];
+  }
+}
+
+for (const relativePath of activeSkillAndReferencePaths) {
+  const previous = FILES[relativePath];
+  FILES[relativePath] = {
+    content: await readFile(
+      resolve(installerSourceRoot, relativePath),
+      "utf8",
+    ),
+    allowedPrevious: [
+      ...(previous?.content ? [previous.content] : []),
+      ...(previous?.allowedPrevious ?? []),
+    ],
+  };
+}
+
 function assertNodeVersion() {
   const major = Number.parseInt(
     process.versions.node.split(".")[0],
@@ -392,7 +435,7 @@ async function assertBootstrapFoundation() {
     "cli/registry.mjs",
     "cli/command-options.mjs",
     "src/workspace/capabilities.mjs",
-    "docs/agent-workflows/README.md",
+    "docs/cli-reference.md",
     "scripts/tasks/test-server.mjs",
     "scripts/tasks/test-git.mjs",
     "scripts/tasks/test-validation.mjs",

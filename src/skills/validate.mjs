@@ -26,12 +26,8 @@ export const EXPECTED_COMMANDS = [
 ];
 
 const SUPPORTING_FILES = [
-  "docs/agent-workflows/README.md",
-  "docs/agent-workflows/OPERATING_MODEL.md",
-  "docs/agent-workflows/CLI_REFERENCE.md",
-  "docs/agent-workflows/ARTIFACT_AUTHORING.md",
-  "docs/agent-workflows/VISUAL_STANDARDS.md",
-  "docs/agent-workflows/EVALUATION_CASES.md",
+  "docs/cli-reference.md",
+  "docs/api-reference.md",
 ];
 
 const CONTENT_RULES = {
@@ -137,6 +133,16 @@ export async function validateProjectSkills(workspaceRoot) {
         code: "SKILL_BODY_MISSING",
         message:
           `Skill /${entry.command} has no instructions.`,
+        command: entry.command,
+      });
+    }
+
+    if (entry.source.includes("docs/agent-workflows/")) {
+      issues.push({
+        severity: "error",
+        code: "SKILL_LEGACY_WORKFLOW_REFERENCE",
+        message:
+          `Skill /${entry.command} still depends on the retired docs/agent-workflows directory.`,
         command: entry.command,
       });
     }
