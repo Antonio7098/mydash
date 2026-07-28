@@ -111,6 +111,7 @@
           class="category-tabs"
           id="category-tabs"
           aria-label="Artefact categories"
+          data-initialising
           data-selected="0"
         >
           <span class="category-tabs__indicator" aria-hidden="true"></span>
@@ -141,47 +142,7 @@
       </div>
     </header>
 
-    <main class="navigator-main" id="page-content" tabindex="-1">
-      <section
-        class="navigator-loading-skeleton"
-        aria-busy="true"
-        aria-live="polite"
-      >
-        <p class="visually-hidden">Opening your workspace</p>
-        <div class="navigator-loading-skeleton__grid" aria-hidden="true">
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-          <article class="navigator-loading-skeleton__card">
-            <div class="navigator-loading-skeleton__preview"></div>
-            <div class="navigator-loading-skeleton__line"></div>
-            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
-          </article>
-        </div>
-      </section>
-    </main>
+    <main class="navigator-main" id="page-content" tabindex="-1"></main>
 
     <footer class="navigator-footer">
       <span>Repository-backed</span>

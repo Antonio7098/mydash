@@ -95,6 +95,13 @@ async function initialise() {
   syncThemeControl();
   restoreNavigationState();
   updateRouteChrome();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      elements.categoryTabs.removeAttribute(
+        "data-initialising",
+      );
+    });
+  });
   await refreshSnapshot({
     focus: false,
   });
