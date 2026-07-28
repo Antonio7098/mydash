@@ -421,13 +421,12 @@ a {
 .category-tabs__indicator {
   position: absolute;
   z-index: 0;
-  top: 0.2rem;
-  bottom: 0.2rem;
+  bottom: 0.1rem;
   left: 0.2rem;
   width: calc((100% - 0.4rem) / 4);
-  border: 1px solid var(--nav-border-strong);
-  border-radius: calc(var(--nav-radius-lg) - 0.2rem);
-  background: transparent;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--nav-text);
   box-shadow: none;
   transform:
     translateX(
@@ -1075,18 +1074,20 @@ a {
 
 .artifact-gallery[data-preview-only="true"]
   .artifact-gallery__grid {
-  width: min(66rem, 80%);
+  width: 100%;
   margin-inline: auto;
-  gap:
-    clamp(2.75rem, 5vw, 4.75rem)
-    clamp(3.25rem, 5.5vw, 5.25rem);
+  column-gap:
+    clamp(3.25rem, 6vw, 5.5rem);
+  row-gap:
+    clamp(2.25rem, 4vw, 3.5rem);
 }
 
 .artifact-gallery[data-preview-only="true"]
   .artifact-preview-mount {
   width: 100%;
+  height: clamp(10.5rem, 14vw, 12rem);
   margin: 0;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
   border-radius:
     clamp(0.75rem, 1.5vw, 1.1rem);
   box-shadow:
@@ -1100,7 +1101,7 @@ a {
   .artifact-card[data-variant="wide"],
 .artifact-gallery[data-preview-only="true"]
   .artifact-card[data-variant="tall"] {
-  grid-column: span 6;
+  grid-column: span 4;
 }
 
 .artifact-gallery[data-preview-only="true"]
@@ -1108,7 +1109,8 @@ a {
 .artifact-gallery[data-preview-only="true"]
   .artifact-preview-mount[data-variant="tall"] {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: clamp(10.5rem, 14vw, 12rem);
+  aspect-ratio: auto;
 }
 
 .artifact-gallery-item__glass {
@@ -1829,7 +1831,7 @@ body[data-route="viewer"]
   }
   .artifact-gallery[data-preview-only="true"]
     .artifact-gallery__grid {
-    width: min(42rem, 86%);
+    width: 100%;
   }
 }
 
@@ -1849,7 +1851,7 @@ body[data-route="viewer"]
   }
   .artifact-gallery[data-preview-only="true"]
     .artifact-gallery__grid {
-    width: min(28rem, 94%);
+    width: 100%;
     gap: 2.5rem;
   }
 
@@ -2886,8 +2888,14 @@ html[data-theme="dark"]
 }
 
 
-/* Visual library browser */
-body[data-route="components"]
+/* Shared catalogue width for the Library and artefact galleries. */
+body:is(
+  [data-route="components"],
+  [data-route="dashboards"],
+  [data-route="presentations"],
+  [data-route="concepts"],
+  [data-route="home"]
+)
   .navigator-main {
   width:
     min(
@@ -4713,7 +4721,6 @@ body[data-route="components"]
   .library-contract-row > span:last-child { grid-column: 1 / -1; }
   .library-mapping-row, .library-edge { grid-template-columns: 1fr; }
 }
-
 
 /* First-run and release readiness */
 .first-run-guide { display: grid; grid-template-columns: 1.1fr 1fr .8fr; gap: 1rem; align-items: start; margin-top: clamp(3rem,7vw,6rem); padding: clamp(1.2rem,3vw,2rem); border: 1px solid var(--nav-border); border-radius: clamp(1rem,2vw,1.5rem); background: linear-gradient(120deg,var(--nav-red-soft),#fff 45%); }
