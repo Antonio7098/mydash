@@ -65,7 +65,7 @@ export function createLibraryBrowser(entries, issues = []) {
   const scopeTitle = element(
     "h1",
     "library-scope-overview__title",
-    "All resources",
+    "All",
   );
   scopeTitle.dataset.libraryScopeTitle = "";
   const scopeStats = element(
@@ -602,7 +602,7 @@ function renderScopeSummary(
   state,
 ) {
   const labels = {
-    all: "All resources",
+    all: "All",
     core: "Core",
     collection: "Collections",
     local: "Local",

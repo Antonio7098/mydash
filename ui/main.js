@@ -54,10 +54,6 @@ const elements = {
     document.querySelector(
       "#theme-toggle",
     ),
-  userSelector:
-    document.querySelector(
-      "#user-selector",
-    ),
   connection:
     document.querySelector(
       "#connection-status",
@@ -84,8 +80,6 @@ const state = {
   eventSource: null,
   loadingController: null,
   revisionId: null,
-  selectedUserId:
-    requestedUserId(),
   deactivatePreviews: null,
   deactivateViewer: null,
   deactivateLibrary: null,
@@ -96,6 +90,7 @@ initialise().catch(
 );
 
 async function initialise() {
+  removeLegacyUserScopeFromUrl();
   bindNavigation();
   syncThemeControl();
   restoreNavigationState();
@@ -104,6 +99,24 @@ async function initialise() {
     focus: false,
   });
   connectRevisionEvents();
+}
+
+function removeLegacyUserScopeFromUrl() {
+  const url =
+    new URL(window.location.href);
+  const hadUser =
+    url.searchParams.has("user") ||
+    url.searchParams.has("userId");
+
+  if (!hadUser) return;
+
+  url.searchParams.delete("user");
+  url.searchParams.delete("userId");
+  window.history.replaceState(
+    {},
+    "",
+    `${url.pathname}${url.search}${url.hash}`,
+  );
 }
 
 function bindNavigation() {
@@ -135,19 +148,6 @@ function bindNavigation() {
     () => {
       setNavOpen(false, {
         persist: false,
-      });
-    },
-  );
-
-  elements.userSelector.addEventListener(
-    "change",
-    () => {
-      state.selectedUserId =
-        elements.userSelector.value;
-      persistSelectedUser();
-      clearApiCache();
-      refreshSnapshot({
-        focus: false,
       });
     },
   );
@@ -202,23 +202,6 @@ function bindNavigation() {
         window.location.pathname,
       );
       updateRouteChrome();
-      const requested =
-        requestedUserId();
-
-      if (
-        requested &&
-        requested !==
-          state.selectedUserId
-      ) {
-        state.selectedUserId =
-          requested;
-        clearApiCache();
-        refreshSnapshot({
-          focus: true,
-        });
-        return;
-      }
-
       renderCurrentRoute({
         focus: true,
       });
@@ -306,42 +289,11 @@ async function refreshSnapshot(
   );
 
   try {
-    let snapshot =
+    const snapshot =
       await loadNavigatorSnapshot({
         signal:
           state.loadingController.signal,
-        userId:
-          state.selectedUserId,
       });
-
-    const userIds =
-      snapshot.users?.userIds ?? [];
-    const fallback =
-      snapshot.users?.currentUserId ??
-      snapshot.selectedUserId;
-
-    if (
-      !state.selectedUserId ||
-      !userIds.includes(
-        state.selectedUserId,
-      )
-    ) {
-      state.selectedUserId =
-        fallback;
-
-      if (
-        snapshot.selectedUserId !==
-        state.selectedUserId
-      ) {
-        snapshot =
-          await loadNavigatorSnapshot({
-            signal:
-              state.loadingController.signal,
-            userId:
-              state.selectedUserId,
-          });
-      }
-    }
 
     state.snapshot = snapshot;
     state.revisionId =
@@ -349,9 +301,6 @@ async function refreshSnapshot(
       snapshot.health?.revision?.id ??
       null;
     updateRouteChrome();
-    populateUserSelector();
-    persistSelectedUser();
-
     setConnection(
       "ready",
       "Workspace live",
@@ -381,69 +330,6 @@ async function refreshSnapshot(
       renderFatalError(error);
     }
   }
-}
-
-function populateUserSelector() {
-  const userIds =
-    state.snapshot?.users?.userIds ??
-    [];
-  const options = userIds.map(
-    (userId) => {
-      const option =
-        document.createElement(
-          "option",
-        );
-      option.value = userId;
-      option.textContent = userId;
-      return option;
-    },
-  );
-
-  elements.userSelector.replaceChildren(
-    ...options,
-  );
-  elements.userSelector.value =
-    state.selectedUserId;
-}
-
-function requestedUserId() {
-  const parameters =
-    new URLSearchParams(
-      window.location.search,
-    );
-  const value =
-    parameters.get("user") ??
-    parameters.get("userId") ??
-    window.localStorage.getItem(
-      "mydash.navigator.user",
-    );
-
-  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(
-    value ?? "",
-  )
-    ? value
-    : null;
-}
-
-function persistSelectedUser() {
-  if (!state.selectedUserId) return;
-
-  window.localStorage.setItem(
-    "mydash.navigator.user",
-    state.selectedUserId,
-  );
-  const url =
-    new URL(window.location.href);
-  url.searchParams.delete("userId");
-  url.searchParams.set(
-    "user",
-    state.selectedUserId,
-  );
-  window.history.replaceState(
-    {},
-    "",
-    `${url.pathname}${url.search}${url.hash}`,
-  );
 }
 
 function connectRevisionEvents() {

@@ -11,8 +11,8 @@
       content="Browse, preview and export My Dashboards artefacts."
     >
     <title>My Dashboards</title>
-    <script src="/navigator/theme-init.js?v=20260727-61"></script>
-    <link rel="stylesheet" href="/navigator/styles.css?v=20260727-61">
+    <script src="/navigator/theme-init.js?v=20260728-62"></script>
+    <link rel="stylesheet" href="/navigator/styles.css?v=20260728-62">
   </head>
   <body>
     <a class="skip-link" href="#page-content">Skip to content</a>
@@ -68,15 +68,6 @@
           >
             Library
           </a>
-
-          <div class="navigator-nav__separator" role="separator"></div>
-
-          <label class="user-switcher">
-            <span>User</span>
-            <select id="user-selector" aria-label="Scope artefacts to user">
-              <option>Loading</option>
-            </select>
-          </label>
 
           <div class="navigator-nav__separator" role="separator"></div>
 
@@ -151,10 +142,44 @@
     </header>
 
     <main class="navigator-main" id="page-content" tabindex="-1">
-      <section class="navigator-loading" aria-live="polite">
-        <p class="navigator-eyebrow">My Dashboards</p>
-        <h1>Opening your workspace</h1>
-        <p>Reading artefacts and shared resources from the repository.</p>
+      <section
+        class="navigator-loading-skeleton"
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <p class="visually-hidden">Opening your workspace</p>
+        <div class="navigator-loading-skeleton__grid" aria-hidden="true">
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+          <article class="navigator-loading-skeleton__card">
+            <div class="navigator-loading-skeleton__preview"></div>
+            <div class="navigator-loading-skeleton__line"></div>
+            <div class="navigator-loading-skeleton__line navigator-loading-skeleton__line--short"></div>
+          </article>
+        </div>
       </section>
     </main>
 
@@ -164,6 +189,6 @@
       <span id="footer-revision">Revision loading</span>
     </footer>
 
-    <script type="module" src="/navigator/main.js?v=20260727-61"></script>
+    <script type="module" src="/navigator/main.js?v=20260728-64"></script>
   </body>
 </html>

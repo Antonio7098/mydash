@@ -39,6 +39,11 @@ Do not start by choosing chart types.
 8. Include units, dates, source context, empty states and error states.
 9. Avoid decorative gauges, unexplained scores and redundant cards.
 
+When data comes from a refreshable source, consume only published
+`data/generated/` outputs. Surface the dataset's as-of time and an intentional
+stale/error state based on `data/refresh-status.json`; never read a live
+workbook or `data/source/` snapshot in browser code.
+
 Create dashboards under `library/dashboards/<id>/`. The schema-version-2
 `artifact.json` declares the workspace `userId`; optional `owner` is descriptive
 metadata. Create only needed `src/`, `data/`, `assets/`, `recipes/`, `ui/` and

@@ -434,7 +434,9 @@ function validateDataRecipe(value, add) {
 }
 
 function validateProvenance(value, add) {
-  validateBase(value, add);
+  if (![1, 2].includes(value.schemaVersion)) {
+    add("$.schemaVersion", "must equal 1 or 2");
+  }
   requireRelativePath(value.source, "$.source", add);
 
   if (!isNonEmptyString(value.sourceHash) || !SHA256_PATTERN.test(value.sourceHash)) {
@@ -450,6 +452,25 @@ function validateProvenance(value, add) {
 
   requireString(value.command, "$.command", add);
   requireString(value.toolVersion, "$.toolVersion", add);
+
+  if (value.schemaVersion === 2) {
+    requireId(value.sourceId, "$.sourceId", add);
+    requireRelativePath(value.recipe, "$.recipe", add);
+    requireRelativePath(value.output, "$.output", add);
+    for (const [field, path] of [
+      [value.recipeHash, "$.recipeHash"],
+      [value.outputHash, "$.outputHash"],
+    ]) {
+      if (!isNonEmptyString(field) || !SHA256_PATTERN.test(field)) {
+        add(path, "must be a lower-case SHA-256 hash");
+      }
+    }
+    if (!Number.isInteger(value.rowCount) || value.rowCount < 0) {
+      add("$.rowCount", "must be a non-negative integer");
+    }
+    requireString(value.acquisitionMode, "$.acquisitionMode", add);
+    requireString(value.originalFilename, "$.originalFilename", add);
+  }
 }
 
 function validateLifecycle(value, add) {

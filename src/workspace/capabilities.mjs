@@ -32,6 +32,16 @@ export function getWorkspaceCapabilities(options = {}) {
         formats: ["csv", "json", "ndjson", "jsonl"],
       },
       {
+        id: "data.refresh",
+        title: "Snapshot-based artefact data refresh",
+        available: true,
+        acquisitionModes: ["manual", "live-local"],
+        qualityGates: true,
+        atomicPublication: true,
+        provenance: true,
+        freshnessStatus: true,
+      },
+      {
         id: "library.discovery",
         title: "Filesystem library discovery",
         available: true,

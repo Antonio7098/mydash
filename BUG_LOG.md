@@ -36,6 +36,23 @@ Add the newest entry first.
 Omit fields that genuinely do not apply. Update an existing open bug entry when
 it is fixed instead of creating a disconnected duplicate.
 
+## 2026-07-28 — Snapshot-based artefact data refresh
+
+- Type: System change
+- Status: Complete
+- Area: CLI, Validation, Workspace
+- Summary: Added manual and live-local source acquisition, artefact-level data
+  refresh, quality gates, rollback-protected publication, extended provenance
+  and freshness/status reporting.
+- Resolution: External files are staged as stable, hashed workspace snapshots;
+  recipes consume only those snapshots and publish generated datasets only
+  after all configured checks pass. Raw snapshots and machine-local source
+  mappings are ignored by Git.
+- Validation: `tests/integration/artifact-data-refresh-cli.test.mjs`, data CLI
+  tests, skill checks and consolidated workspace validation.
+- References: `src/data/artifact-refresh.mjs`, `cli/commands/data.mjs`,
+  `docs/data-refresh.md`, `.claude/skills/spreadsheet/SKILL.md`
+
 ## 2026-07-27 — System change log introduced
 
 - Type: System change

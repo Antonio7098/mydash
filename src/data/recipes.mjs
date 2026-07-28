@@ -117,7 +117,7 @@ export async function refreshRecipe(recipePath, options) {
   };
 }
 
-async function extractRecipeSource(sourcePath, recipe, options) {
+export async function extractRecipeSource(sourcePath, recipe, options) {
   if (recipe.source.type === "excel") {
     const result = recipe.source.table
       ? await extractTable(sourcePath, recipe.source.table, {

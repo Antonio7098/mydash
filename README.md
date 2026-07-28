@@ -39,6 +39,7 @@ npm run smoke
 - [Appearance](docs/appearance.md)
 - [Agent workflow](docs/agent-workflow.md)
 - [Cloud workstation](docs/cloud-workstation.md)
+- [Data refresh](docs/data-refresh.md)
 - [Troubleshooting](docs/troubleshooting.md)
 
 ## Principles

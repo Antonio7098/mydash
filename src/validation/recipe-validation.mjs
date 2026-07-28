@@ -236,11 +236,16 @@ async function validateSource(
     canonicalSource = await realpath(candidate);
   } catch (error) {
     if (error?.code === "ENOENT") {
+      const stagedSnapshot = value.replaceAll("\\", "/").includes("/data/source/");
       issues.push(
         createIssue(
-          "error",
-          "RECIPE_SOURCE_MISSING",
-          `Recipe source does not exist: ${value}`,
+          stagedSnapshot ? "warning" : "error",
+          stagedSnapshot
+            ? "RECIPE_SOURCE_SNAPSHOT_MISSING"
+            : "RECIPE_SOURCE_MISSING",
+          stagedSnapshot
+            ? `Workstation-local recipe source snapshot is not present: ${value}`
+            : `Recipe source does not exist: ${value}`,
         ),
       );
       return {

@@ -21,6 +21,13 @@ import {
   createRecipe,
   refreshRecipe,
 } from "../../src/data/recipes.mjs";
+import {
+  artifactDataStatus,
+  refreshArtifactData,
+  stageArtifactSource,
+  syncArtifactSource,
+} from "../../src/data/artifact-refresh.mjs";
+import { loadPackageMetadata } from "../../src/workspace/package-metadata.mjs";
 
 const SUBCOMMANDS = new Set([
   "inspect",
@@ -31,6 +38,10 @@ const SUBCOMMANDS = new Set([
   "deduplicate",
   "create-recipe",
   "refresh",
+  "stage",
+  "sync",
+  "refresh-artifact",
+  "status",
 ]);
 
 export const dataCommand = {
@@ -46,6 +57,10 @@ export const dataCommand = {
     "deduplicate <file>             Remove duplicate rows by key.",
     "create-recipe <source>         Create a repeatable extraction recipe.",
     "refresh <recipe.json>          Execute a recipe and record provenance.",
+    "stage <source>                 Stage a source snapshot for an artefact.",
+    "sync <artifact>                Stage a configured live-local source.",
+    "refresh-artifact <artifact>    Refresh all data recipes for an artefact.",
+    "status <artifact>              Report artefact data freshness and state.",
     "--allow-outside                Permit read-only source access outside the workspace.",
     "--json                         Return structured JSON.",
   ],
@@ -90,6 +105,14 @@ export const dataCommand = {
         return runCreateRecipe(rest, context, workspaceRoot);
       case "refresh":
         return runRefresh(rest, context, workspaceRoot);
+      case "stage":
+        return runStage(rest, context, workspaceRoot);
+      case "sync":
+        return runSync(rest, context, workspaceRoot);
+      case "refresh-artifact":
+        return runRefreshArtifact(rest, context, workspaceRoot);
+      case "status":
+        return runStatus(rest, context, workspaceRoot);
       default:
         throw new Error("Unreachable data subcommand.");
     }
@@ -453,6 +476,111 @@ async function runRefresh(args, context, workspaceRoot) {
   };
 }
 
+async function runStage(args, context, workspaceRoot) {
+  const parsed = parseCommandArguments(args, {
+    booleans: ["force", "no-history"],
+    values: ["artifact", "kind", "source"],
+  });
+  requirePositionals(parsed.positionals, 1, "mydash data stage <source-file> --artifact <id> --kind <kind> --source <id>");
+  requireWorkspace(workspaceRoot, "Source staging");
+  requireNamed(parsed.options, ["artifact", "kind", "source"], "Source staging");
+  const sourcePath = await resolveCommandPath(parsed.positionals[0], {
+    cwd: context.cwd,
+    workspaceRoot,
+    allowOutside: true,
+    mustExist: true,
+    requireFile: true,
+  });
+  const data = await stageArtifactSource({
+    workspaceRoot,
+    sourcePath,
+    artifactId: parsed.options.artifact,
+    kind: parsed.options.kind,
+    sourceId: parsed.options.source,
+    force: parsed.options.force ?? false,
+    history: !(parsed.options.noHistory ?? false),
+  });
+  return {
+    ok: true,
+    command: "data stage",
+    data,
+    text: data.changed
+      ? `Staged ${data.originalFilename} at ${data.stagedPath}.`
+      : `Source is unchanged at ${data.stagedPath}.`,
+  };
+}
+
+async function runSync(args, context, workspaceRoot) {
+  const parsed = parseCommandArguments(args, {
+    booleans: ["force", "no-history"],
+    values: ["kind", "source"],
+  });
+  requirePositionals(parsed.positionals, 1, "mydash data sync <artifact> --kind <kind> --source <id>");
+  requireWorkspace(workspaceRoot, "Live source synchronisation");
+  requireNamed(parsed.options, ["kind", "source"], "Live source synchronisation");
+  const data = await syncArtifactSource({
+    workspaceRoot,
+    artifactId: parsed.positionals[0],
+    kind: parsed.options.kind,
+    sourceId: parsed.options.source,
+    force: parsed.options.force ?? false,
+    history: !(parsed.options.noHistory ?? false),
+  });
+  const metadata = await loadPackageMetadata(workspaceRoot);
+  const refresh = await refreshArtifactData({
+    workspaceRoot,
+    artifactId: parsed.positionals[0],
+    kind: parsed.options.kind,
+    toolVersion: metadata.version,
+  });
+  return {
+    ok: true,
+    command: "data sync",
+    data: { ...data, refresh },
+    warnings: refresh.datasets.flatMap((dataset) => dataset.warnings ?? []),
+    text: `${data.changed ? "Synchronised" : "Confirmed unchanged"} ${data.sourceId} at ${data.stagedPath} and refreshed ${refresh.datasets.length} dataset${refresh.datasets.length === 1 ? "" : "s"}.`,
+  };
+}
+
+async function runRefreshArtifact(args, context, workspaceRoot) {
+  const parsed = parseCommandArguments(args, { values: ["kind"] });
+  requirePositionals(parsed.positionals, 1, "mydash data refresh-artifact <artifact> --kind <kind>");
+  requireWorkspace(workspaceRoot, "Artefact data refresh");
+  requireNamed(parsed.options, ["kind"], "Artefact data refresh");
+  const metadata = await loadPackageMetadata(workspaceRoot);
+  const data = await refreshArtifactData({
+    workspaceRoot,
+    artifactId: parsed.positionals[0],
+    kind: parsed.options.kind,
+    toolVersion: metadata.version,
+  });
+  return {
+    ok: true,
+    command: "data refresh-artifact",
+    data,
+    warnings: data.datasets.flatMap((dataset) => dataset.warnings ?? []),
+    text: `Refreshed ${data.datasets.length} dataset${data.datasets.length === 1 ? "" : "s"} for ${data.artifact.kind}:${data.artifact.id}.`,
+  };
+}
+
+async function runStatus(args, context, workspaceRoot) {
+  const parsed = parseCommandArguments(args, { values: ["kind"] });
+  requirePositionals(parsed.positionals, 1, "mydash data status <artifact> --kind <kind>");
+  requireWorkspace(workspaceRoot, "Artefact data status");
+  requireNamed(parsed.options, ["kind"], "Artefact data status");
+  const data = await artifactDataStatus({
+    workspaceRoot,
+    artifactId: parsed.positionals[0],
+    kind: parsed.options.kind,
+  });
+  return {
+    ok: true,
+    command: "data status",
+    data,
+    text: `Data status for ${data.artifact.kind}:${data.artifact.id}: ${data.state}.`,
+  };
+}
+
 async function resolveSource(input, options, context, workspaceRoot) {
   return resolveCommandPath(input, {
     cwd: context.cwd,
@@ -482,6 +610,24 @@ function requireOutput(value, operation) {
       `${operation} requires --output <path>.`,
       { exitCode: EXIT_USAGE },
     );
+  }
+}
+
+function requireWorkspace(workspaceRoot, operation) {
+  if (!workspaceRoot) {
+    throw new CliError("WORKSPACE_REQUIRED_FOR_WRITE", `${operation} requires a My Dashboards workspace.`, {
+      exitCode: 5,
+    });
+  }
+}
+
+function requireNamed(options, names, operation) {
+  for (const name of names) {
+    if (!options[name]) {
+      throw new CliError("MISSING_DATA_OPTION", `${operation} requires --${name}.`, {
+        exitCode: EXIT_USAGE,
+      });
+    }
   }
 }
 

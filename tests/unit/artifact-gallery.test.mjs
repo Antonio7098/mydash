@@ -35,7 +35,7 @@ test("gallery URLs use the existing API and viewer contracts", () => {
   );
 });
 
-test("artifact URLs carry their user scope", () => {
+test("artifact API URLs carry user scope while navigator URLs do not", () => {
   const scoped = {
     ...artifact,
     userId: "antonio",
@@ -43,7 +43,7 @@ test("artifact URLs carry their user scope", () => {
 
   assert.equal(
     artifactViewerPath(scoped),
-    "/view/dashboard/ai-use-case-governance?userId=antonio",
+    "/view/dashboard/ai-use-case-governance",
   );
   assert.equal(
     artifactPreviewPath(scoped),

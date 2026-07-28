@@ -82,10 +82,17 @@ npm run mydash -- data filter <file> --where "status=Review" --output <path> --f
 npm run mydash -- data deduplicate <file> --key id --output <path> --format csv --overwrite
 npm run mydash -- data create-recipe <source> --id <id> --recipe <path> --output <path> --format json --output-overwrite --overwrite
 npm run mydash -- data refresh <recipe.json> --overwrite [--no-provenance]
+npm run mydash -- data stage <source> --artifact <id> --kind <kind> --source <source-id> [--force] [--no-history]
+npm run mydash -- data sync <artifact> --kind <kind> --source <source-id> [--force] [--no-history]
+npm run mydash -- data refresh-artifact <artifact> --kind <kind>
+npm run mydash -- data status <artifact> --kind <kind>
 ```
 
 Supported tabular formats are CSV, JSON and NDJSON. Write operations require
 explicit outputs and do not overwrite existing files without `--overwrite`.
+Excel is supported as a staged recipe source. See
+[Data refresh](data-refresh.md) for source policies, live-local configuration,
+quality gates, transactional publication and scheduling.
 
 ## Library, appearance and impact
 

@@ -20,6 +20,9 @@ A typical artefact may contain:
 │   ├── main.js
 │   └── styles.css
 ├── data/
+│   ├── source/<source-id>/
+│   ├── generated/
+│   └── refresh-status.json
 ├── assets/
 ├── recipes/
 ├── ui/
@@ -53,3 +56,8 @@ and tabular data, images, fonts and approved media. Final exports cannot have
 external load-time dependencies. Prefer deterministic extracted data over
 parsing Office files in browser code; keep repeatable extraction recipes and
 provenance with the artefact.
+
+Refreshable artefacts stage external inputs beneath `data/source/<source-id>/`
+and publish deterministic browser-consumable outputs beneath `data/generated/`.
+The raw current snapshot and history are workstation-local by default. See
+[Data refresh](data-refresh.md).

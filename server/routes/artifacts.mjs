@@ -53,7 +53,7 @@ export function createArtifactsRouter(context) {
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-list-v3",
-        userId,
+        result.userId,
       );
 
       sendJson(
@@ -61,7 +61,7 @@ export function createArtifactsRouter(context) {
         {
           artifacts: result.artifacts.map(publicArtifact),
           count: result.artifacts.length,
-          userId,
+          userId: result.userId,
           librarySummary: result.scan.summary,
         },
         {
@@ -340,14 +340,14 @@ function parseBuildRequest(request, context) {
   };
 }
 
-function requestUserId(request, context) {
+function requestUserId(request) {
+  if (request.query.userId === undefined) {
+    return null;
+  }
+
   const value = stringQuery(
     request.query.userId,
     "userId",
-    {
-      defaultValue:
-        context.config.userId,
-    },
   );
 
   return requireIdentifier(value, "userId");

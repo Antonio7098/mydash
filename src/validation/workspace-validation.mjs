@@ -20,6 +20,9 @@ import {
 import {
   scopedLibraryView,
 } from "../users/scope.mjs";
+import {
+  validateArtifactSourcePolicies,
+} from "./source-policy-validation.mjs";
 
 export async function validateWorkspace(options) {
   const generatedAt = (
@@ -29,6 +32,7 @@ export async function validateWorkspace(options) {
   const stages = createStages();
   const artefactReports = [];
   const recipeReports = [];
+  const sourceReports = [];
   let config = null;
   let scan = null;
   let userId = null;
@@ -261,8 +265,38 @@ export async function validateWorkspace(options) {
   }
 
   if (options.validateRecipes === false) {
+    stages.sources.status = "skipped";
     stages.recipes.status = "skipped";
   } else {
+    const validatedSources =
+      await validateArtifactSourcePolicies(
+        artifacts,
+        options.workspaceRoot,
+      );
+    sourceReports.push(...validatedSources);
+    for (const report of sourceReports) {
+      for (const issue of report.issues) {
+        issues.push({
+          stage: "sources",
+          artifactId: report.artifactId,
+          artifactKind: report.artifactKind,
+          sourceId: report.sourceId,
+          policyPath: report.policyPath,
+          ...issue,
+        });
+      }
+    }
+    const sourceIssues = issues.filter(
+      (issue) => issue.stage === "sources",
+    );
+    stages.sources.status = sourceIssues.some(
+      (issue) => issue.severity === "error",
+    )
+      ? "failed"
+      : "passed";
+    stages.sources.sourceCount = sourceReports.length;
+    finishStage(stages.sources, sourceIssues);
+
     const recipePaths = await discoverRecipeFiles(
       options.workspaceRoot,
       artifacts,
@@ -346,6 +380,7 @@ export async function validateWorkspace(options) {
       stages,
       artifacts: artefactReports,
       recipes: recipeReports,
+      sources: sourceReports,
       issues: sortIssues(issues),
       summary: {
         valid,
@@ -353,6 +388,7 @@ export async function validateWorkspace(options) {
         warningCount,
         artifactCount: artefactReports.length,
         recipeCount: recipeReports.length,
+        sourceCount: sourceReports.length,
         exportValidatedCount:
           artefactReports.filter(
             (artifact) =>
@@ -373,6 +409,7 @@ function createStages() {
     workspace: stage(),
     library: stage(),
     appearance: stage(),
+    sources: stage(),
     recipes: stage(),
     exports: stage(),
   };
@@ -422,8 +459,9 @@ function sortIssues(issues) {
     workspace: 0,
     library: 1,
     appearance: 2,
-    recipes: 3,
-    exports: 4,
+    sources: 3,
+    recipes: 4,
+    exports: 5,
   };
 
   return [...issues].sort(

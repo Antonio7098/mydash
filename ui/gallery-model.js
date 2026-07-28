@@ -52,11 +52,11 @@ export function galleryVariantForArtifact(
 export function artifactViewerPath(
   artifact,
 ) {
-  return withArtifactUser(`/view/${encodeURIComponent(
+  return `/view/${encodeURIComponent(
     artifact.kind,
   )}/${encodeURIComponent(
     artifact.id,
-  )}`, artifact);
+  )}`;
 }
 
 export function artifactPreviewPath(

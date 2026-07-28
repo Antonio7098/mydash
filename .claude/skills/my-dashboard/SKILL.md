@@ -44,6 +44,22 @@ JavaScript merely to inspect an input. Keep outputs inside the workspace, use
 explicit overwrite flags, do not follow symlinks outside the workspace and use
 `--json` when a decision depends on CLI output.
 
+When the user provides a source file at another location on the computer,
+first use `mydash data stage` to copy it into the intended artefact's
+`library/<kind>/<id>/data/source/<source-id>/current.<ext>` snapshot. Do this
+before inspecting, analysing or using the file to build an artefact. Tell the
+user the exact `stagedPath` returned by the command.
+
+For refreshable data, follow `docs/data-refresh.md`: external and live-local
+sources are snapshotted before extraction, recipes remain artefact-local,
+generated data is published only after quality gates, and dashboards consume
+only `data/generated/` outputs. Use `mydash data sync` for configured
+live-local sources, `mydash data refresh-artifact` for transactional
+publication and `mydash data status` for freshness. Never put credentials or
+machine-specific paths in tracked files. `mydash data sync` also runs the
+artefact refresh after staging. Ask before enabling scheduling or external
+access.
+
 ## Orient
 
 1. Run `npm run mydash -- git status --json`.

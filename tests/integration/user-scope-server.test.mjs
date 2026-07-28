@@ -35,7 +35,7 @@ test("artifact APIs scope by user while library resources stay global", async ()
   try {
     await withServer(root, async (baseUrl) => {
       const navigator = await fetch(baseUrl);
-      assert.match(
+      assert.doesNotMatch(
         await navigator.text(),
         /id="user-selector"/,
       );

@@ -8,6 +8,12 @@ coverage/
 
 # Agent and application working files
 .my-dashboards/
+.mydash-local/
+
+# Workstation-local source snapshots
+library/*/*/data/source/*/current.*
+library/*/*/data/source/*/history/
+library/*/*/data/source/*/snapshot.json
 
 # Environment and local configuration
 .env

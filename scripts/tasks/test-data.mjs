@@ -12,6 +12,7 @@ const tests = [
   resolve(projectRoot, "tests", "unit", "data-csv.test.mjs"),
   resolve(projectRoot, "tests", "unit", "data.test.mjs"),
   resolve(projectRoot, "tests", "integration", "data-cli.test.mjs"),
+  resolve(projectRoot, "tests", "integration", "artifact-data-refresh-cli.test.mjs"),
 ];
 
 const result = spawnSync(
