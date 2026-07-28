@@ -172,7 +172,26 @@ restores, amend, force push or force-with-lease. Do not switch branches, rewrite
 published history, discard unrelated work or include unrelated staged files.
 If pushing is impossible, keep the local commit and report the exact obstacle.
 
-## Bug and system change log
+## Changelog and bug log
+
+Maintain `CHANGELOG.md` for every core-system change. This includes changes to:
+
+- Navigator, CLI, server and shared services;
+- discovery, validation, resolution, export, workspace and Git behaviour;
+- configuration contracts, schemas and migrations;
+- agent skills and repository-wide operating guidance;
+- shared Core or Collection resources that change system-wide capability or
+  appearance.
+
+An addition or correction to `/help` is a core-system change and must update
+`CHANGELOG.md`, even when it arose from one user's recurring problem. Add a
+concise user-facing bullet under the current release, describing the capability
+or behaviour rather than the implementation detail.
+
+Do not add routine creation or editing of an individual dashboard,
+presentation, concept or its local resources to `CHANGELOG.md`. Log it only
+when the work also changes the core system used by other artefacts or users. A
+qualifying task is incomplete until `CHANGELOG.md` is current.
 
 Maintain `BUG_LOG.md` as part of system work:
 
@@ -196,9 +215,11 @@ Before claiming the task is complete:
 1. Run the relevant focused checks.
 2. Run `npm run mydash -- validate` or scoped validation.
 3. Review shared impact when applicable.
-4. Update `BUG_LOG.md` when the task fixes a bug or changes system behaviour.
-5. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
-6. Report validation, commit, push and remaining obstacles honestly.
+4. Update `CHANGELOG.md` for every core-system change, including skill and
+   `/help` changes.
+5. Update `BUG_LOG.md` when the task fixes a bug or changes system behaviour.
+6. Checkpoint explicit task-owned paths with `mydash git checkpoint`.
+7. Report validation, commit, push and remaining obstacles honestly.
 
 Use this completion report:
 

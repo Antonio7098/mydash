@@ -38,11 +38,14 @@ const CONTENT_RULES = {
     "Every primitive, component, layout, theme, preset and asset",
     "Load `/component`",
     "shows only artefacts belonging to the user configured",
+    "Maintain `CHANGELOG.md` for every core-system change",
+    "An addition or correction to `/help` is a core-system change",
   ],
   help: [
     "nontechnical",
     "Capture recurring guidance",
     "Navigator shows content for the user",
+    "Every addition or correction to this `/help` skill",
   ],
   "mydash-help": [
     ".claude/skills/help/SKILL.md",

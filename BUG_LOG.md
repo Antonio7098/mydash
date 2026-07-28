@@ -36,6 +36,21 @@ Add the newest entry first.
 Omit fields that genuinely do not apply. Update an existing open bug entry when
 it is fixed instead of creating a disconnected duplicate.
 
+## 2026-07-28 — Changelog required for core-system changes
+
+- Type: System change
+- Status: Complete
+- Area: Workspace
+- Summary: Made `CHANGELOG.md` mandatory for every core-system change,
+  including additions or corrections to agent skills and `/help`.
+- Resolution: `/mydash` now distinguishes the user-facing changelog from the
+  operational bug log, defines what qualifies as core-system work and excludes
+  routine artefact-local content. `/help` explicitly records its changes in the
+  changelog.
+- Validation: Skill catalogue validation and consolidated workspace validation.
+- References: `.claude/skills/mydash/SKILL.md`,
+  `.claude/skills/help/SKILL.md`, `CHANGELOG.md`
+
 ## 2026-07-28 — Primary agent skill renamed to `/mydash`
 
 - Type: System change

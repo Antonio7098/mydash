@@ -155,6 +155,10 @@ recurring help insight may be maintained here without a separate content
 request. Do not use that exception to change application code, manifests,
 themes, artefacts or Git history.
 
+Every addition or correction to this `/help` skill is a core-system change.
+Add a concise user-facing entry to `CHANGELOG.md` and validate the skill
+catalogue before completion.
+
 When investigation confirms a reproducible MyDash system bug, add or update its
 entry in `BUG_LOG.md`. When the bug is fixed, record its cause, resolution and
 validation. Do not log ordinary dashboard, presentation, concept or reusable
