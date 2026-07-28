@@ -3,7 +3,7 @@ import test from "node:test";
 import {
   artifactBelongsToUser,
   artifactsForUser,
-  availableUserIds,
+  availableUsers,
   entriesForUser,
   scopedLibraryView,
 } from "../../src/users/scope.mjs";
@@ -39,14 +39,14 @@ test("artifact scope filters artifacts but keeps components global", () => {
 
 test("available users include the configured user without artifacts", () => {
   assert.deepEqual(
-    availableUserIds(entries, "charlie"),
+    availableUsers(entries, "charlie"),
     ["antonio", "bob", "charlie"],
   );
 });
 
 test("scoped library views retain global resource diagnostics", () => {
   const scan = {
-    config: { userId: "antonio" },
+    config: { user: "antonio" },
     entries,
     issues: [
       {
@@ -74,7 +74,7 @@ test("scoped library views retain global resource diagnostics", () => {
   );
 });
 
-test("workspace and artifact contracts require user IDs", () => {
+test("workspace and artifact contracts require users", () => {
   const workspace = validateDocument("workspace", {
     schemaVersion: 2,
     id: "workspace",
@@ -98,19 +98,19 @@ test("workspace and artifact contracts require user IDs", () => {
   });
 
   assert.equal(
-    workspace.errors.some((error) => error.path === "$.userId"),
+    workspace.errors.some((error) => error.path === "$.user"),
     true,
   );
   assert.equal(
-    artifactResult.errors.some((error) => error.path === "$.userId"),
+    artifactResult.errors.some((error) => error.path === "$.user"),
     true,
   );
 });
 
-function artifact(id, userId) {
+function artifact(id, user) {
   return {
     id,
-    userId,
+    user,
     kind: "dashboard",
     category: "artifact",
     manifestPath: `/${id}.json`,

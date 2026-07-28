@@ -3,7 +3,7 @@
   "kind": "presentation",
   "id": "customer-insights",
   "title": "Customer Insights",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Signals and themes emerging from customer research.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

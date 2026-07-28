@@ -3,7 +3,7 @@
   "kind": "dashboard",
   "id": "ai-use-case-governance",
   "title": "AI Use Case Governance",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Reference dashboard for understanding AI use-case progress, review backlog, risk and next actions.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

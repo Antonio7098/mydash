@@ -1,31 +1,31 @@
-export function artifactBelongsToUser(entry, userId) {
+export function artifactBelongsToUser(entry, user) {
   return (
     entry?.category === "artifact" &&
-    entry.userId === userId
+    entry.user === user
   );
 }
 
-export function artifactsForUser(entries, userId) {
+export function artifactsForUser(entries, user) {
   return entries.filter((entry) =>
-    artifactBelongsToUser(entry, userId),
+    artifactBelongsToUser(entry, user),
   );
 }
 
-export function entriesForUser(entries, userId) {
+export function entriesForUser(entries, user) {
   return entries.filter(
     (entry) =>
       entry.category !== "artifact" ||
-      artifactBelongsToUser(entry, userId),
+      artifactBelongsToUser(entry, user),
   );
 }
 
-export function availableUserIds(entries, configuredUserId) {
+export function availableUsers(entries, configuredUser) {
   return [
     ...new Set([
-      configuredUserId,
+      configuredUser,
       ...entries
         .filter((entry) => entry.category === "artifact")
-        .map((entry) => entry.userId)
+        .map((entry) => entry.user)
         .filter(Boolean),
     ]),
   ].sort((left, right) => left.localeCompare(right, "en"));
@@ -42,7 +42,7 @@ export function scopedLibraryView(scan, options = {}) {
 
   const entries = entriesForUser(
     scan.entries,
-    options.userId ?? scan.config.userId,
+    options.user ?? scan.config.user,
   );
   const visiblePaths = new Set(
     entries.map((entry) => entry.manifestPath),
@@ -55,7 +55,7 @@ export function scopedLibraryView(scan, options = {}) {
       .filter(
         (entry) =>
           entry.category === "artifact" &&
-          !isUserId(entry.userId),
+          !isUser(entry.user),
       )
       .map((entry) => entry.manifestPath),
   );
@@ -84,7 +84,7 @@ export function scopedLibraryView(scan, options = {}) {
   };
 }
 
-function isUserId(value) {
+function isUser(value) {
   return (
     typeof value === "string" &&
     /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)

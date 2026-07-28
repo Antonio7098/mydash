@@ -34,8 +34,8 @@ export function createArtifactsRouter(context) {
       sendJson(
         response,
         {
-          currentUserId: result.currentUserId,
-          userIds: result.userIds,
+          currentUser: result.currentUser,
+          users: result.users,
         },
         {
           etag,
@@ -48,12 +48,12 @@ export function createArtifactsRouter(context) {
   router.get(
     "/artifacts",
     asyncRoute(async (request, response) => {
-      const userId = requestUserId(request, context);
-      const result = await context.services.artifacts.list(userId);
+      const user = requestUser(request, context);
+      const result = await context.services.artifacts.list(user);
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-list-v3",
-        result.userId,
+        result.user,
       );
 
       sendJson(
@@ -61,7 +61,7 @@ export function createArtifactsRouter(context) {
         {
           artifacts: result.artifacts.map(publicArtifact),
           count: result.artifacts.length,
-          userId: result.userId,
+          user: result.user,
           librarySummary: result.scan.summary,
         },
         {
@@ -77,19 +77,19 @@ export function createArtifactsRouter(context) {
     asyncRoute(async (request, response) => {
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
-      const userId = requestUserId(request, context);
+      const user = requestUser(request, context);
       const result =
         await context.services.artifacts.appearanceOptions(
           kind,
           id,
-          userId,
+          user,
         );
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-appearance-options-v1",
         kind,
         id,
-        userId,
+        user,
       );
 
       sendJson(
@@ -116,13 +116,13 @@ export function createArtifactsRouter(context) {
       requireSameOriginMutation(request);
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
-      const userId = requestUserId(request, context);
+      const user = requestUser(request, context);
       const body = validateAppearanceBody(request.body);
       const result = await context.services.artifacts.saveAppearance(
         kind,
         id,
         body,
-        userId,
+        user,
       );
 
       sendJson(
@@ -148,19 +148,19 @@ export function createArtifactsRouter(context) {
     asyncRoute(async (request, response) => {
       const kind = requireIdentifier(request.params.kind, "kind");
       const id = requireIdentifier(request.params.id, "id");
-      const userId = requestUserId(request, context);
+      const user = requestUser(request, context);
       const result = await context.services.artifacts.get(
         kind,
         id,
         null,
-        userId,
+        user,
       );
       const etag = createRevisionEtag(
         result.revision.id,
         "artifact-detail-v3",
         kind,
         id,
-        userId,
+        user,
       );
 
       sendJson(
@@ -193,7 +193,7 @@ export function createArtifactsRouter(context) {
         requestData.kind,
         requestData.id,
         requestData.options.appearance,
-        requestData.options.userId,
+        requestData.options.user,
       );
 
       if (!detail.resolution.summary.valid) {
@@ -203,7 +203,7 @@ export function createArtifactsRouter(context) {
           requestData.kind,
           requestData.id,
           requestData.options.appearance,
-          requestData.options.userId,
+          requestData.options.user,
           "invalid",
         );
 
@@ -246,7 +246,7 @@ export function createArtifactsRouter(context) {
         requestData.kind,
         requestData.id,
         requestData.options.appearance,
-        requestData.options.userId,
+        requestData.options.user,
         result.built.sha256,
       );
 
@@ -335,22 +335,22 @@ function parseBuildRequest(request, context) {
       minify,
       maxBytes,
       appearance,
-      userId: requestUserId(request, context),
+      user: requestUser(request, context),
     },
   };
 }
 
-function requestUserId(request) {
-  if (request.query.userId === undefined) {
+function requestUser(request) {
+  if (request.query.user === undefined) {
     return null;
   }
 
   const value = stringQuery(
-    request.query.userId,
-    "userId",
+    request.query.user,
+    "user",
   );
 
-  return requireIdentifier(value, "userId");
+  return requireIdentifier(value, "user");
 }
 
 function validateAppearanceBody(value) {
@@ -472,7 +472,7 @@ function publicArtifact(entry) {
     id: entry.id,
     kind: entry.kind,
     title: entry.title,
-    userId: entry.userId,
+    user: entry.user,
     description: entry.manifest.description ?? null,
     tags: entry.manifest.tags ?? [],
     exportFileName: exportFileName(entry),

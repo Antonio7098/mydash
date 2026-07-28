@@ -48,7 +48,7 @@ index is part of these contracts.
 
 ## Users
 
-Workspace and artefact schema version 2 require a kebab-case `userId`.
+Workspace and artefact schema version 2 require a kebab-case `user`.
 Artefact IDs remain globally unique; user scoping controls discovery and
 operations rather than creating a second identifier namespace. Reusable
 library resources remain global.

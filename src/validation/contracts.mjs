@@ -82,7 +82,7 @@ function validateWorkspace(value, add) {
   validateBase(value, add, 2);
   requireId(value.id, "$.id", add);
   requireString(value.name, "$.name", add);
-  requireId(value.userId, "$.userId", add);
+  requireId(value.user, "$.user", add);
 
   const requiredRoots = [
     "dashboards",
@@ -144,7 +144,7 @@ function validateArtifact(value, add) {
 
   requireId(value.id, "$.id", add);
   requireString(value.title, "$.title", add);
-  requireId(value.userId, "$.userId", add);
+  requireId(value.user, "$.user", add);
   requireRelativePath(value.entry, "$.entry", add);
 
   if (value.data !== undefined) {
@@ -383,7 +383,7 @@ function validateAsset(value, add) {
 
 function validateUserPreferences(value, add) {
   validateBase(value, add);
-  requireId(value.userId, "$.userId", add);
+  requireId(value.user, "$.user", add);
   validateReferenceArray(value.favourites, "$.favourites", add, true);
   validateReferenceArray(value.recent, "$.recent", add, true);
 

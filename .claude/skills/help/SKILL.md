@@ -95,6 +95,13 @@ canonical references, lifecycle ownership, source paths, props, variants,
 supported themes, dependencies and consumers. It does not automatically
 promote or edit shared resources.
 
+The Navigator shows content for the user in `config/workspace.json`. If someone
+needs to see another user's dashboards, presentations or concepts, update the
+workspace `user` to that existing user's kebab-case value, validate, and reload
+the page. Change only the workspace setting; do not rename or reassign the
+other user's artefacts. Shared UI resources remain visible to every user. This
+is organisational scoping, not sign-in or access control.
+
 Explain the three appearance scopes distinctly:
 
 - Preview only is temporary and encoded in the preview URL.
@@ -129,6 +136,24 @@ What happened
 Why it matters
 The next safe action
 ```
+
+## Capture recurring guidance
+
+After resolving confusion or a difficult setup/recovery problem, decide whether
+another nontechnical user is likely to encounter the same issue. If so, add the
+smallest durable insight to this `/help` skill in the relevant section.
+
+Only add guidance when the cause and safe resolution are understood. Keep it
+plain, general and action-oriented; say what the user should do and what they
+should see. Do not add conversation history, personal data, credentials,
+machine-specific paths, uncertain guesses or one-off project details. Reuse or
+correct existing guidance instead of creating a duplicate, and keep the skill
+concise. Validate the skill catalogue after changing it.
+
+This is the exception to the no-file-change rule above: a confirmed, likely
+recurring help insight may be maintained here without a separate content
+request. Do not use that exception to change application code, manifests,
+themes, artefacts or Git history.
 
 When investigation confirms a reproducible MyDash system bug, add or update its
 entry in `BUG_LOG.md`. When the bug is fixed, record its cause, resolution and

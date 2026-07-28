@@ -37,7 +37,7 @@ export const doctorCommand = {
     const data = {
       healthy: blocking.length === 0,
       workspaceRoot: workspace.root,
-      userId: workspace.userId,
+      user: workspace.user,
       checks,
       capabilities: deriveCapabilities(checks),
     };
@@ -134,7 +134,7 @@ function checkLibreOffice() {
 async function inspectWorkspace(startPath) {
   const checks = [];
   const warnings = [];
-  let userId = null;
+  let user = null;
   const root = await findWorkspaceRoot(startPath);
 
   if (!root) {
@@ -183,7 +183,7 @@ async function inspectWorkspace(startPath) {
 
   try {
     const config = await loadWorkspaceConfig(root);
-    userId = config.userId;
+    user = config.user;
     checks.push({
       id: "workspace-config",
       label: "Workspace configuration",
@@ -197,8 +197,8 @@ async function inspectWorkspace(startPath) {
       label: "Workspace user",
       required: true,
       status: "pass",
-      value: config.userId,
-      message: `Artifact commands are scoped to ${config.userId}.`,
+      value: config.user,
+      message: `Artifact commands are scoped to ${config.user}.`,
     });
   } catch (error) {
     checks.push({
@@ -288,7 +288,7 @@ async function inspectWorkspace(startPath) {
     });
   }
 
-  return { root, userId, checks, warnings };
+  return { root, user, checks, warnings };
 }
 
 function commandOutput(command, args, cwd) {

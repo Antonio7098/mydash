@@ -1,5 +1,5 @@
 ---
-name: "My Dashboard"
+name: "MyDash"
 description: "Routes My Dashboards requests to the correct repository workflow. Use when the user asks to create, inspect, update, share, export or understand a dashboard, presentation, concept, component, spreadsheet source, PowerPoint source or the My Dashboards app."
 argument-hint: "[request]"
 ---
@@ -63,7 +63,7 @@ access.
 ## Orient
 
 1. Run `npm run mydash -- git status --json`.
-2. Run `npm run mydash -- doctor --json` and confirm `data.userId`. Artefact
+2. Run `npm run mydash -- doctor --json` and confirm `data.user`. Artefact
    work and CLI discovery are scoped to this configured user unless the task
    explicitly requires the `--all-users` override.
 3. When an upstream exists and the worktree is clean, run `git pull --rebase`
@@ -83,10 +83,26 @@ Load the specialised skill that best matches the work:
 - `/dashboard` — dashboard artefacts
 - `/presentation` — presentation artefacts
 - `/concept` — lightweight concepts and prototypes
-- `/component` — primitives, components, layouts, themes, presets or assets
+- `/component` — select, create, change or promote any primitive, component,
+  layout, theme, preset or asset
 - `/hsbc-visual-standards` — visual language and accessibility
 
 Several skills may apply. Use the smallest combination that covers the task.
+
+## Resources and manifests
+
+Every primitive, component, layout, theme, preset and asset is a filesystem
+resource, not just an implementation file. Each resource must live in the
+correct Local, Collection or Core directory and include the manifest required
+for its kind (`ui.json`, `theme.json`, `preset.json` or `asset.json`). Without
+that manifest, the resource is incomplete, undiscoverable and must not be
+reported as created.
+
+Load `/component` before selecting, creating, changing, moving or promoting any
+resource. That skill owns classification, placement, manifest contracts,
+dependency references, lifecycle scope, asset handling, impact review and
+resource validation. Mention this rule lightly when delegating artefact work;
+do not duplicate the full component workflow here.
 
 ## Rules
 
@@ -104,9 +120,13 @@ shared dependencies through manifests, exports as one standalone HTML file,
 works through `file://`, passes validation and has no server dependency at
 viewing time.
 
-Schema-version-2 artefact manifests declare a kebab-case `userId`. Artefact
-discovery defaults to the workspace user; the Navigator may switch users
-without changing workspace configuration. Reusable UI resources remain global.
+Schema-version-2 artefact manifests declare a kebab-case `user`. The Navigator
+shows only artefacts belonging to the user configured in
+`config/workspace.json`; it does not switch users independently. To view
+another user's content in the UI, change only the workspace `user` to that
+existing artefact user, validate, and reload the Navigator. Do not rewrite
+artefact manifests merely to switch the view. Reusable UI resources remain
+global. This scope is organisation, not authentication.
 
 Standalone exports may include local HTML, CSS and CSS imports, JavaScript
 modules, JSON and tabular data, images, fonts and approved media, but no
@@ -118,6 +138,11 @@ Use the lifecycle `Local → Collection → Core`: Local is the default; Collect
 requires a second real consumer in one domain; Core requires broad, stable,
 cross-domain reuse. Demote shared resources when the evidence no longer
 supports their scope.
+
+When user confusion reveals a confirmed solution that is likely to recur for
+other nontechnical users, add the smallest reusable guidance to `/help`.
+Exclude personal data, machine-specific paths, uncertain advice and one-off
+details, then validate the skill catalogue.
 
 ## Appearance scopes
 

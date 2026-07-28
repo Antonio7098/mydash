@@ -6,9 +6,12 @@ argument-hint: "[concept request]"
 
 Treat `$ARGUMENTS` as the concept to explore.
 
-Inspect Git state, the configured `userId`, relevant sources and the filesystem
+Inspect Git state, the configured `user`, relevant sources and the filesystem
 library before editing. Preserve unrelated work. Consult
 `docs/cli-reference.md` only for exact command syntax.
+
+Load `/component` before selecting, creating or changing any primitive,
+component, layout, theme, preset or asset, including concept-local resources.
 
 ## Principles
 
@@ -37,6 +40,13 @@ Use a schema-version-2 manifest and create only the `src/`, `data/`, `assets/`,
 declare `level: local`, the containing `ownerArtifact`, a matching directory ID
 and stable semantic slots. The final export must have no external load-time
 dependencies.
+
+The artefact manifest is `artifact.json`. Every resource also requires its own
+kind-specific manifest: `ui.json` for primitives, components and layouts,
+`theme.json` for themes, `preset.json` for presets and `asset.json` for assets.
+An implementation without its manifest is incomplete and undiscoverable.
+Follow `/component` for placement, required fields, dependencies and
+validation.
 
 ## Completion
 

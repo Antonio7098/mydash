@@ -3,7 +3,7 @@
   "kind": "presentation",
   "id": "transformation-roadmap",
   "title": "Transformation Roadmap",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "A phased view of change from discovery through scale.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

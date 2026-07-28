@@ -120,7 +120,7 @@ async function runInspect(args, workspaceRoot) {
         id: artifact.id,
         kind: artifact.kind,
         title: artifact.title,
-        userId: artifact.userId,
+        user: artifact.user,
         entry: artifact.manifest.entry,
         displayPath: artifact.displayPath,
       },
@@ -130,7 +130,7 @@ async function runInspect(args, workspaceRoot) {
     text: [
       `${artifact.kind}:${artifact.id}`,
       `Title: ${artifact.title}`,
-      `User: ${artifact.userId}`,
+      `User: ${artifact.user}`,
       `Entry: ${artifact.manifest.entry}`,
       `Appearance valid: ${resolution.summary.valid ? "yes" : "no"}`,
       `Resolved dependencies: ${resolution.summary.dependencyCount}`,
@@ -302,7 +302,7 @@ async function loadResolvedArtifact(
     scan,
     artifactId,
     kind,
-    allUsers ? null : scan.config.userId,
+    allUsers ? null : scan.config.user,
   );
   const resolution = resolveArtifactAppearance(scan, artifact);
 

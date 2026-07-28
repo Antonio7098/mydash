@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "kind": "dashboard",
   "id": "broken-dashboard",
-  "userId": "antonio",
+  "user": "antonio",
   "entry": "src/index.html",
   "appearance": {
     "theme": null,

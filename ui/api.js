@@ -14,9 +14,9 @@ export async function loadNavigatorSnapshot(
   options = {},
 ) {
   const signal = options.signal;
-  const artifactsPath = withUserId(
+  const artifactsPath = withUser(
     "/api/artifacts",
-    options.userId,
+    options.user,
   );
 
   const [
@@ -49,9 +49,9 @@ export async function loadNavigatorSnapshot(
   return {
     health,
     users,
-    selectedUserId:
-      artefacts.userId ??
-      users.currentUserId,
+    selectedUser:
+      artefacts.user ??
+      users.currentUser,
     artefacts:
       artefacts.artifacts ?? [],
     library:
@@ -82,7 +82,7 @@ export async function loadArtifactViewerData(
     `/api/artifacts/${encodeURIComponent(
       kind,
     )}/${encodeURIComponent(id)}`;
-  const scopedBase = withUserId(base, options.userId);
+  const scopedBase = withUser(base, options.user);
   const [
     detail,
     exportStatus,
@@ -91,7 +91,7 @@ export async function loadArtifactViewerData(
       signal: options.signal,
     }),
     getJson(
-      withUserId(`${base}/export-status`, options.userId),
+      withUser(`${base}/export-status`, options.user),
       {
         signal: options.signal,
       },
@@ -113,9 +113,9 @@ export async function loadAppearanceOptions(
   options = {},
 ) {
   return getJson(
-    withUserId(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
+    withUser(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
       id,
-    )}/appearance-options`, options.userId),
+    )}/appearance-options`, options.user),
     { signal: options.signal },
   );
 }
@@ -127,9 +127,9 @@ export async function saveArtifactAppearance(
   options = {},
 ) {
   return sendJson(
-    withUserId(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
+    withUser(`/api/artifacts/${encodeURIComponent(kind)}/${encodeURIComponent(
       id,
-    )}/appearance`, options.userId),
+    )}/appearance`, options.user),
     {
       method: "PUT",
       body: payload,
@@ -271,9 +271,9 @@ export function clearApiCache() {
   responseCache.clear();
 }
 
-function withUserId(path, userId) {
-  if (!userId) return path;
+function withUser(path, user) {
+  if (!user) return path;
   return `${path}${
     path.includes("?") ? "&" : "?"
-  }userId=${encodeURIComponent(userId)}`;
+  }user=${encodeURIComponent(user)}`;
 }

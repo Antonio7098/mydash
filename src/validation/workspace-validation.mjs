@@ -35,13 +35,13 @@ export async function validateWorkspace(options) {
   const sourceReports = [];
   let config = null;
   let scan = null;
-  let userId = null;
+  let user = null;
 
   try {
     config = await loadWorkspaceConfig(
       options.workspaceRoot,
     );
-    userId = options.allUsers ? null : config.userId;
+    user = options.allUsers ? null : config.user;
     stages.workspace.status = "passed";
   } catch (error) {
     const issue = errorIssue(
@@ -62,7 +62,7 @@ export async function validateWorkspace(options) {
     );
     const libraryView = scopedLibraryView(scan, {
       allUsers: options.allUsers,
-      userId,
+      user,
     });
     const libraryIssues = libraryView.issues.map((issue) => ({
       stage: "library",
@@ -92,7 +92,7 @@ export async function validateWorkspace(options) {
   let artifacts = scan.entries.filter(
     (entry) =>
       entry.category === "artifact" &&
-      (!userId || entry.userId === userId),
+      (!user || entry.user === user),
   );
 
   if (options.artifactId) {
@@ -101,7 +101,7 @@ export async function validateWorkspace(options) {
         scan,
         options.artifactId,
         options.artifactKind,
-        userId,
+        user,
       ),
     ];
   }
@@ -111,7 +111,7 @@ export async function validateWorkspace(options) {
       id: artifact.id,
       kind: artifact.kind,
       title: artifact.title,
-      userId: artifact.userId,
+      user: artifact.user,
       displayPath: artifact.displayPath,
       appearance: null,
       export: {
@@ -360,13 +360,13 @@ export async function validateWorkspace(options) {
       workspace: {
         id: config?.id ?? null,
         name: config?.name ?? "Unknown workspace",
-        userId: config?.userId ?? null,
+        user: config?.user ?? null,
         root: options.workspaceRoot,
       },
       options: {
         artifactId: options.artifactId ?? null,
         artifactKind: options.artifactKind ?? null,
-        userId,
+        user,
         allUsers: options.allUsers ?? false,
         validateExports:
           options.validateExports !== false,

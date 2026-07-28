@@ -113,8 +113,8 @@ function titleCase(value) {
 }
 
 function withArtifactUser(path, artifact) {
-  if (!artifact.userId) return path;
+  if (!artifact.user) return path;
   return `${path}${
     path.includes("?") ? "&" : "?"
-  }userId=${encodeURIComponent(artifact.userId)}`;
+  }user=${encodeURIComponent(artifact.user)}`;
 }

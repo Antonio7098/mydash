@@ -41,9 +41,9 @@ test("artifact APIs scope by user while library resources stay global", async ()
       );
 
       const users = await json(`${baseUrl}/api/users`);
-      assert.equal(users.data.currentUserId, "test-user");
+      assert.equal(users.data.currentUser, "test-user");
       assert.deepEqual(
-        users.data.userIds,
+        users.data.users,
         ["other-user", "test-user"],
       );
 
@@ -54,14 +54,14 @@ test("artifact APIs scope by user while library resources stay global", async ()
       );
 
       const other = await json(
-        `${baseUrl}/api/artifacts?userId=other-user`,
+        `${baseUrl}/api/artifacts?user=other-user`,
       );
       assert.deepEqual(
         other.data.artifacts.map((artifact) => artifact.id),
         ["other-dashboard"],
       );
       assert.equal(
-        other.data.artifacts[0].userId,
+        other.data.artifacts[0].user,
         "other-user",
       );
 
@@ -71,13 +71,13 @@ test("artifact APIs scope by user while library resources stay global", async ()
       assert.equal(hidden.status, 404);
 
       const visible = await fetch(
-        `${baseUrl}/api/artifacts/dashboard/other-dashboard?userId=other-user`,
+        `${baseUrl}/api/artifacts/dashboard/other-dashboard?user=other-user`,
       );
       assert.equal(visible.status, 200);
 
       const defaultLibrary = await json(`${baseUrl}/api/library`);
       const otherLibrary = await json(
-        `${baseUrl}/api/library?userId=other-user`,
+        `${baseUrl}/api/library?user=other-user`,
       );
       assert.deepEqual(
         resourceIds(defaultLibrary),
@@ -107,7 +107,7 @@ async function addOtherUserArtifact(root) {
       kind: "dashboard",
       id: "other-dashboard",
       title: "Other Dashboard",
-      userId: "other-user",
+      user: "other-user",
       entry: "src/index.html",
       appearance: {
         theme: "hsbc-light",

@@ -814,14 +814,14 @@ function buildSchemas() {
       additionalProperties: false,
       required: [
         "schemaVersion",
-        "userId",
+        "user",
         "favourites",
         "recent",
         "appearance"
       ],
       properties: {
         schemaVersion: { const: 1 },
-        userId: { $ref: "common.schema.json#/$defs/id" },
+        user: { $ref: "common.schema.json#/$defs/id" },
         favourites: {
           type: "array",
           uniqueItems: true,
@@ -1098,7 +1098,7 @@ function buildFixtures() {
 
     "valid/user-preferences.json": {
       schemaVersion: 1,
-      userId: "antonio",
+      user: "antonio",
       favourites: ["use-case-pipeline"],
       recent: ["agent-hub-proposal", "use-case-pipeline"],
       appearance: {
@@ -1587,7 +1587,7 @@ function validateAsset(value, add) {
 
 function validateUserPreferences(value, add) {
   validateBase(value, add);
-  requireId(value.userId, "$.userId", add);
+  requireId(value.user, "$.user", add);
   validateReferenceArray(value.favourites, "$.favourites", add, true);
   validateReferenceArray(value.recent, "$.recent", add, true);
 

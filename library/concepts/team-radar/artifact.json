@@ -3,7 +3,7 @@
   "kind": "concept",
   "id": "team-radar",
   "title": "Team Radar",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "An exploratory view of team health, capability and focus.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

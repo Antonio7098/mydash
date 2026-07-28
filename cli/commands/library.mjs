@@ -175,7 +175,7 @@ async function runInspect(args, workspaceRoot) {
     (consumer) =>
       parsed.options.allUsers ||
       consumer.source.category !== "artifact" ||
-      consumer.source.userId === scan.config.userId,
+      consumer.source.user === scan.config.user,
   );
 
   return {
@@ -273,7 +273,7 @@ async function runConsumers(args, workspaceRoot) {
     (consumer) =>
       parsed.options.allUsers ||
       consumer.source.category !== "artifact" ||
-      consumer.source.userId === scan.config.userId,
+      consumer.source.user === scan.config.user,
   );
 
   return {
@@ -334,7 +334,7 @@ function requireUniqueEntry(entries, id, kind) {
 function serialiseScan(scan, view) {
   return {
     workspaceRoot: scan.workspaceRoot,
-    userId: scan.config.userId,
+    user: scan.config.user,
     allUsers:
       view.entries === scan.entries,
     summary: view.summary,
@@ -351,7 +351,7 @@ function publicEntry(entry, includeManifest = false) {
     title: entry.title,
     level: entry.level,
     collection: entry.collection,
-    userId: entry.userId,
+    user: entry.user,
     displayPath: entry.displayPath,
     manifestPath: entry.manifestPath,
     ...(includeManifest ? { manifest: entry.manifest } : {}),

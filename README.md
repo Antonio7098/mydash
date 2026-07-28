@@ -34,6 +34,7 @@ npm run smoke
 ## Documentation
 
 - [Getting started](docs/getting-started.md)
+- [Set up and migrate with Claude Code](docs/setup.md)
 - [Artefacts](docs/artefacts.md)
 - [UI library](docs/ui-library.md)
 - [Appearance](docs/appearance.md)

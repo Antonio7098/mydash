@@ -15,8 +15,10 @@ metadata. Revision-aware GET responses use `ETag` and accept
 `X-MyDash-Revision`. Errors use an HTTP status plus a machine-readable error
 code and message.
 
-Most artefact endpoints accept `userId=<kebab-case-id>` and otherwise use
-`config/workspace.json`. Build endpoints accept:
+Most artefact endpoints accept `user=<kebab-case-user>` for trusted local
+tooling and otherwise use `config/workspace.json`. The Navigator itself always
+uses the configured workspace user; viewing another user in the UI requires a
+workspace configuration change. Build endpoints accept:
 
 - `minify=true|false`
 - `maxBytes=<integer>` from 1 KiB through 200 MiB

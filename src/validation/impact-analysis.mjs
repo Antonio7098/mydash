@@ -320,7 +320,7 @@ function publicEntry(entry) {
     level: entry.level,
     collection: entry.collection,
     ownerArtifact: entry.ownerArtifact,
-    userId: entry.userId,
+    user: entry.user,
     displayPath: entry.displayPath,
     manifestPath: entry.manifestPath,
   };

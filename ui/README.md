@@ -3,10 +3,11 @@
 The navigator is a lightweight browser interface over the repository and HTTP
 services. It does not maintain a separate database or artefact index.
 
-The top-bar user selector scopes artifact galleries, viewers, previews,
-downloads and appearance changes. It defaults to the workspace `userId` and
-persists the selected user in the URL and browser storage. The visual component
-library remains global.
+Artifact galleries, viewers, previews, downloads and appearance changes are
+scoped to the `user` in `config/workspace.json`. The Navigator has no separate
+user switcher. To see another existing user's content, update that workspace
+setting, validate and reload; do not reassign the artefacts. The visual
+component library remains global.
 
 ## Start
 

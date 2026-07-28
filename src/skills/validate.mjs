@@ -9,7 +9,7 @@ import {
 } from "./discover.mjs";
 
 export const LOGICAL_SKILLS = [
-  "my-dashboard",
+  "mydash",
   "help",
   "spreadsheet",
   "powerpoint",
@@ -31,13 +31,18 @@ const SUPPORTING_FILES = [
 ];
 
 const CONTENT_RULES = {
-  "my-dashboard": [
+  mydash: [
     "Do not maintain an artefact index",
     "mydash git checkpoint",
-    "data.userId",
+    "data.user",
+    "Every primitive, component, layout, theme, preset and asset",
+    "Load `/component`",
+    "shows only artefacts belonging to the user configured",
   ],
   help: [
     "nontechnical",
+    "Capture recurring guidance",
+    "Navigator shows content for the user",
   ],
   "mydash-help": [
     ".claude/skills/help/SKILL.md",
@@ -53,19 +58,24 @@ const CONTENT_RULES = {
   dashboard: [
     "kind dashboard",
     "mydash git checkpoint",
+    "An implementation without its manifest",
   ],
   presentation: [
     "kind presentation",
     "mydash git checkpoint",
+    "An implementation without its manifest",
   ],
   concept: [
     "Local",
     "mydash git checkpoint",
+    "An implementation without its manifest",
   ],
   component: [
     "Local → Collection → Core",
     "mydash impact",
     "--acknowledge-impact",
+    "implementation without its manifest is not a resource",
+    "library diagnostics",
   ],
   "hsbc-visual-standards": [
     "Do not claim official brand approval",

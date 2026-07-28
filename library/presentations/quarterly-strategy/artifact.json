@@ -3,7 +3,7 @@
   "kind": "presentation",
   "id": "quarterly-strategy",
   "title": "Quarterly Strategy",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Priorities, choices and measures for the next quarter.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

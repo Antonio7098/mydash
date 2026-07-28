@@ -108,7 +108,7 @@ export function activateAppearanceControls(root, options) {
 
   loadAppearanceOptions(artifact.kind, artifact.id, {
     signal: controller.signal,
-    userId: artifact.userId,
+    user: artifact.user,
   })
     .then((data) => {
       if (disposed) return;
@@ -227,7 +227,7 @@ export function activateAppearanceControls(root, options) {
           expectedRevision: options.revisionId,
         },
         {
-          userId: artifact.userId,
+          user: artifact.user,
         },
       );
       baseline = normaliseBrowserAppearance(result.appearance);

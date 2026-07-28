@@ -515,7 +515,7 @@ operations should be delegated to the \`mydash\` CLI.
 
 Planned skills:
 
-- \`/my-dashboard\`
+- \`/mydash\`
 - \`/help\`
 - \`/spreadsheet\`
 - \`/powerpoint\`
@@ -525,7 +525,7 @@ Planned skills:
 - \`/component\`
 - \`/hsbc-visual-standards\`
 
-\`/my-dashboard\` indexes and explains these skills. It does not maintain an
+\`/mydash\` indexes and explains these skills. It does not maintain an
 index of artefacts. Exact CLI and HTTP contracts are installed as
 \`docs/cli-reference.md\` and \`docs/api-reference.md\`.
 `,

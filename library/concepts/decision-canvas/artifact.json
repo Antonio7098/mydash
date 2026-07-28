@@ -3,7 +3,7 @@
   "kind": "concept",
   "id": "decision-canvas",
   "title": "Decision Canvas",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "A lightweight structure for turning evidence into action.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

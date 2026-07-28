@@ -189,7 +189,7 @@ export function resolveAllArtifactAppearances(scan, options = {}) {
   const artifacts = scan.entries.filter(
     (entry) =>
       entry.category === "artifact" &&
-      (!options.userId || entry.userId === options.userId),
+      (!options.user || entry.user === options.user),
   );
   const results = artifacts.map((artifact) =>
     resolveArtifactAppearance(scan, artifact),
@@ -599,7 +599,7 @@ function publicEntry(entry) {
     level: entry.level,
     collection: entry.collection,
     ownerArtifact: entry.ownerArtifact,
-    userId: entry.userId,
+    user: entry.user,
     contractVersion:
       entry.manifest.contractVersion ?? null,
     slot: entry.manifest.slot ?? null,

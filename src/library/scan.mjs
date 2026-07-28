@@ -328,9 +328,9 @@ async function readManifestEntry(context) {
     level: manifest.level ?? null,
     collection: manifest.collection ?? null,
     ownerArtifact: manifest.ownerArtifact ?? null,
-    userId:
+    user:
       context.spec.category === "artifact"
-        ? manifest.userId ?? null
+        ? manifest.user ?? null
         : null,
     rootKey: context.spec.rootKey,
     rootPath: context.rootPath,

@@ -3,7 +3,7 @@
   "kind": "dashboard",
   "id": "portfolio-overview",
   "title": "Portfolio Overview",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Development sample for testing the dashboard gallery layout.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

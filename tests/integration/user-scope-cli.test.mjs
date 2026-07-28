@@ -57,7 +57,7 @@ test("CLI defaults to config user and supports --all-users", async () => {
     ]);
     assert.equal(globalArtifact.status, 0, globalArtifact.stderr);
     assert.equal(
-      JSON.parse(globalArtifact.stdout).data.artifact.userId,
+      JSON.parse(globalArtifact.stdout).data.artifact.user,
       "other-user",
     );
 
@@ -120,7 +120,7 @@ async function addOtherUserArtifact(root) {
       kind: "dashboard",
       id: "other-dashboard",
       title: "Other Dashboard",
-      userId: "other-user",
+      user: "other-user",
       entry: "src/index.html",
       appearance: {
         theme: "hsbc-light",

@@ -3,7 +3,7 @@
   "kind": "presentation",
   "id": "agent-hub-proposal",
   "title": "Agent Hub Proposal",
-  "userId": "antonio",
+  "user": "antonio",
   "entry": "src/index.html",
   "appearance": {
     "theme": "hsbc-light",

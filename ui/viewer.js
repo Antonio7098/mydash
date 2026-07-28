@@ -589,7 +589,7 @@ export function activateArtifactViewer(
     {
       signal:
         controller.signal,
-      userId: artifact.userId,
+      user: artifact.user,
     },
   )
     .then((data) => {
@@ -772,7 +772,7 @@ function renderViewerDetails(
         ],
         [
           "User",
-          artifact.userId ??
+          artifact.user ??
             "Unavailable",
         ],
         [

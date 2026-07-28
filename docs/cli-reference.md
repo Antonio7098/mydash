@@ -14,7 +14,7 @@ Use `--json` whenever a decision depends on command output. Most commands also
 accept `--workspace <path>`; source-reading commands accept `--allow-outside`
 only for explicit, read-only access beyond that workspace.
 
-Artefact-aware commands default to `userId` in `config/workspace.json`. Add
+Artefact-aware commands default to `user` in `config/workspace.json`. Add
 `--all-users` only when the requested operation must span the whole workspace.
 Reusable resources and impact analysis remain global.
 

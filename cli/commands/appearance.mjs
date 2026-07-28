@@ -85,7 +85,7 @@ async function runResolve(args, workspaceRoot) {
     scan,
     parsed.positionals[0],
     parsed.options.kind,
-    parsed.options.allUsers ? null : scan.config.userId,
+    parsed.options.allUsers ? null : scan.config.user,
   );
   const data = resolveArtifactAppearance(scan, artifact);
 
@@ -118,9 +118,9 @@ async function runValidate(args, workspaceRoot) {
 
   const scan = await scanWorkspaceLibrary(workspaceRoot);
   const data = resolveAllArtifactAppearances(scan, {
-    userId: parsed.options.allUsers
+    user: parsed.options.allUsers
       ? null
-      : scan.config.userId,
+      : scan.config.user,
   });
   const valid = data.summary.invalidArtifactCount === 0;
 

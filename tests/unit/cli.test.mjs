@@ -62,5 +62,5 @@ test("doctor recognises the repository workspace", () => {
   assert.equal(body.command, "doctor");
   assert.equal(body.data.healthy, true);
   assert.equal(body.data.workspaceRoot, projectRoot);
-  assert.equal(body.data.userId, "antonio");
+  assert.equal(body.data.user, "antonio");
 });

@@ -36,10 +36,13 @@ Only create directories the artefact needs. Local resource manifests declare
 `level: local` and the containing `ownerArtifact`, live beneath that artefact,
 use a directory matching their ID and preserve semantic slot contracts.
 
-Each schema-version-2 manifest declares a kebab-case `userId`. Artifact-aware
-CLI commands use the workspace `userId` by default; pass `--all-users` for an
-explicit workspace-wide operation. The Navigator can switch users without
-changing configuration, while reusable components remain global.
+Each schema-version-2 manifest declares a kebab-case `user`. Artifact-aware
+CLI commands use the workspace `user` by default; pass `--all-users` for an
+explicit workspace-wide operation. The Navigator shows only the configured
+workspace user's artefacts. To see another user's content in the UI, change
+`user` in `config/workspace.json` to that existing user, validate and reload.
+Do not change artefact manifests just to switch the view. Reusable resources
+remain global. User scoping is organisational and is not authentication.
 
 Use the CLI to inspect, validate and export:
 

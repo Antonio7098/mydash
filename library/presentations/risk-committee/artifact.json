@@ -3,7 +3,7 @@
   "kind": "presentation",
   "id": "risk-committee",
   "title": "Risk Committee Briefing",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Key risks, controls and decisions for committee review.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

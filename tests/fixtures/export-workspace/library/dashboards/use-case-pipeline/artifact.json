@@ -3,7 +3,7 @@
   "kind": "dashboard",
   "id": "use-case-pipeline",
   "title": "Use Case Pipeline",
-  "userId": "test-user",
+  "user": "test-user",
   "entry": "src/index.html",
   "appearance": {
     "theme": "hsbc-light",

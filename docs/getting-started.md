@@ -1,9 +1,17 @@
 # Getting started
 
+This guide is for first-time users, including people who already have
+dashboards elsewhere on their computer. Claude Code can complete the technical
+steps for you.
+
+For the complete copy-and-paste setup and migration process, follow
+[Set up MyDash with Claude Code](setup.md).
+
 ## Requirements
 
 - Node.js 20 or later
 - npm
+- Claude Code
 - Git is recommended, but not required for browsing, previewing or exporting
 
 ## Windows work laptop

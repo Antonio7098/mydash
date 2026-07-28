@@ -43,9 +43,11 @@ POST /api/validation
 GET  /api/git/status
 ```
 
-Artifact routes accept `?userId=<id>` and default to the configured workspace
-user. `/api/users` derives available IDs from artifact manifests; it is a
-scoping aid, not an authentication endpoint. Library resources remain global.
+Artifact routes accept `?user=<user>` for trusted local tooling and default to
+the configured workspace user. The Navigator does not expose this override; it
+uses `config/workspace.json`. `/api/users` derives available users from artifact
+manifests; it is a scoping aid, not an authentication endpoint. Library
+resources remain global.
 
 The server is deliberately read-only at this stage. Preview and validation
 builds happen in memory. It does not expose file writes, recipe refreshes,

@@ -9,7 +9,7 @@
     "kind",
     "id",
     "title",
-    "userId",
+    "user",
     "entry",
     "appearance"
   ],
@@ -32,7 +32,7 @@
       "type": "string",
       "minLength": 1
     },
-    "userId": {
+    "user": {
       "$ref": "common.schema.json#/$defs/id"
     },
     "description": {

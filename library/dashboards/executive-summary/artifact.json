@@ -3,7 +3,7 @@
   "kind": "dashboard",
   "id": "executive-summary",
   "title": "Executive Summary",
-  "userId": "antonio",
+  "user": "antonio",
   "description": "Development sample for testing the dashboard gallery layout.",
   "owner": "My Dashboards",
   "entry": "src/index.html",

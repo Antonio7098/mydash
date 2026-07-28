@@ -6,12 +6,13 @@ argument-hint: "[presentation request]"
 
 Treat `$ARGUMENTS` as the presentation outcome.
 
-Inspect Git state, the configured `userId`, relevant sources and the filesystem
+Inspect Git state, the configured `user`, relevant sources and the filesystem
 library before editing. Preserve unrelated work. Consult
 `docs/cli-reference.md` only for exact command syntax.
 
 Load `/powerpoint` when working from a source deck. Load `/component` before
-creating or changing reusable slide UI.
+selecting, creating or changing any primitive, component, layout, theme, preset
+or asset, including presentation-local resources.
 
 ## Narrative first
 
@@ -42,12 +43,19 @@ Do not mechanically reproduce every source slide. Rebuild the story for the
 requested purpose.
 
 Create presentations under `library/presentations/<id>/`. The
-schema-version-2 `artifact.json` declares the workspace `userId`; optional
+schema-version-2 `artifact.json` declares the workspace `user`; optional
 `owner` is descriptive metadata. Create only needed `src/`, `data/`, `assets/`,
 `recipes/`, `ui/` and `theme/` directories. Local resources declare
 `level: local`, the containing `ownerArtifact`, a matching directory ID and
 stable semantic slots. The final export must have no external load-time
 dependencies.
+
+The artefact manifest is `artifact.json`. Every resource also requires its own
+kind-specific manifest: `ui.json` for primitives, components and layouts,
+`theme.json` for themes, `preset.json` for presets and `asset.json` for assets.
+An implementation without its manifest is incomplete and undiscoverable.
+Follow `/component` for placement, required fields, dependencies and
+validation.
 
 ## Verify
 

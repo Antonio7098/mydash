@@ -8,7 +8,7 @@
     "schemaVersion",
     "id",
     "name",
-    "userId",
+    "user",
     "libraryRoots",
     "defaults",
     "preview",
@@ -25,7 +25,7 @@
       "type": "string",
       "minLength": 1
     },
-    "userId": {
+    "user": {
       "$ref": "common.schema.json#/$defs/id"
     },
     "libraryRoots": {

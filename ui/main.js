@@ -90,7 +90,7 @@ initialise().catch(
 );
 
 async function initialise() {
-  removeLegacyUserScopeFromUrl();
+  removeUserScopeFromUrl();
   bindNavigation();
   syncThemeControl();
   restoreNavigationState();
@@ -101,17 +101,15 @@ async function initialise() {
   connectRevisionEvents();
 }
 
-function removeLegacyUserScopeFromUrl() {
+function removeUserScopeFromUrl() {
   const url =
     new URL(window.location.href);
   const hadUser =
-    url.searchParams.has("user") ||
-    url.searchParams.has("userId");
+    url.searchParams.has("user");
 
   if (!hadUser) return;
 
   url.searchParams.delete("user");
-  url.searchParams.delete("userId");
   window.history.replaceState(
     {},
     "",

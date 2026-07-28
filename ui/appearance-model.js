@@ -26,7 +26,7 @@ export function withAppearanceQuery(path, appearance) {
 }
 
 export function personalAppearanceKey(artifact) {
-  return `${PREFIX}:${artifact.userId ?? "global"}:${artifact.kind}:${artifact.id}`;
+  return `${PREFIX}:${artifact.user ?? "global"}:${artifact.kind}:${artifact.id}`;
 }
 
 export function readPersonalAppearance(storage, artifact) {

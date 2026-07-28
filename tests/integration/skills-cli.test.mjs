@@ -51,7 +51,7 @@ test("skills list exposes the active project commands", () => {
   assert.equal(
     body.data.entries.some(
       (entry) =>
-        entry.command === "my-dashboard",
+        entry.command === "mydash",
     ),
     true,
   );

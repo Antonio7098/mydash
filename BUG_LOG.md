@@ -36,6 +36,32 @@ Add the newest entry first.
 Omit fields that genuinely do not apply. Update an existing open bug entry when
 it is fixed instead of creating a disconnected duplicate.
 
+## 2026-07-28 — Primary agent skill renamed to `/mydash`
+
+- Type: System change
+- Status: Complete
+- Area: CLI, Validation, Workspace
+- Summary: Renamed the repository-wide agent skill from `/my-dashboard` to
+  `/mydash`, documented a global linked installation for Claude Code and
+  strengthened reusable-resource and recurring-help guidance.
+- Resolution: The embedded skill, catalogue validation, integration coverage
+  and retained bootstrap references now use `mydash`. A non-technical setup
+  guide covers installation, user configuration and safe dashboard
+  migration. `/mydash` now makes resource manifests and `/component` routing
+  explicit; `/component` defines the full authoring and promotion workflow; and
+  `/help` retains confirmed guidance for recurring nontechnical problems.
+  Dashboard, presentation and concept workflows now apply the same manifest
+  rule to artefact-local resources. Workspace and artefact ownership now use
+  the exact field `user`; the Navigator is explicitly scoped to the configured
+  workspace user.
+- Validation: Skill catalogue validation, focused unit and integration tests,
+  source integrity checks and consolidated workspace validation passed.
+- References: `.claude/skills/mydash/SKILL.md`,
+  `.claude/skills/component/SKILL.md`, `.claude/skills/help/SKILL.md`,
+  `.claude/skills/dashboard/SKILL.md`,
+  `.claude/skills/presentation/SKILL.md`, `.claude/skills/concept/SKILL.md`,
+  `src/skills/validate.mjs`, `docs/setup.md`
+
 ## 2026-07-28 — Snapshot-based artefact data refresh
 
 - Type: System change
