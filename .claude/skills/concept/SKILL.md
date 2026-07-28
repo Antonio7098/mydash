@@ -41,6 +41,12 @@ declare `level: local`, the containing `ownerArtifact`, a matching directory ID
 and stable semantic slots. The final export must have no external load-time
 dependencies.
 
+Before creating or updating `artifact.json`, read the configured user from
+`data.user` returned by `npm run mydash -- doctor --json` and set its `user`
+field to that exact value. Do not infer it from the person's display name,
+conversation, Git identity or optional `owner` metadata. If no configured user
+exists, stop and ask the user to configure one.
+
 The artefact manifest is `artifact.json`. Every resource also requires its own
 kind-specific manifest: `ui.json` for primitives, components and layouts,
 `theme.json` for themes, `preset.json` for presets and `asset.json` for assets.

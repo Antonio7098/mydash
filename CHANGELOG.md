@@ -17,6 +17,7 @@
 - Nontechnical setup and existing-dashboard migration guide for Claude Code
 - Global `/mydash` skill linked to the repository workflow
 - Workspace and artefact scoping through the `user` configuration field
+- Explicit artefact-manifest user assignment from the configured workspace user
 - Explicit resource-manifest rules across dashboard, presentation and concept
   workflows
 - Expanded component lifecycle, authoring, asset and validation guidance

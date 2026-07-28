@@ -36,6 +36,24 @@ Add the newest entry first.
 Omit fields that genuinely do not apply. Update an existing open bug entry when
 it is fixed instead of creating a disconnected duplicate.
 
+## 2026-07-28 — Artefact skills use the configured manifest user
+
+- Type: System change
+- Status: Complete
+- Area: Workspace
+- Summary: Made artefact ownership assignment explicit across the MyDash,
+  dashboard, presentation and concept skills.
+- Resolution: Agents now read `data.user` from `mydash doctor --json` and copy
+  that exact value to `artifact.json.user`. They must not infer it from a
+  display name, conversation, Git identity or optional `owner` metadata, and
+  must stop for configuration when the workspace user is absent. Resource
+  manifests remain global and do not receive the artefact `user` field.
+- Validation: Skill catalogue validation and consolidated workspace validation.
+- References: `.claude/skills/mydash/SKILL.md`,
+  `.claude/skills/dashboard/SKILL.md`,
+  `.claude/skills/presentation/SKILL.md`, `.claude/skills/concept/SKILL.md`,
+  `CHANGELOG.md`
+
 ## 2026-07-28 — Changelog required for core-system changes
 
 - Type: System change

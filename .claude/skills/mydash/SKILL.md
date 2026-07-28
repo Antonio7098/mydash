@@ -128,6 +128,14 @@ existing artefact user, validate, and reload the Navigator. Do not rewrite
 artefact manifests merely to switch the view. Reusable UI resources remain
 global. This scope is organisation, not authentication.
 
+Before creating or updating an artefact manifest, read the configured user from
+`data.user` returned by `npm run mydash -- doctor --json`. Set
+`artifact.json.user` to that exact value. Do not infer it from the person's
+display name, conversation, Git identity or optional `owner` metadata. If no
+configured user exists, stop and ask the user to configure one. Resource
+manifests (`ui.json`, `theme.json`, `preset.json` and `asset.json`) do not carry
+this artefact `user` field.
+
 Standalone exports may include local HTML, CSS and CSS imports, JavaScript
 modules, JSON and tabular data, images, fonts and approved media, but no
 external load-time dependencies. Prefer deterministic extracted data over
