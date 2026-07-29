@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- TypeScript migration: `src/`, `cli/`, `server/`, `bin/`, and `tests/` now ship as TypeScript and compile to `dist/` (and `build-test/` for tests) via `tsc`. The `bin` field in `package.json` points at the built `dist/cli/index.js`; the launcher `bin/mydash.mjs` is a thin wrapper that resolves it.
+- New npm scripts: `npm run typecheck`, `npm run build`, `npm run build:test`, `npm run clean`. `npm test` now compiles tests to `build-test/tests/` and runs them via `node --test`.
+- Strict TypeScript flags enabled: `strict`, `noUncheckedIndexedAccess`, and `useUnknownInCatchVariables`. `exactOptionalPropertyTypes` and `verbatimModuleSyntax` remain disabled for now because the existing JS-style ergonomics pass `undefined` to optional fields; both are deferred to a follow-up release.
+- Bootstrap scripts are now historical: `scripts/00-` through `scripts/23-` refuse to overwrite TypeScript application directories (`src/`, `cli/`, `server/`, `tests/`, `bin/`, `dist/`). Any attempt records a `BOOTSTRAP_TYPE_SCRIPT_GUARD` warning instead of writing.
+
 ## 0.1.0
 
 - Filesystem-discovered artefact and UI library

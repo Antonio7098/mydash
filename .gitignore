@@ -3,6 +3,7 @@ node_modules/
 
 # Generated outputs
 dist/
+build-test/
 exports/
 coverage/
 

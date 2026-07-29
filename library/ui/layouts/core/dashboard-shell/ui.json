@@ -23,5 +23,18 @@
   },
   "supportedThemes": [
     "hsbc-light"
-  ]
+  ],
+  "dependencies": {
+    "primitives": {
+      "button": "core/button",
+      "status": "core/status-badge"
+    },
+    "components": {
+      "metric-summary": "core/metric-card",
+      "section-heading": "core/section-heading"
+    },
+    "assets": {
+      "brand-logo": "core/mydash-brand-mark"
+    }
+  }
 }

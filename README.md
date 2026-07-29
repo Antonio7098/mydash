@@ -25,11 +25,17 @@ On Windows, `start-mydash.cmd` installs missing dependencies and starts the app.
 ## Verify
 
 ```bash
+npm run typecheck
+npm run build
 npm run check:source
 npm run validate
 npm test
 npm run smoke
 ```
+
+`npm test` compiles the TypeScript tests to `build-test/tests/` and runs them
+through `node --test`. `npm install --global .` installs the `mydash` command
+from `dist/cli/index.js` once `npm run build` has produced the compiled output.
 
 ## Documentation
 

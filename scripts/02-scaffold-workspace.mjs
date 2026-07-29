@@ -39,6 +39,17 @@ import process from "node:process";
 const SCRIPT_NAME = "02-scaffold-workspace";
 const COMMIT_MESSAGE = "Scaffold workspace directories";
 const MIN_NODE_MAJOR = 20;
+const TYPE_SCRIPT_GUARDED_PATHS = [
+  /^src\//,
+  /^cli\//,
+  /^server\//,
+  /^tests\//,
+  /^bin\//,
+  /^dist\//,
+];
+function isTypeScriptGuardedPath(relativePath) {
+  return TYPE_SCRIPT_GUARDED_PATHS.some((re) => re.test(relativePath));
+}
 
 const args = parseArgs(process.argv.slice(2));
 const targetRoot = resolve(args.target ?? process.cwd());
@@ -583,6 +594,16 @@ async function createFileIfAbsent(
   repoRoot,
 ) {
   const gitPath = relativeGitPath(repoRoot, absolutePath);
+
+  if (isTypeScriptGuardedPath(gitPath)) {
+    report.warnings.push({
+      severity: "warning",
+      code: "BOOTSTRAP_TYPE_SCRIPT_GUARD",
+      message: `Skipped writing ${gitPath} because TypeScript application directories are no longer bootstrap-managed.`,
+    });
+    return "preserved";
+  }
+
   const exists = await pathExists(absolutePath);
 
   if (dirtyBefore.has(gitPath)) {

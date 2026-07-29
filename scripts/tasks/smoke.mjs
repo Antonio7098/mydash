@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { startApplicationServer } from "../../server/start.mjs";
+import { startApplicationServer } from "../../dist/server/start.js";
 let started;
 try {
   started = await startApplicationServer({ port: 0, host: "127.0.0.1", installSignalHandlers: false, logger() {} });

@@ -11,12 +11,16 @@
     "preflight": "node scripts/00-preflight.mjs",
     "bootstrap": "node scripts/bootstrap.mjs",
     "doctor": "node scripts/00-preflight.mjs --check-remote",
-    "test": "node --test",
+    "test": "npm run build && node --test build-test/tests/unit/*.test.js build-test/tests/integration/*.test.js",
     "validate": "node scripts/tasks/validate.mjs",
-    "start": "node scripts/tasks/start.mjs",
+    "start": "npm run build && node dist/server/start.js",
     "export": "node scripts/tasks/export.mjs",
     "validate:contracts": "node scripts/tasks/validate-contracts.mjs",
-    "mydash": "node bin/mydash.mjs",
+    "mydash": "node dist/cli/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.test.json",
+    "build:test": "tsc -p tsconfig.test.json",
+    "clean": "rm -rf dist build-test",
     "test:cli": "node scripts/tasks/test-cli.mjs",
     "test:files": "node scripts/tasks/test-files.mjs",
     "test:office": "node scripts/tasks/test-office.mjs",
@@ -40,7 +44,7 @@
     "test:polish": "node scripts/tasks/test-polish.mjs"
   },
   "bin": {
-    "mydash": "bin/mydash.mjs"
+    "mydash": "dist/cli/index.js"
   },
   "dependencies": {
     "exceljs": "4.4.0",
@@ -49,5 +53,10 @@
     "esbuild": "0.28.1",
     "parse5": "8.0.1",
     "express": "5.2.1"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "@types/node": "22.7.5",
+    "@types/express": "5.0.0"
   }
 }

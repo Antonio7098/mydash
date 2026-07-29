@@ -66,10 +66,6 @@ const elements = {
     document.querySelector(
       "#page-content",
     ),
-  footerRevision:
-    document.querySelector(
-      "#footer-revision",
-    ),
 };
 
 const state = {
@@ -310,7 +306,6 @@ async function refreshSnapshot(
       "ready",
       "Workspace live",
     );
-    updateRevisionLabel();
     renderCurrentRoute({
       focus:
         options.focus ?? false,
@@ -1174,20 +1169,6 @@ function setConnection(
     mode;
   elements.connectionLabel.textContent =
     label;
-}
-
-function updateRevisionLabel() {
-  elements.footerRevision.textContent =
-    state.revisionId
-      ? `Revision ${shortRevision()}`
-      : "Revision unavailable";
-}
-
-function shortRevision() {
-  return (
-    state.revisionId?.slice(0, 8) ??
-    "unknown"
-  );
 }
 
 function formatTimestamp(value) {

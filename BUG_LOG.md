@@ -36,6 +36,16 @@ Add the newest entry first.
 Omit fields that genuinely do not apply. Update an existing open bug entry when
 it is fixed instead of creating a disconnected duplicate.
 
+## 2026-07-29 — TypeScript migration of src/, cli/, server/, bin/, tests/
+
+- Type: System change
+- Status: Complete
+- Area: Navigator | CLI | Server | Library | Validation | Export | Workspace | Git | Skills
+- Summary: TypeScript migration of `src/`, `cli/`, `server/`, `bin/`, and `tests/`. The application now compiles to `dist/` via `tsc`; `npm start`, `npm run mydash` and `npm test` consume the compiled output. The bootstrap scripts under `scripts/00-` through `scripts/23-` are historical and refuse to overwrite TypeScript application directories.
+- Resolution: Added `tsconfig.json`, `tsconfig.build.json`, and `tsconfig.test.json`; introduced `npm run typecheck`, `npm run build`, `npm run build:test`, and `npm run clean`. The package `bin` field now points at `dist/cli/index.js` after `npm run build`. Bootstrap scripts push a `BOOTSTRAP_TYPE_SCRIPT_GUARD` warning and skip writes against `src/`, `cli/`, `server/`, `tests/`, `bin/`, and `dist/`; legacy install paths (`scripts/`, `config/`, `library/`, `docs/`, `data/`, `recipes/`, `README.md`, `package.json`) are unaffected.
+- Validation: `npm run typecheck`, `node scripts/tasks/check-source.mjs`, focused unit and integration tests, and consolidated workspace validation.
+- References: `tsconfig.json`, `tsconfig.build.json`, `tsconfig.test.json`, `package.json` (build/typecheck scripts), `docs/migration/typescript.md`, `scripts/00-23-*.mjs` (refuse to overwrite .ts directories)
+
 ## 2026-07-28 — Artefact skills use the configured manifest user
 
 - Type: System change

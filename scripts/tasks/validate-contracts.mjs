@@ -4,7 +4,7 @@ import { readdir, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import process from "node:process";
-import { readJson, validateDocument } from "../../src/validation/contracts.mjs";
+import { readJson, validateDocument } from "../../dist/src/validation/contracts.js";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "../..");

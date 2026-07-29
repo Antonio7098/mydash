@@ -1,0 +1,32 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build-test",
+    "noEmit": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+    "types": ["node"],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmitOnError": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "cli/**/*.ts",
+    "server/**/*.ts",
+    "bin/**/*.ts",
+    "tests/**/*.ts",
+    "ui/**/*.js",
+    "library/dashboards/ai-use-case-governance/src/model.js",
+    "types/**/*.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "scripts",
+    "app",
+    "bin/**/*.mjs"
+  ]
+}
